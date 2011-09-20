@@ -1,0 +1,830 @@
+[09-May-2011 23:09:50] 1
+[09-May-2011 23:12:03] SELECT * FROM people WHERE RCSid = 'camarr'
+[09-May-2011 23:12:03] INSERT INTO people (RCSid, password, confirm_code) VALUES ('camarr','098f6bcd4621d373cade4e832627b4f6', '500a1dbb0dea4cf40ec70d1cc85de8fd')
+[09-May-2011 23:12:04] PHP Warning:  include_once(Person.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/settings.php on line 2
+[09-May-2011 23:12:04] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'Person.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/settings.php on line 2
+[09-May-2011 23:12:04] PHP Warning:  session_start() [<a href='function.session-start'>function.session-start</a>]: Cannot send session cache limiter - headers already sent (output started at /home2/camarr/public_html/includes/settings.php:2) in /home2/camarr/public_html/includes/settings.php on line 1
+[09-May-2011 23:12:04] PHP Fatal error:  main() [<a href='function.main'>function.main</a>]: The script tried to execute a method or access a property of an incomplete object. Please ensure that the class definition &quot;Person&quot; of the object you are trying to operate on was loaded _before_ unserialize() gets called or provide a __autoload() function to load the class definition  in /home2/camarr/public_html/includes/settings.php on line 56
+[09-May-2011 23:12:50] PHP Warning:  require_once(person.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/register.php on line 3
+[09-May-2011 23:12:50] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'person.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/register.php on line 3
+[09-May-2011 23:12:50] PHP Warning:  require_once(course.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/Person.php on line 4
+[09-May-2011 23:12:50] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'course.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/Person.php on line 4
+[09-May-2011 23:13:09] PHP Warning:  require_once(person.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/register.php on line 3
+[09-May-2011 23:13:09] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'person.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/register.php on line 3
+[09-May-2011 23:13:10] PHP Warning:  require_once(course.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/Person.php on line 4
+[09-May-2011 23:13:10] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'course.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/Person.php on line 4
+[09-May-2011 23:13:42] PHP Warning:  require_once(person.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/register.php on line 3
+[09-May-2011 23:13:42] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'person.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/register.php on line 3
+[09-May-2011 23:14:00] Information Technology
+[09-May-2011 23:14:00] UPDATE people SET fname='Rebecca', lname='Camara', class_year='2012', major='Information Technology', major2='', profile_pic='1', current_classes='1', email_messages='1' WHERE RCSid='camarr'
+[09-May-2011 23:17:43] PHP Warning:  require_once(person.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/register.php on line 3
+[09-May-2011 23:17:43] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'person.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/register.php on line 3
+[09-May-2011 23:17:46] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'camarr'@'localhost' (using password: NO) in /home2/camarr/public_html/includes/database_class.php on line 20
+[09-May-2011 23:18:02] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'camarr'@'localhost' (using password: NO) in /home2/camarr/public_html/includes/database_class.php on line 20
+[09-May-2011 23:18:17] PHP Warning:  require_once(person.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/login.php on line 2
+[09-May-2011 23:18:17] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'person.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/login.php on line 2
+[09-May-2011 23:18:19] PHP Warning:  require_once(person.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/login.php on line 2
+[09-May-2011 23:18:19] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required 'person.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/login.php on line 2
+[09-May-2011 23:23:12] SELECT * FROM people WHERE RCSid = 'camarr'
+[09-May-2011 23:23:12] INSERT INTO people (RCSid, password, confirm_code) VALUES ('camarr','098f6bcd4621d373cade4e832627b4f6', '500a1dbb0dea4cf40ec70d1cc85de8fd')
+[09-May-2011 23:23:13] PHP Warning:  include_once(Person.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/settings.php on line 2
+[09-May-2011 23:23:13] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'Person.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/settings.php on line 2
+[09-May-2011 23:23:13] PHP Warning:  session_start() [<a href='function.session-start'>function.session-start</a>]: Cannot send session cache limiter - headers already sent (output started at /home2/camarr/public_html/includes/settings.php:2) in /home2/camarr/public_html/includes/settings.php on line 1
+[09-May-2011 23:23:13] PHP Fatal error:  main() [<a href='function.main'>function.main</a>]: The script tried to execute a method or access a property of an incomplete object. Please ensure that the class definition &quot;Person&quot; of the object you are trying to operate on was loaded _before_ unserialize() gets called or provide a __autoload() function to load the class definition  in /home2/camarr/public_html/includes/settings.php on line 56
+[09-May-2011 23:27:52] SELECT * FROM people WHERE RCSid = 'camarr'
+[09-May-2011 23:27:53] PHP Warning:  include_once(Person.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/settings.php on line 2
+[09-May-2011 23:27:53] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'Person.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/settings.php on line 2
+[09-May-2011 23:27:53] PHP Warning:  session_start() [<a href='function.session-start'>function.session-start</a>]: Cannot send session cache limiter - headers already sent (output started at /home2/camarr/public_html/includes/settings.php:2) in /home2/camarr/public_html/includes/settings.php on line 1
+[09-May-2011 23:27:53] PHP Fatal error:  main() [<a href='function.main'>function.main</a>]: The script tried to execute a method or access a property of an incomplete object. Please ensure that the class definition &quot;Person&quot; of the object you are trying to operate on was loaded _before_ unserialize() gets called or provide a __autoload() function to load the class definition  in /home2/camarr/public_html/includes/settings.php on line 56
+[09-May-2011 23:28:53] 1
+[09-May-2011 23:28:53] PHP Fatal error:  Call to undefined function get_currpeople() in /home2/camarr/public_html/includes/course.php on line 147
+[09-May-2011 23:56:32] SELECT * FROM people WHERE RCSid = 'helleb2'
+[09-May-2011 23:56:32] INSERT INTO people (RCSid, password, confirm_code) VALUES ('helleb2','5f4dcc3b5aa765d61d8327deb882cf99', '9b446a65ebadd20495dee0cc195c4394')
+[09-May-2011 23:56:33] PHP Warning:  include_once(Person.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/settings.php on line 2
+[09-May-2011 23:56:33] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'Person.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/settings.php on line 2
+[09-May-2011 23:56:33] PHP Warning:  session_start() [<a href='function.session-start'>function.session-start</a>]: Cannot send session cache limiter - headers already sent (output started at /home2/camarr/public_html/includes/settings.php:2) in /home2/camarr/public_html/includes/settings.php on line 1
+[09-May-2011 23:56:33] PHP Fatal error:  main() [<a href='function.main'>function.main</a>]: The script tried to execute a method or access a property of an incomplete object. Please ensure that the class definition &quot;Person&quot; of the object you are trying to operate on was loaded _before_ unserialize() gets called or provide a __autoload() function to load the class definition  in /home2/camarr/public_html/includes/settings.php on line 56
+[10-May-2011 00:01:47] 0
+[10-May-2011 00:09:19] SELECT * FROM people WHERE RCSid = 'helleb2'
+[10-May-2011 00:09:19] INSERT INTO people (RCSid, password, confirm_code) VALUES ('helleb2','5f4dcc3b5aa765d61d8327deb882cf99', '9b446a65ebadd20495dee0cc195c4394')
+[10-May-2011 00:09:20] PHP Warning:  include_once(Person.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home2/camarr/public_html/includes/settings.php on line 2
+[10-May-2011 00:09:20] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'Person.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home2/camarr/public_html/includes/settings.php on line 2
+[10-May-2011 00:09:20] PHP Warning:  session_start() [<a href='function.session-start'>function.session-start</a>]: Cannot send session cache limiter - headers already sent (output started at /home2/camarr/public_html/includes/settings.php:2) in /home2/camarr/public_html/includes/settings.php on line 1
+[10-May-2011 00:09:20] PHP Fatal error:  main() [<a href='function.main'>function.main</a>]: The script tried to execute a method or access a property of an incomplete object. Please ensure that the class definition &quot;Person&quot; of the object you are trying to operate on was loaded _before_ unserialize() gets called or provide a __autoload() function to load the class definition  in /home2/camarr/public_html/includes/settings.php on line 56
+[10-May-2011 01:32:16] I'm about to exit
+[10-May-2011 01:32:16] I'm about to exit
+[10-May-2011 01:32:16] I'm about to exit
+[10-May-2011 01:32:16] I'm about to exit
+[10-May-2011 01:32:16] I'm about to exit
+[10-May-2011 01:32:16] I'm about to exit
+[10-May-2011 01:32:16] I'm about to exit
+[10-May-2011 01:32:16] I'm about to exit
+[10-May-2011 01:32:21] I'm about to exit
+[10-May-2011 01:32:27] I'm about to exit
+[10-May-2011 01:32:29] I'm about to exit
+[10-May-2011 01:32:31] I'm about to exit
+[10-May-2011 01:32:33] I'm about to exit
+[10-May-2011 01:32:34] I'm about to exit
+[10-May-2011 01:32:36] I'm about to exit
+[10-May-2011 01:45:53] I'm about to exit
+[10-May-2011 01:45:53] I'm about to exit
+[10-May-2011 01:45:53] I'm about to exit
+[10-May-2011 01:45:53] I'm about to exit
+[10-May-2011 01:45:53] I'm about to exit
+[10-May-2011 01:45:53] I'm about to exit
+[10-May-2011 01:45:53] I'm about to exit
+[10-May-2011 01:45:53] I'm about to exit
+[10-May-2011 01:48:03] I'm about to exit
+[10-May-2011 01:48:03] I'm about to exit
+[10-May-2011 01:48:03] I'm about to exit
+[10-May-2011 01:48:03] I'm about to exit
+[10-May-2011 01:48:03] I'm about to exit
+[10-May-2011 01:48:03] I'm about to exit
+[10-May-2011 01:48:03] I'm about to exit
+[10-May-2011 01:48:03] I'm about to exit
+[10-May-2011 01:48:32] I'm about to exit
+[10-May-2011 01:48:32] I'm about to exit
+[10-May-2011 01:48:32] I'm about to exit
+[10-May-2011 01:48:32] I'm about to exit
+[10-May-2011 01:48:32] I'm about to exit
+[10-May-2011 01:48:32] I'm about to exit
+[10-May-2011 01:48:32] I'm about to exit
+[10-May-2011 01:48:32] I'm about to exit
+[10-May-2011 01:48:41] I'm about to exit
+[10-May-2011 01:48:42] I'm about to exit
+[10-May-2011 01:48:43] I'm about to exit
+[10-May-2011 01:48:44] I'm about to exit
+[10-May-2011 01:49:27] I'm about to exit
+[10-May-2011 01:56:01] I'm about to exit
+[10-May-2011 01:56:01] I'm about to exit
+[10-May-2011 01:56:15] I'm about to exit
+[10-May-2011 01:56:15] I'm about to exit
+[10-May-2011 01:56:15] I'm about to exit
+[10-May-2011 01:56:15] I'm about to exit
+[10-May-2011 01:56:28] I'm about to exit
+[10-May-2011 01:56:28] I'm about to exit
+[10-May-2011 01:56:28] I'm about to exit
+[10-May-2011 01:56:28] I'm about to exit
+[10-May-2011 01:56:28] I'm about to exit
+[10-May-2011 01:56:28] I'm about to exit
+[10-May-2011 01:56:47] I'm about to exit
+[10-May-2011 01:56:47] I'm about to exit
+[10-May-2011 01:56:47] I'm about to exit
+[10-May-2011 01:56:47] I'm about to exit
+[10-May-2011 01:56:47] I'm about to exit
+[10-May-2011 01:56:47] I'm about to exit
+[10-May-2011 01:56:47] I'm about to exit
+[10-May-2011 01:56:47] I'm about to exit
+[10-May-2011 01:56:50] I'm about to exit
+[10-May-2011 01:56:52] I'm about to exit
+[10-May-2011 01:56:53] I'm about to exit
+[10-May-2011 01:56:53] I'm about to exit
+[10-May-2011 01:57:08] I'm about to exit
+[10-May-2011 01:57:08] I'm about to exit
+[10-May-2011 01:57:08] I'm about to exit
+[10-May-2011 01:57:08] I'm about to exit
+[10-May-2011 01:57:08] I'm about to exit
+[10-May-2011 01:57:08] I'm about to exit
+[10-May-2011 01:57:08] I'm about to exit
+[10-May-2011 01:57:08] I'm about to exit
+[10-May-2011 01:57:10] I'm about to exit
+[10-May-2011 01:57:11] I'm about to exit
+[10-May-2011 02:02:57] I'm about to exit
+[10-May-2011 02:02:57] I'm about to exit
+[10-May-2011 02:03:08] I'm about to exit
+[10-May-2011 02:03:08] I'm about to exit
+[10-May-2011 02:03:08] I'm about to exit
+[10-May-2011 02:03:08] I'm about to exit
+[10-May-2011 02:03:17] PHP Fatal error:  Call to a member function get_first_name() on a non-object in /home2/camarr/public_html/includes/settings.php on line 56
+[10-May-2011 02:03:24] PHP Fatal error:  Call to a member function get_first_name() on a non-object in /home2/camarr/public_html/includes/settings.php on line 56
+[10-May-2011 02:03:24] I'm about to exit
+[10-May-2011 02:03:24] I'm about to exit
+[10-May-2011 02:03:24] I'm about to exit
+[10-May-2011 02:03:24] I'm about to exit
+[10-May-2011 02:03:24] I'm about to exit
+[10-May-2011 02:03:24] I'm about to exit
+[10-May-2011 02:04:32] I'm about to exit
+[10-May-2011 02:04:32] I'm about to exit
+[10-May-2011 02:04:32] I'm about to exit
+[10-May-2011 02:04:32] I'm about to exit
+[10-May-2011 02:04:32] I'm about to exit
+[10-May-2011 02:04:32] I'm about to exit
+[10-May-2011 02:04:32] I'm about to exit
+[10-May-2011 02:04:32] I'm about to exit
+[10-May-2011 02:04:43] I'm about to exit
+[10-May-2011 02:04:43] I'm about to exit
+[10-May-2011 02:04:43] I'm about to exit
+[10-May-2011 02:04:43] I'm about to exit
+[10-May-2011 02:04:43] I'm about to exit
+[10-May-2011 02:04:43] I'm about to exit
+[10-May-2011 02:04:43] I'm about to exit
+[10-May-2011 02:04:43] I'm about to exit
+[10-May-2011 02:04:43] I'm about to exit
+[10-May-2011 02:04:43] I'm about to exit
+[10-May-2011 02:04:45] I'm about to exit
+[10-May-2011 02:04:46] I'm about to exit
+[10-May-2011 02:04:51] I'm about to exit
+[10-May-2011 02:04:51] I'm about to exit
+[10-May-2011 02:04:51] I'm about to exit
+[10-May-2011 02:04:51] I'm about to exit
+[10-May-2011 02:04:51] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:04:51] This course is CSCI 4380 - Database Systems
+[10-May-2011 02:04:51] This course is ITWS 1220 - IT and Society
+[10-May-2011 02:04:51] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:04:54] I'm about to exit
+[10-May-2011 02:04:54] I'm about to exit
+[10-May-2011 02:04:57] I'm about to exit
+[10-May-2011 02:04:57] I'm about to exit
+[10-May-2011 02:04:57] I'm about to exit
+[10-May-2011 02:04:57] I'm about to exit
+[10-May-2011 02:04:57] I'm about to exit
+[10-May-2011 02:04:57] This course is COMM 4180 - Studio Design in Human-Computer Interaction
+[10-May-2011 02:04:57] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:04:57] This course is COMM 4770 - User-Centered Design
+[10-May-2011 02:04:57] This course is CSCI 2400 - Models of Computation
+[10-May-2011 02:04:57] This course is CSCI 4430 - Programming Languages
+[10-May-2011 02:04:59] I'm about to exit
+[10-May-2011 02:05:00] I'm about to exit
+[10-May-2011 02:05:00] I'm about to exit
+[10-May-2011 02:05:01] I'm about to exit
+[10-May-2011 02:05:02] I'm about to exit
+[10-May-2011 02:05:02] I'm about to exit
+[10-May-2011 02:05:02] I'm about to exit
+[10-May-2011 02:05:02] I'm about to exit
+[10-May-2011 02:05:02] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:05:02] This course is CSCI 4380 - Database Systems
+[10-May-2011 02:05:02] This course is ITWS 1220 - IT and Society
+[10-May-2011 02:05:02] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:05:03] I'm about to exit
+[10-May-2011 02:05:03] I'm about to exit
+[10-May-2011 02:05:04] I'm about to exit
+[10-May-2011 02:05:04] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:05:07] I'm about to exit
+[10-May-2011 02:05:28] I'm about to exit
+[10-May-2011 02:05:28] I'm about to exit
+[10-May-2011 02:05:28] I'm about to exit
+[10-May-2011 02:05:28] I'm about to exit
+[10-May-2011 02:06:30] I'm about to exit
+[10-May-2011 02:06:30] I'm about to exit
+[10-May-2011 02:06:49] I'm about to exit
+[10-May-2011 02:06:49] I'm about to exit
+[10-May-2011 02:06:49] I'm about to exit
+[10-May-2011 02:06:49] I'm about to exit
+[10-May-2011 02:06:55] I'm about to exit
+[10-May-2011 02:07:57] I'm about to exit
+[10-May-2011 02:07:57] I'm about to exit
+[10-May-2011 02:07:57] I'm about to exit
+[10-May-2011 02:07:57] I'm about to exit
+[10-May-2011 02:07:57] I'm about to exit
+[10-May-2011 02:07:57] I'm about to exit
+[10-May-2011 02:08:17] I'm about to exit
+[10-May-2011 02:08:30] I'm about to exit
+[10-May-2011 02:08:30] I'm about to exit
+[10-May-2011 02:08:30] I'm about to exit
+[10-May-2011 02:08:30] I'm about to exit
+[10-May-2011 02:08:30] I'm about to exit
+[10-May-2011 02:08:30] This course is COMM 4180 - Studio Design in Human-Computer Interaction
+[10-May-2011 02:08:30] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:08:30] This course is COMM 4770 - User-Centered Design
+[10-May-2011 02:08:30] This course is CSCI 2400 - Models of Computation
+[10-May-2011 02:08:30] This course is CSCI 4430 - Programming Languages
+[10-May-2011 02:09:17] I'm about to exit
+[10-May-2011 02:09:17] I'm about to exit
+[10-May-2011 02:09:17] I'm about to exit
+[10-May-2011 02:09:17] I'm about to exit
+[10-May-2011 02:09:17] I'm about to exit
+[10-May-2011 02:09:17] I'm about to exit
+[10-May-2011 02:09:17] I'm about to exit
+[10-May-2011 02:09:17] I'm about to exit
+[10-May-2011 02:09:21] I'm about to exit
+[10-May-2011 02:09:21] I'm about to exit
+[10-May-2011 02:09:21] I'm about to exit
+[10-May-2011 02:09:21] I'm about to exit
+[10-May-2011 02:09:21] I'm about to exit
+[10-May-2011 02:09:21] I'm about to exit
+[10-May-2011 02:09:22] I'm about to exit
+[10-May-2011 02:09:25] I'm about to exit
+[10-May-2011 02:09:26] I'm about to exit
+[10-May-2011 02:09:28] I'm about to exit
+[10-May-2011 02:11:16] I'm about to exit
+[10-May-2011 02:11:16] I'm about to exit
+[10-May-2011 02:11:16] I'm about to exit
+[10-May-2011 02:11:16] I'm about to exit
+[10-May-2011 02:11:16] I'm about to exit
+[10-May-2011 02:11:16] I'm about to exit
+[10-May-2011 02:11:16] I'm about to exit
+[10-May-2011 02:11:16] I'm about to exit
+[10-May-2011 02:11:56] I'm about to exit
+[10-May-2011 02:11:57] I'm about to exit
+[10-May-2011 02:11:58] I'm about to exit
+[10-May-2011 02:12:36] I'm about to exit
+[10-May-2011 02:12:36] I'm about to exit
+[10-May-2011 02:12:42] I'm about to exit
+[10-May-2011 02:13:43] I'm about to exit
+[10-May-2011 02:13:43] I'm about to exit
+[10-May-2011 02:13:43] I'm about to exit
+[10-May-2011 02:13:43] I'm about to exit
+[10-May-2011 02:14:17] I'm about to exit
+[10-May-2011 02:14:17] I'm about to exit
+[10-May-2011 02:14:17] I'm about to exit
+[10-May-2011 02:14:17] I'm about to exit
+[10-May-2011 02:14:17] I'm about to exit
+[10-May-2011 02:14:17] I'm about to exit
+[10-May-2011 02:15:05] I'm about to exit
+[10-May-2011 02:15:05] I'm about to exit
+[10-May-2011 02:15:05] I'm about to exit
+[10-May-2011 02:15:05] I'm about to exit
+[10-May-2011 02:15:05] I'm about to exit
+[10-May-2011 02:15:05] I'm about to exit
+[10-May-2011 02:15:05] I'm about to exit
+[10-May-2011 02:15:05] I'm about to exit
+[10-May-2011 02:15:34] I'm about to exit
+[10-May-2011 02:15:34] I'm about to exit
+[10-May-2011 02:15:34] I'm about to exit
+[10-May-2011 02:15:34] I'm about to exit
+[10-May-2011 02:15:34] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:15:34] This course is CSCI 4380 - Database Systems
+[10-May-2011 02:15:34] This course is ITWS 1220 - IT and Society
+[10-May-2011 02:15:34] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:15:36] I'm about to exit
+[10-May-2011 02:15:36] I'm about to exit
+[10-May-2011 02:15:36] I'm about to exit
+[10-May-2011 02:15:36] I'm about to exit
+[10-May-2011 02:15:36] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:15:36] This course is CSCI 4380 - Database Systems
+[10-May-2011 02:15:36] This course is ITWS 1220 - IT and Society
+[10-May-2011 02:15:36] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:16:45] I'm about to exit
+[10-May-2011 02:16:49] I'm about to exit
+[10-May-2011 02:16:49] I'm about to exit
+[10-May-2011 02:16:49] I'm about to exit
+[10-May-2011 02:16:49] I'm about to exit
+[10-May-2011 02:16:49] This course is CISH 4380 - Database Systems
+[10-May-2011 02:16:49] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:16:49] This course is CSCI 2300 - Introduction to Algorithms
+[10-May-2011 02:16:49] This course is MGMT 4870 - Strategy and Policy
+[10-May-2011 02:16:57] I'm about to exit
+[10-May-2011 02:17:23] I'm about to exit
+[10-May-2011 02:17:24] I'm about to exit
+[10-May-2011 02:17:26] I'm about to exit
+[10-May-2011 02:17:27] I'm about to exit
+[10-May-2011 02:17:28] I'm about to exit
+[10-May-2011 02:17:29] I'm about to exit
+[10-May-2011 02:17:30] I'm about to exit
+[10-May-2011 02:17:30] I'm about to exit
+[10-May-2011 02:17:37] I'm about to exit
+[10-May-2011 02:17:51] I'm about to exit
+[10-May-2011 02:17:55] I'm about to exit
+[10-May-2011 02:17:55] I'm about to exit
+[10-May-2011 02:17:55] I'm about to exit
+[10-May-2011 02:17:55] I'm about to exit
+[10-May-2011 02:17:55] This course is CISH 4380 - Database Systems
+[10-May-2011 02:17:55] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:17:55] This course is IHSS 1220 - IT and Society
+[10-May-2011 02:17:55] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:18:52] I'm about to exit
+[10-May-2011 02:18:54] I'm about to exit
+[10-May-2011 02:18:56] I'm about to exit
+[10-May-2011 02:18:57] I'm about to exit
+[10-May-2011 02:18:59] I'm about to exit
+[10-May-2011 02:19:01] I'm about to exit
+[10-May-2011 02:19:27] I'm about to exit
+[10-May-2011 02:19:30] I'm about to exit
+[10-May-2011 02:19:31] I'm about to exit
+[10-May-2011 02:19:32] I'm about to exit
+[10-May-2011 02:19:34] I'm about to exit
+[10-May-2011 02:19:36] I'm about to exit
+[10-May-2011 02:19:37] I'm about to exit
+[10-May-2011 02:19:38] I'm about to exit
+[10-May-2011 02:32:31] I'm about to exit
+[10-May-2011 02:32:31] I'm about to exit
+[10-May-2011 02:32:47] I'm about to exit
+[10-May-2011 02:32:47] I'm about to exit
+[10-May-2011 02:32:47] I'm about to exit
+[10-May-2011 02:32:47] I'm about to exit
+[10-May-2011 02:33:19] I'm about to exit
+[10-May-2011 02:33:19] I'm about to exit
+[10-May-2011 02:33:19] I'm about to exit
+[10-May-2011 02:33:19] I'm about to exit
+[10-May-2011 02:33:19] I'm about to exit
+[10-May-2011 02:33:19] I'm about to exit
+[10-May-2011 02:33:36] I'm about to exit
+[10-May-2011 02:33:36] I'm about to exit
+[10-May-2011 02:33:36] I'm about to exit
+[10-May-2011 02:33:36] I'm about to exit
+[10-May-2011 02:33:36] I'm about to exit
+[10-May-2011 02:33:36] I'm about to exit
+[10-May-2011 02:33:36] I'm about to exit
+[10-May-2011 02:33:36] I'm about to exit
+[10-May-2011 02:33:55] I'm about to exit
+[10-May-2011 02:33:55] I'm about to exit
+[10-May-2011 02:33:55] I'm about to exit
+[10-May-2011 02:33:55] I'm about to exit
+[10-May-2011 02:33:55] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:33:55] This course is CSCI 4380 - Database Systems
+[10-May-2011 02:33:55] This course is ITWS 1220 - IT and Society
+[10-May-2011 02:33:55] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:34:41] I'm about to exit
+[10-May-2011 02:34:47] I'm about to exit
+[10-May-2011 02:34:51] I'm about to exit
+[10-May-2011 02:34:53] I'm about to exit
+[10-May-2011 02:34:53] I'm about to exit
+[10-May-2011 02:34:53] I'm about to exit
+[10-May-2011 02:34:53] I'm about to exit
+[10-May-2011 02:34:53] This course is CISH 4380 - Database Systems
+[10-May-2011 02:34:53] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:34:53] This course is IHSS 1220 - IT and Society
+[10-May-2011 02:34:53] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:34:53] I'm about to exit
+[10-May-2011 02:34:53] I'm about to exit
+[10-May-2011 02:34:53] I'm about to exit
+[10-May-2011 02:34:53] I'm about to exit
+[10-May-2011 02:34:53] This course is CISH 4380 - Database Systems
+[10-May-2011 02:34:53] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:34:53] This course is IHSS 1220 - IT and Society
+[10-May-2011 02:34:53] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:34:59] I'm about to exit
+[10-May-2011 02:43:44] I'm about to exit
+[10-May-2011 02:43:44] I'm about to exit
+[10-May-2011 02:44:06] I'm about to exit
+[10-May-2011 02:44:06] I'm about to exit
+[10-May-2011 02:44:06] I'm about to exit
+[10-May-2011 02:44:06] I'm about to exit
+[10-May-2011 02:44:19] I'm about to exit
+[10-May-2011 02:44:19] I'm about to exit
+[10-May-2011 02:44:19] I'm about to exit
+[10-May-2011 02:44:19] I'm about to exit
+[10-May-2011 02:44:19] I'm about to exit
+[10-May-2011 02:44:19] I'm about to exit
+[10-May-2011 02:44:32] I'm about to exit
+[10-May-2011 02:44:32] I'm about to exit
+[10-May-2011 02:44:32] I'm about to exit
+[10-May-2011 02:44:32] I'm about to exit
+[10-May-2011 02:44:32] I'm about to exit
+[10-May-2011 02:44:32] I'm about to exit
+[10-May-2011 02:44:32] I'm about to exit
+[10-May-2011 02:44:32] I'm about to exit
+[10-May-2011 02:46:46] I'm about to exit
+[10-May-2011 02:46:46] I'm about to exit
+[10-May-2011 02:46:46] I'm about to exit
+[10-May-2011 02:46:46] I'm about to exit
+[10-May-2011 02:46:46] This course is CISH 4380 - Database Systems
+[10-May-2011 02:46:46] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:46:46] This course is IHSS 1220 - IT and Society
+[10-May-2011 02:46:46] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:47:14] I'm about to exit
+[10-May-2011 02:47:14] I'm about to exit
+[10-May-2011 02:47:14] I'm about to exit
+[10-May-2011 02:47:14] I'm about to exit
+[10-May-2011 02:47:14] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:47:14] This course is CSCI 4380 - Database Systems
+[10-May-2011 02:47:14] This course is ITWS 1220 - IT and Society
+[10-May-2011 02:47:14] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:47:20] I'm about to exit
+[10-May-2011 02:47:20] I'm about to exit
+[10-May-2011 02:47:20] I'm about to exit
+[10-May-2011 02:47:20] I'm about to exit
+[10-May-2011 02:47:20] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:47:20] This course is CSCI 4380 - Database Systems
+[10-May-2011 02:47:20] This course is ITWS 1220 - IT and Society
+[10-May-2011 02:47:20] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:47:27] I'm about to exit
+[10-May-2011 02:47:27] I'm about to exit
+[10-May-2011 02:47:27] I'm about to exit
+[10-May-2011 02:47:27] I'm about to exit
+[10-May-2011 02:47:27] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:47:27] This course is CSCI 4380 - Database Systems
+[10-May-2011 02:47:27] This course is ITWS 1220 - IT and Society
+[10-May-2011 02:47:27] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:48:16] I'm about to exit
+[10-May-2011 02:48:19] I'm about to exit
+[10-May-2011 02:48:20] I'm about to exit
+[10-May-2011 02:48:21] I'm about to exit
+[10-May-2011 02:48:28] I'm about to exit
+[10-May-2011 02:48:29] I'm about to exit
+[10-May-2011 02:48:31] I'm about to exit
+[10-May-2011 02:48:36] I'm about to exit
+[10-May-2011 02:48:37] I'm about to exit
+[10-May-2011 02:48:49] I'm about to exit
+[10-May-2011 02:48:49] I'm about to exit
+[10-May-2011 02:48:49] I'm about to exit
+[10-May-2011 02:48:49] I'm about to exit
+[10-May-2011 02:48:49] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:48:49] This course is CSCI 4380 - Database Systems
+[10-May-2011 02:48:49] This course is ITWS 1220 - IT and Society
+[10-May-2011 02:48:49] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:49:13] I'm about to exit
+[10-May-2011 02:49:14] I'm about to exit
+[10-May-2011 02:57:04] I'm about to exit
+[10-May-2011 02:57:04] I'm about to exit
+[10-May-2011 02:57:27] I'm about to exit
+[10-May-2011 02:57:27] I'm about to exit
+[10-May-2011 02:57:27] I'm about to exit
+[10-May-2011 02:57:27] I'm about to exit
+[10-May-2011 02:57:45] I'm about to exit
+[10-May-2011 02:57:45] I'm about to exit
+[10-May-2011 02:57:45] I'm about to exit
+[10-May-2011 02:57:45] I'm about to exit
+[10-May-2011 02:57:45] I'm about to exit
+[10-May-2011 02:57:45] I'm about to exit
+[10-May-2011 02:58:10] I'm about to exit
+[10-May-2011 02:58:10] I'm about to exit
+[10-May-2011 02:58:10] I'm about to exit
+[10-May-2011 02:58:10] I'm about to exit
+[10-May-2011 02:58:10] I'm about to exit
+[10-May-2011 02:58:10] I'm about to exit
+[10-May-2011 02:58:10] I'm about to exit
+[10-May-2011 02:58:10] I'm about to exit
+[10-May-2011 02:58:32] I'm about to exit
+[10-May-2011 02:59:01] I'm about to exit
+[10-May-2011 02:59:01] I'm about to exit
+[10-May-2011 02:59:01] I'm about to exit
+[10-May-2011 02:59:01] I'm about to exit
+[10-May-2011 02:59:01] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:59:01] This course is CSCI 4380 - Database Systems
+[10-May-2011 02:59:01] This course is ITWS 1220 - IT and Society
+[10-May-2011 02:59:01] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 02:59:20] I'm about to exit
+[10-May-2011 02:59:37] I'm about to exit
+[10-May-2011 02:59:42] I'm about to exit
+[10-May-2011 02:59:42] I'm about to exit
+[10-May-2011 02:59:42] I'm about to exit
+[10-May-2011 02:59:42] I'm about to exit
+[10-May-2011 02:59:42] This course is CISH 4380 - Database Systems
+[10-May-2011 02:59:42] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 02:59:42] This course is IHSS 1220 - IT and Society
+[10-May-2011 02:59:42] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 03:02:22] I'm about to exit
+[10-May-2011 14:05:18] I'm about to exit
+[10-May-2011 14:05:18] I'm about to exit
+[10-May-2011 14:05:18] I'm about to exit
+[10-May-2011 14:05:18] I'm about to exit
+[10-May-2011 14:05:18] I'm about to exit
+[10-May-2011 14:05:18] I'm about to exit
+[10-May-2011 14:05:18] I'm about to exit
+[10-May-2011 14:05:18] I'm about to exit
+[10-May-2011 14:05:55] I'm about to exit
+[10-May-2011 14:05:56] I'm about to exit
+[10-May-2011 14:05:58] I'm about to exit
+[10-May-2011 14:05:59] I'm about to exit
+[10-May-2011 14:08:55] I'm about to exit
+[10-May-2011 14:08:55] I'm about to exit
+[10-May-2011 14:08:55] I'm about to exit
+[10-May-2011 14:08:55] I'm about to exit
+[10-May-2011 14:08:55] I'm about to exit
+[10-May-2011 14:08:55] I'm about to exit
+[10-May-2011 14:08:55] I'm about to exit
+[10-May-2011 14:08:55] I'm about to exit
+[10-May-2011 14:08:55] I'm about to exit
+[10-May-2011 14:08:55] I'm about to exit
+[10-May-2011 14:08:58] I'm about to exit
+[10-May-2011 14:08:58] I'm about to exit
+[10-May-2011 14:08:59] I'm about to exit
+[10-May-2011 14:09:00] I'm about to exit
+[10-May-2011 14:09:01] I'm about to exit
+[10-May-2011 14:13:25] I'm about to exit
+[10-May-2011 14:13:25] I'm about to exit
+[10-May-2011 14:13:56] I'm about to exit
+[10-May-2011 14:13:56] I'm about to exit
+[10-May-2011 14:13:59] I'm about to exit
+[10-May-2011 14:14:00] I'm about to exit
+[10-May-2011 14:14:09] I'm about to exit
+[10-May-2011 14:14:09] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:14:10] I'm about to exit
+[10-May-2011 14:14:10] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:14:13] I'm about to exit
+[10-May-2011 14:14:13] I'm about to exit
+[10-May-2011 14:14:13] I'm about to exit
+[10-May-2011 14:14:13] I'm about to exit
+[10-May-2011 14:14:13] This course is CISH 4380 - Database Systems
+[10-May-2011 14:14:13] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:14:13] This course is IHSS 1220 - IT and Society
+[10-May-2011 14:14:13] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 14:14:30] I'm about to exit
+[10-May-2011 14:14:30] I'm about to exit
+[10-May-2011 14:14:38] I'm about to exit
+[10-May-2011 14:14:38] I'm about to exit
+[10-May-2011 14:14:38] I'm about to exit
+[10-May-2011 14:14:38] I'm about to exit
+[10-May-2011 14:14:38] I'm about to exit
+[10-May-2011 14:14:38] This course is COMM 4180 - Studio Design in Human-Computer Interaction
+[10-May-2011 14:14:38] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:14:38] This course is COMM 4770 - User-Centered Design
+[10-May-2011 14:14:38] This course is CSCI 2400 - Models of Computation
+[10-May-2011 14:14:38] This course is CSCI 4430 - Programming Languages
+[10-May-2011 14:14:38] I'm about to exit
+[10-May-2011 14:14:42] I'm about to exit
+[10-May-2011 14:14:42] This course is COMM 6560 - Visual Design: Theory and Application
+[10-May-2011 14:14:47] I'm about to exit
+[10-May-2011 14:14:47] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:14:48] I'm about to exit
+[10-May-2011 14:14:48] I'm about to exit
+[10-May-2011 14:14:48] I'm about to exit
+[10-May-2011 14:14:48] I'm about to exit
+[10-May-2011 14:14:48] I'm about to exit
+[10-May-2011 14:14:48] I'm about to exit
+[10-May-2011 14:14:48] I'm about to exit
+[10-May-2011 14:14:48] I'm about to exit
+[10-May-2011 14:14:48] I'm about to exit
+[10-May-2011 14:14:48] I'm about to exit
+[10-May-2011 14:14:52] I'm about to exit
+[10-May-2011 14:14:52] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:15:11] I'm about to exit
+[10-May-2011 14:15:11] I'm about to exit
+[10-May-2011 14:15:11] I'm about to exit
+[10-May-2011 14:15:11] I'm about to exit
+[10-May-2011 14:15:16] I'm about to exit
+[10-May-2011 14:15:22] I'm about to exit
+[10-May-2011 14:15:22] I'm about to exit
+[10-May-2011 14:15:22] I'm about to exit
+[10-May-2011 14:15:22] I'm about to exit
+[10-May-2011 14:15:24] I'm about to exit
+[10-May-2011 14:15:24] I'm about to exit
+[10-May-2011 14:15:25] I'm about to exit
+[10-May-2011 14:15:25] I'm about to exit
+[10-May-2011 14:15:29] I'm about to exit
+[10-May-2011 14:15:30] I'm about to exit
+[10-May-2011 14:15:30] I'm about to exit
+[10-May-2011 14:15:30] I'm about to exit
+[10-May-2011 14:15:30] I'm about to exit
+[10-May-2011 14:15:30] This course is CISH 4380 - Database Systems
+[10-May-2011 14:15:30] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:15:30] This course is CSCI 2300 - Introduction to Algorithms
+[10-May-2011 14:15:30] This course is MGMT 4870 - Strategy and Policy
+[10-May-2011 14:15:31] I'm about to exit
+[10-May-2011 14:15:31] I'm about to exit
+[10-May-2011 14:15:31] I'm about to exit
+[10-May-2011 14:15:31] I'm about to exit
+[10-May-2011 14:15:31] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:15:31] This course is CSCI 4380 - Database Systems
+[10-May-2011 14:15:31] This course is ITWS 1220 - IT and Society
+[10-May-2011 14:15:31] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 14:15:38] I'm about to exit
+[10-May-2011 14:15:38] I'm about to exit
+[10-May-2011 14:15:38] I'm about to exit
+[10-May-2011 14:15:38] I'm about to exit
+[10-May-2011 14:15:38] I'm about to exit
+[10-May-2011 14:15:38] I'm about to exit
+[10-May-2011 14:15:42] I'm about to exit
+[10-May-2011 14:15:42] I'm about to exit
+[10-May-2011 14:15:46] I'm about to exit
+[10-May-2011 14:15:53] I'm about to exit
+[10-May-2011 14:15:53] I'm about to exit
+[10-May-2011 14:15:57] I'm about to exit
+[10-May-2011 14:16:26] I'm about to exit
+[10-May-2011 14:16:26] I'm about to exit
+[10-May-2011 14:16:26] I'm about to exit
+[10-May-2011 14:16:26] I'm about to exit
+[10-May-2011 14:16:26] This course is CISH 4380 - Database Systems
+[10-May-2011 14:16:26] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:16:26] This course is IHSS 1220 - IT and Society
+[10-May-2011 14:16:26] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:41] I'm about to exit
+[10-May-2011 14:16:46] I'm about to exit
+[10-May-2011 14:16:52] I'm about to exit
+[10-May-2011 14:16:54] I'm about to exit
+[10-May-2011 14:16:54] I'm about to exit
+[10-May-2011 14:16:54] I'm about to exit
+[10-May-2011 14:16:54] I'm about to exit
+[10-May-2011 14:16:57] I'm about to exit
+[10-May-2011 14:16:58] I'm about to exit
+[10-May-2011 14:16:58] I'm about to exit
+[10-May-2011 14:16:58] I'm about to exit
+[10-May-2011 14:16:58] I'm about to exit
+[10-May-2011 14:16:58] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:16:58] This course is CSCI 4380 - Database Systems
+[10-May-2011 14:16:58] This course is ITWS 1220 - IT and Society
+[10-May-2011 14:16:58] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 14:16:58] I'm about to exit
+[10-May-2011 14:17:19] I'm about to exit
+[10-May-2011 14:17:19] I'm about to exit
+[10-May-2011 14:17:19] I'm about to exit
+[10-May-2011 14:17:19] I'm about to exit
+[10-May-2011 14:17:19] I'm about to exit
+[10-May-2011 14:17:19] I'm about to exit
+[10-May-2011 14:17:22] I'm about to exit
+[10-May-2011 14:17:26] I'm about to exit
+[10-May-2011 14:17:32] I'm about to exit
+[10-May-2011 14:17:32] I'm about to exit
+[10-May-2011 14:17:32] I'm about to exit
+[10-May-2011 14:17:32] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:17:32] This course is COMM 6770 - User-Centered Design
+[10-May-2011 14:17:32] This course is ITWS 2110 - Web Systems Development
+[10-May-2011 14:17:43] I'm about to exit
+[10-May-2011 14:17:44] I'm about to exit
+[10-May-2011 14:17:46] I'm about to exit
+[10-May-2011 14:17:48] I'm about to exit
+[10-May-2011 14:17:48] I'm about to exit
+[10-May-2011 14:17:48] I'm about to exit
+[10-May-2011 14:17:48] I'm about to exit
+[10-May-2011 14:17:48] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:17:48] This course is CSCI 4380 - Database Systems
+[10-May-2011 14:17:48] This course is ITWS 1220 - IT and Society
+[10-May-2011 14:17:48] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 14:17:48] I'm about to exit
+[10-May-2011 14:17:49] I'm about to exit
+[10-May-2011 14:17:50] I'm about to exit
+[10-May-2011 14:17:51] I'm about to exit
+[10-May-2011 14:17:54] I'm about to exit
+[10-May-2011 14:17:57] I'm about to exit
+[10-May-2011 14:17:57] I'm about to exit
+[10-May-2011 14:17:58] I'm about to exit
+[10-May-2011 14:17:59] I'm about to exit
+[10-May-2011 14:18:00] I'm about to exit
+[10-May-2011 14:18:00] I'm about to exit
+[10-May-2011 14:18:00] I'm about to exit
+[10-May-2011 14:18:00] I'm about to exit
+[10-May-2011 14:18:00] This course is CISH 4380 - Database Systems
+[10-May-2011 14:18:00] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:18:00] This course is CSCI 2300 - Introduction to Algorithms
+[10-May-2011 14:18:00] This course is MGMT 4870 - Strategy and Policy
+[10-May-2011 14:18:05] I'm about to exit
+[10-May-2011 14:18:05] I'm about to exit
+[10-May-2011 14:18:05] I'm about to exit
+[10-May-2011 14:18:05] I'm about to exit
+[10-May-2011 14:18:05] This course is CISH 4380 - Database Systems
+[10-May-2011 14:18:05] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:18:05] This course is IHSS 1220 - IT and Society
+[10-May-2011 14:18:05] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 14:18:06] I'm about to exit
+[10-May-2011 14:18:06] I'm about to exit
+[10-May-2011 14:18:06] I'm about to exit
+[10-May-2011 14:18:06] I'm about to exit
+[10-May-2011 14:18:06] This course is CISH 4380 - Database Systems
+[10-May-2011 14:18:06] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:18:06] This course is IHSS 1220 - IT and Society
+[10-May-2011 14:18:06] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 14:18:12] I'm about to exit
+[10-May-2011 14:18:12] I'm about to exit
+[10-May-2011 14:18:12] I'm about to exit
+[10-May-2011 14:18:12] I'm about to exit
+[10-May-2011 14:18:12] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:18:12] This course is CSCI 4380 - Database Systems
+[10-May-2011 14:18:12] This course is ITWS 1220 - IT and Society
+[10-May-2011 14:18:12] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 14:18:18] I'm about to exit
+[10-May-2011 14:18:18] I'm about to exit
+[10-May-2011 14:18:18] I'm about to exit
+[10-May-2011 14:18:18] I'm about to exit
+[10-May-2011 14:18:18] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:18:18] This course is CSCI 4380 - Database Systems
+[10-May-2011 14:18:18] This course is ITWS 1220 - IT and Society
+[10-May-2011 14:18:18] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 14:18:26] I'm about to exit
+[10-May-2011 14:18:28] I'm about to exit
+[10-May-2011 14:18:29] I'm about to exit
+[10-May-2011 14:18:42] I'm about to exit
+[10-May-2011 14:20:13] I'm about to exit
+[10-May-2011 14:20:13] I'm about to exit
+[10-May-2011 14:20:13] I'm about to exit
+[10-May-2011 14:20:13] I'm about to exit
+[10-May-2011 14:20:13] This course is CISH 4380 - Database Systems
+[10-May-2011 14:20:13] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[10-May-2011 14:20:13] This course is IHSS 1220 - IT and Society
+[10-May-2011 14:20:13] This course is MGMT 1100 - Introduction to Management
+[10-May-2011 14:20:48] I'm about to exit
+[10-May-2011 14:20:50] I'm about to exit
+[10-May-2011 14:20:52] I'm about to exit
+[10-May-2011 14:21:13] I'm about to exit
+[11-May-2011 00:43:45] I'm about to exit
+[11-May-2011 00:43:45] I'm about to exit
+[11-May-2011 00:44:03] I'm about to exit
+[11-May-2011 00:44:03] I'm about to exit
+[11-May-2011 00:44:03] I'm about to exit
+[11-May-2011 00:44:03] I'm about to exit
+[11-May-2011 00:45:06] I'm about to exit
+[11-May-2011 00:45:06] I'm about to exit
+[11-May-2011 00:45:06] I'm about to exit
+[11-May-2011 00:45:06] I'm about to exit
+[11-May-2011 00:45:06] I'm about to exit
+[11-May-2011 00:45:06] I'm about to exit
+[11-May-2011 00:49:22] I'm about to exit
+[11-May-2011 00:49:22] I'm about to exit
+[11-May-2011 00:49:22] I'm about to exit
+[11-May-2011 00:49:22] I'm about to exit
+[11-May-2011 00:49:22] I'm about to exit
+[11-May-2011 00:49:22] I'm about to exit
+[11-May-2011 00:49:22] I'm about to exit
+[11-May-2011 00:49:22] I'm about to exit
+[11-May-2011 00:49:49] I'm about to exit
+[11-May-2011 00:50:00] I'm about to exit
+[11-May-2011 00:50:00] I'm about to exit
+[11-May-2011 00:50:00] I'm about to exit
+[11-May-2011 00:50:00] I'm about to exit
+[11-May-2011 00:50:00] This course is BCBP 4760 - Molecular Biochemistry I
+[11-May-2011 00:50:00] This course is BIOL 4720 - Molecular Biology Laboratory
+[11-May-2011 00:50:00] This course is CHEM 2230 - Organic Chemistry Laboratory I
+[11-May-2011 00:50:00] This course is CHEM 2250 - Organic Chemistry I
+[11-May-2011 00:50:15] I'm about to exit
+[11-May-2011 00:50:15] I'm about to exit
+[11-May-2011 00:50:15] I'm about to exit
+[11-May-2011 00:50:15] I'm about to exit
+[11-May-2011 00:50:15] This course is BCBP 4760 - Molecular Biochemistry I
+[11-May-2011 00:50:15] This course is BIOL 4720 - Molecular Biology Laboratory
+[11-May-2011 00:50:15] This course is CHEM 2230 - Organic Chemistry Laboratory I
+[11-May-2011 00:50:15] This course is CHEM 2250 - Organic Chemistry I
+[11-May-2011 00:50:22] I'm about to exit
+[11-May-2011 00:50:23] I'm about to exit
+[11-May-2011 00:50:23] I'm about to exit
+[12-Sep-2011 22:14:22] I'm about to exit
+[12-Sep-2011 22:14:22] I'm about to exit
+[12-Sep-2011 22:14:22] I'm about to exit
+[12-Sep-2011 22:14:22] I'm about to exit
+[12-Sep-2011 22:14:22] I'm about to exit
+[12-Sep-2011 22:14:22] I'm about to exit
+[12-Sep-2011 22:14:22] I'm about to exit
+[12-Sep-2011 22:14:22] I'm about to exit
+[12-Sep-2011 22:14:28] I'm about to exit
+[12-Sep-2011 22:14:35] I'm about to exit
+[12-Sep-2011 22:14:36] I'm about to exit
+[12-Sep-2011 22:14:38] I'm about to exit
+[12-Sep-2011 22:15:04] I'm about to exit
+[12-Sep-2011 22:15:05] I'm about to exit
+[12-Sep-2011 22:15:07] I'm about to exit
+[12-Sep-2011 22:15:08] I'm about to exit
+[12-Sep-2011 22:15:09] I'm about to exit
+[12-Sep-2011 22:15:10] I'm about to exit
+[12-Sep-2011 22:15:12] I'm about to exit
+[12-Sep-2011 22:35:56] I'm about to exit
+[12-Sep-2011 22:35:56] I'm about to exit
+[12-Sep-2011 22:35:56] I'm about to exit
+[12-Sep-2011 22:35:56] I'm about to exit
+[12-Sep-2011 22:35:56] I'm about to exit
+[12-Sep-2011 22:35:56] I'm about to exit
+[12-Sep-2011 22:35:56] I'm about to exit
+[12-Sep-2011 22:35:56] I'm about to exit
+[12-Sep-2011 22:36:06] I'm about to exit
+[12-Sep-2011 22:36:12] I'm about to exit
+[12-Sep-2011 22:36:12] I'm about to exit
+[12-Sep-2011 22:36:12] I'm about to exit
+[12-Sep-2011 22:36:12] I'm about to exit
+[12-Sep-2011 22:36:12] This course is CISH 4380 - Database Systems
+[12-Sep-2011 22:36:12] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[12-Sep-2011 22:36:12] This course is IHSS 1220 - IT and Society
+[12-Sep-2011 22:36:12] This course is MGMT 1100 - Introduction to Management
+[12-Sep-2011 22:36:58] I'm about to exit
+[12-Sep-2011 22:36:59] I'm about to exit
+[12-Sep-2011 22:49:47] I'm about to exit
+[12-Sep-2011 22:49:56] I'm about to exit
+[12-Sep-2011 22:49:56] I'm about to exit
+[12-Sep-2011 22:49:56] I'm about to exit
+[12-Sep-2011 22:49:56] I'm about to exit
+[12-Sep-2011 22:49:56] This course is CISH 4380 - Database Systems
+[12-Sep-2011 22:49:56] This course is COMM 4690 - Interface Design: Hypermedia Theory and Application
+[12-Sep-2011 22:49:56] This course is IHSS 1220 - IT and Society
+[12-Sep-2011 22:49:56] This course is MGMT 1100 - Introduction to Management
+[12-Sep-2011 22:50:13] I'm about to exit
+[12-Sep-2011 22:50:19] I'm about to exit
+[12-Sep-2011 22:50:20] I'm about to exit
+[12-Sep-2011 22:50:21] I'm about to exit
