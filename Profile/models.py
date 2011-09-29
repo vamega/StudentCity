@@ -18,7 +18,7 @@ class Student(models.Model):
     class_year = models.CharField(max_length=4)
     rin = models.CharField(max_length=9)
     profile_picture_url = models.CharField(max_length=512)
-    classes = models.ManyToManyField(Course)
+    classes_current = models.ManyToManyField(Course)
     classes_taken = models.ManyToManyField(CourseDetail)
     
     def name(self):
@@ -32,8 +32,8 @@ class CourseDetail(models.Model):
     )
     course = models.OneToOneField(Course)
     year = models.CharField(max_length=4)
-    season = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
-    section = client
+    semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
+    section = models.IntegerField()
 
 class Teacher(models.Model):
     rcs_id = models.CharField(max_length=128)
