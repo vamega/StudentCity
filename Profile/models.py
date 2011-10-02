@@ -30,7 +30,7 @@ class CourseDetail(models.Model):
         ('F', 'Fall'),
         ('S', 'Spring'),
     )
-    course = models.OneToOneField(Course)
+    course = models.ForeignKey(Course)
     year = models.CharField(max_length=4)
     semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
     section = models.IntegerField()
