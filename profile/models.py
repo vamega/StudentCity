@@ -9,6 +9,15 @@ class Course(models.Model):
     def course_code(self):
         return course_department + " " + str(course_number)
 
+class CourseDetail(models.Model):
+    SEMESTER_CHOICES = (
+        ('F', 'Fall'),
+        ('S', 'Spring'),
+    )
+    course = models.ForeignKey(Course)
+    year = models.CharField(max_length=4)
+    semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
+    section = models.IntegerField()
 
 class Student(models.Model):
     rcs_id = models.CharField(max_length=128)
@@ -22,18 +31,7 @@ class Student(models.Model):
     classes_taken = models.ManyToManyField(CourseDetail)
     
     def name(self):
-        return self.first_name + self.middle_name + self.last_name
-
-
-class CourseDetail(models.Model):
-    SEMESTER_CHOICES = (
-        ('F', 'Fall'),
-        ('S', 'Spring'),
-    )
-    course = models.ForeignKey(Course)
-    year = models.CharField(max_length=4)
-    semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
-    section = models.IntegerField()
+        return self.first_name + " " + self.middle_name + " " + self.last_name
 
 class Teacher(models.Model):
     rcs_id = models.CharField(max_length=128)

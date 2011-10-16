@@ -1,0 +1,176 @@
+/* CSS Document */
+
+#dashboard #left_side {
+	position: relative;
+	width: 240px;
+	height: auto;
+	z-index: 100;	
+}
+
+.course_tile {
+	position: relative;
+	height: 75px;
+	width: 270px;
+	background-image: url(../images/course_tile.png);
+	background-position: left top;	
+	background-repeat: no-repeat;
+}
+
+.course_tile:hover {
+	cursor: pointer;	
+}
+
+#dashboard #right_side {
+	position: relative;
+	height: auto;
+	width: 505px;
+	background-color: #FFF;
+	margin-top: 3px;
+	padding: 25px;	
+}
+
+.course_tile .text {
+	position: relative;
+	padding-top: 10px;
+	padding-left: 20px;
+	height: 45px;
+	width: 200px;	
+}
+
+#dashboard h1, #dashboard p {
+	color: #000;
+}
+
+#dashboard p {
+	font-size: 12px;	
+}
+
+#dashboard h2 {
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 14px;	
+}
+
+#dashboard h3 {
+	margin-top: 10px;
+	font-size: 13px;	
+}
+
+#dashboard h6 {
+	margin-top: 14px;
+	font-size: 10px;	
+}
+
+#header_wrapper {
+	margin-left: auto;
+	margin-right: auto;	
+	width: 760px;
+	height: 100px;
+	margin-top: -105px;
+	padding-left: 20px;
+	padding-right: 20px;
+	z-index: 100;
+}
+
+#welcome_message {
+	position: absolute;	
+}
+
+#header h3 {
+	display:block;
+	position: relative;
+}
+
+#header #date {
+	margin-top: 25px;	
+	color: #FFF;
+}
+
+.search_submit {
+	height: 20px;
+	border: 1px solid #58595B;
+	background-color: #FFF;
+	width: 20px;
+	float: right;
+	margin-left: -1px;
+	background-image: url(../images/search.svg);
+}
+
+#main_search {
+	float: right;
+	border: 1px solid #58595B;
+	height: 18px;
+	width: 155px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #58595B;
+	font-size: 12px;
+	padding-left: 3px;
+}
+
+#site_search {
+	position: relative;
+	margin-top: 25px;	
+}
+
+.in_course {
+	position: relative;
+	height: 170px;
+	width: 485px;
+	border: 1px solid #000;	
+	padding: 10px;
+	padding-bottom: 0px;
+	overflow-y: auto;
+}
+
+.in_course_title {
+	margin-top: 20px;
+	margin-bottom: 5px;	
+}
+
+.person_block {
+	height: 85px;
+	width: 60px;
+	float: left;
+}
+
+.person_image {
+	display: block;
+	height: 60px;
+	width: 60px;
+	background-color: #586;
+}
+
+.person_name {
+	margin-top: 5px;
+	font-size: 10px;
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+}
+
+.person_block + .person_block {
+	margin-left: 8px;	
+}
+
+li.search_person:hover {
+	cursor: pointer;	
+}
+
+li.search_course:hover {
+	cursor: pointer;	
+}
+
+#person_search_info #person_search_image {
+	background-color: #9F0;
+	height: 100px;
+	width: 100px;	
+	margin-right: 20px;
+}
+
+#person_search_info h3 {
+	margin-top: 5px;	
+}
