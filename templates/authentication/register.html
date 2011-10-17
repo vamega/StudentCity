@@ -4,10 +4,20 @@
 <head>
 	<title>StudentCity | RPI's Home for Social Academia</title>
     
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css" />
+    <!-- If you just want something to work, even temprarily and incompletely, uncomment the follwing 4 lines and comment the 4 below them. ->
+    
+    <!--
+    <link rel="stylesheet" type="text/css" href="http://studentcity.myrpi.org/css/base.css" />
+    <script type="text/javascript" src="http://studentcity.myrpi.org/javascript/jquery.js"></script>
+    <script type="text/javascript" src="http://studentcity.myrpi.org/javascript/validate.js"></script>
+    <script type="text/javascript" src="http://studentcity.myrpi.org/javascript/custom_functions.js"></script>
+    -->
+     
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL|default:'/static_files/' }}css/base.css" />
     <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}javascript/validate.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}javascript/custom_functions.js"></script>
+    
 
   	<script type="text/javascript">
 		$(document).ready(function() {								

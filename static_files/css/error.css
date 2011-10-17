@@ -1,0 +1,33 @@
+/* CSS Document */
+
+.errorMessageBox {
+	display: none;
+	border: 1px solid #F00;
+	background-color: #FEE;
+	list-style: none;
+	
+	width: 257px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+label.error {
+	font-size: 11px;
+	color: #F00;	
+}
+
+label.success {
+	color: #030;
+	font-size: 11px;
+}
+
+.successMessageBox {
+	display: none;
+	border: 1px solid #060;
+	background-color: #9F3;
+	list-style: none;
+	
+	width: 257px;
+	margin-bottom: 10px;
+	padding: 10px;
+}

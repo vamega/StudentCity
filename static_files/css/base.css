@@ -1,0 +1,12 @@
+/*	base.css
+ *	
+ *	Imports all the CSS files needed for the program. With this you only need
+ *	to include this one file to get them all! 
+ */
+
+@import url("reset.css");
+@import url("style.css");
+@import url("dashboard.css");
+@import url("error.css");
+@import url("overlay.css");
+@import url("settings.css");

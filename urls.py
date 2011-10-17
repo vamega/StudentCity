@@ -13,3 +13,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 )
+
+try:
+    from local_urls import *
+except ImportError:
+    pass

@@ -1,4 +1,5 @@
 local_database*
+local_urls.py
 local.py
 *.pyc
 *~
