@@ -12,9 +12,19 @@ urlpatterns = patterns('',
     # admin
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    
+    # delete before pushing
+    (r'^static_files/(?P<path>.*)$', 
+        'serve', {
+            'document_root': 'C:/Users/bellok/code/classes/sdd/StudentCity/static_files/',
+            'show_indexes': True 
+        }
+    ),
 )
 
+'''
 try:
     from local_urls import *
 except ImportError:
     pass
+'''
