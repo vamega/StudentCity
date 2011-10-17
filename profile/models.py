@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 from django.db import models
-import addclass.py
 
 class Course(models.Model):
     course_department = models.CharField(max_length=16)
@@ -30,6 +30,11 @@ class Student(models.Model):
     profile_picture_url = models.CharField(max_length=512)
     classes_current = models.ManyToManyField(Course)
     classes_taken = models.ManyToManyField(CourseDetail)
+    
+    def addclass(self, num, name):
+	class_name = name
+	class_num = num
+	profile_student_classes_current = 
     
     def name(self):
         return self.first_name + " " + self.middle_name + " " + self.last_name
