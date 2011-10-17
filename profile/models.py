@@ -27,7 +27,7 @@ class Student(models.Model):
     class_year = models.CharField(max_length=4)
     rin = models.CharField(max_length=9)
     profile_picture_url = models.CharField(max_length=512)
-    classes_current = models.ManyToManyField(Course)
+    classes_current = models.ManyToManyField(CourseDetail)
     classes_taken = models.ManyToManyField(CourseDetail)
     
     def name(self):
