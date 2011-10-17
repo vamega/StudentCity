@@ -1,4 +1,5 @@
 from django.db import models
+import addclass.py
 
 class Course(models.Model):
     course_department = models.CharField(max_length=16)
