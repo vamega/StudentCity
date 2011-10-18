@@ -33,10 +33,10 @@ class Student(models.Model):
     classes_taken = models.ManyToManyField(CourseDetail)
     
 
-    def addclass(self, num, name):
-	class_name = name
-	class_num = num
-	#profile_student_classes_current = 
+    def add_class(self, num, name):
+        class_name = name
+        class_num = num
+        # Write code for adding class to classes_current here
     
     def name(self):
         return self.first_name + " " + self.middle_name + " " + self.last_name
