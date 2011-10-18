@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import * 
+from django.template import RequestContext
 
 # Builtin django forms imported:
 # - class AdminPasswordChangeForm
@@ -34,4 +35,4 @@ def index(request):
     else:
         c['login_form'] = AuthenticationForm()
         c['register_form'] = UserCreationForm()
-        return render_to_response('authentication/register.html', c)
+        return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))

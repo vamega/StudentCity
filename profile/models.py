@@ -9,7 +9,7 @@ class Course(models.Model):
     course_description = models.TextField()
     
     def course_code(self):
-        return course_department + " " + str(course_number)
+        return self.course_department + " " + str(self.course_number)
 
 class CourseDetail(models.Model):
     SEMESTER_CHOICES = (
@@ -35,7 +35,7 @@ class Student(models.Model):
     def addclass(self, num, name):
 	class_name = name
 	class_num = num
-	profile_student_classes_current = 
+	#profile_student_classes_current = 
     
     def name(self):
         return self.first_name + " " + self.middle_name + " " + self.last_name

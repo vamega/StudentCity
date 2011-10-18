@@ -10,7 +10,7 @@ def index(request):
     c = {}
     c.update(csrf(request))
     
-    render_to_response("profile/personal.html")
+    return render_to_response("profile/personal.html")
     
     # TODO: write the "profile/personal.html" to accept POST data or cookies and show personal page, 
     #       then uncomment and adjust the below code to handle it
