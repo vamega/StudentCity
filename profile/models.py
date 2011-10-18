@@ -32,6 +32,7 @@ class Student(models.Model):
     classes_current = models.ManyToManyField(Course)
     classes_taken = models.ManyToManyField(CourseDetail)
     
+
     def addclass(self, num, name):
 	class_name = name
 	class_num = num
