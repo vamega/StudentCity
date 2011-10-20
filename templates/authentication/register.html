@@ -4,22 +4,6 @@
 <head>
 	<title>StudentCity | RPI's Home for Social Academia</title>
     
-    <!-- If you just want something to work, even temprarily and incompletely, uncomment the follwing 4 lines and comment the 4 below them. -->
-    
-    <!-- 
-    <link rel="stylesheet" type="text/css" href="http://studentcity.myrpi.org/css/base.css" />
-    <script type="text/javascript" src="http://studentcity.myrpi.org/javascript/jquery.js"></script>
-    <script type="text/javascript" src="http://studentcity.myrpi.org/javascript/validate.js"></script>
-    <script type="text/javascript" src="http://studentcity.myrpi.org/javascript/custom_functions.js"></script>
-    -->
-    
-    <!--
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL|default:'/static_files/' }}css/base.css" />
-    <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}javascript/validate.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}javascript/custom_functions.js"></script>
-    -->
-    
     <link rel="stylesheet" type="text/css" href="/static/css/base.css" />
     <script type="text/javascript" src="/static/javascript/jquery.js"></script>
     <script type="text/javascript" src="/static/javascript/validate.js"></script>
@@ -115,19 +99,11 @@
             <div id="leftErrorMessageBoxServer" class="float_right errorMessageBox"></div>
             <div id="leftErrorMessageBox" class="float_right errorMessageBox"></div>
             <form id="login" method="post" action="/login">
-                <!-- Legacy login code from the PHP version of the site
-                <input class="float_right text_input" type="text" name="rcsid" />
-                <label class="float_right">RCS ID</label>
-                <div class="clear"></div>
-                <div class="not-first">
-               		<input class="float_right text_input" type="password" name="password" />
-                	<label class="float_right">Password</label>
-                </div>
-                <div class="clear"></div>
-                -->
                 {% csrf_token %}
+                <table>
                 {{ login_form.as_table }}
                 <input class="float_right button_input" type="submit" value="Login" />
+                </table>
             </form>
         </div>
         <div class="float_right main_info">
@@ -135,23 +111,10 @@
             <div id="rightErrorMessageBoxServer" class="errorMessageBox"></div>
             <div id="rightErrorMessageBox" class="errorMessageBox"></div>
             <form  id="registration" method="post">
-                <!-- Legacy registration code from the PHP version of the site
-                <label class="float_left">RCS ID</label>
-                <input class="float_left text_input" type="text" name="rcsid"/>
-                <div class="clear"></div>
-                <div class="not-first">
-                	<label class="float_left">Password</label>
-               		<input id="pass1" class="float_left text_input" type="password" name="pass1"/>
-                </div>
-				<div class="clear"></div>
-                <div class="not-first">
-                	<label class="float_left">Retype Password</label>
-               		<input id="pass2" class="float_left text_input" type="password" name="pass2"/>
-                </div>
-                <div class="clear"></div>
-                -->
                 {% csrf_token %}
+                <table>
                 {{ register_form.as_table }}
+                </table>
                 <input class="float_right button_input" type="submit" value="Register" />
             </form>
       

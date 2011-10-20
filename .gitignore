@@ -1,5 +1,8 @@
 local_database*
+database/*
 local_urls.py
 local.py
 *.pyc
 *~
+*.sublime-project
+*.sublime-workspace
