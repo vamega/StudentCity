@@ -114,7 +114,7 @@
                 {% csrf_token %}
                 <table>
                     <tr><th><label for="id_username">Username:</label></th><td>{{  register_form.username }}</td></tr>
-                    <tr><th><label for="id_password">Password:</label></th><td>{{  register_form.password }}</td></tr>
+                    <tr><th><label for="id_password">Password:</label></th><td>{{  register_form.password1 }}</td></tr>
                     <tr><th><label for="id_password2">Confirm Password:</label></th><td>{{  register_form.password2 }}</td></tr>
                 </table>
                 <input class="float_right button_input" type="submit" value="Register" />
