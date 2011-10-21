@@ -79,6 +79,16 @@
 			});
 		});
 	</script>
+    
+    <style type="text/css">
+        th {
+            text-align:     right;
+            padding:         10px;
+        }
+        table#login_form {
+            float:          right;
+        }
+    </style>
 </head>
 
 <body>
@@ -100,10 +110,11 @@
             <div id="leftErrorMessageBox" class="float_right errorMessageBox"></div>
             <form id="login" method="post" action="/login">
                 {% csrf_token %}
-                <table>
-                {{ login_form.as_table }}
-                <input class="float_right button_input" type="submit" value="Login" />
+                <table class="float_right">
+                    <tr><th><label for="id_username">Username:</label></th><td>{{  login_form.username }}</td></tr>
+                    <tr><th><label for="id_password">Password:</label></th><td>{{  login_form.password }}</td></tr>
                 </table>
+                <input class="float_right button_input" type="submit" value="Login" style="clear:both;" />
             </form>
         </div>
         <div class="float_right main_info">
@@ -112,9 +123,9 @@
             <div id="rightErrorMessageBox" class="errorMessageBox"></div>
             <form  id="registration" method="post">
                 {% csrf_token %}
-                <table>
+                <table class="float_left">
                     <tr><th><label for="id_username">Username:</label></th><td>{{  register_form.username }}</td></tr>
-                    <tr><th><label for="id_password">Password:</label></th><td>{{  register_form.password1 }}</td></tr>
+                    <tr><th><label for="id_password1">Password:</label></th><td>{{  register_form.password1 }}</td></tr>
                     <tr><th><label for="id_password2">Confirm Password:</label></th><td>{{  register_form.password2 }}</td></tr>
                 </table>
                 <input class="float_right button_input" type="submit" value="Register" />
