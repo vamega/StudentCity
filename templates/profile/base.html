@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 
+<!-- 
+
+Expected POST objects:
+
+- courses : list/tuple of course_detail model objects associated with the current student
+
+-->
+
 <html>
 <head>
     <title>StudentCity | {% block title %}Dashboard{% endblock title %}</title>
@@ -102,7 +110,7 @@
                 <div class="course_tile" id="{{ course_detail.course.course_code }}">
                     <div class="text">
                         <h2>{{ course_detail.course.course_name }}</h2>
-                        <h6>Currents: {{ course_detail.get_num_current_students }}. | Veterans: {{ get_num_past_students }}. </h6>
+                        <h6>Currents: {{ course_detail.get_num_current_students }}. | Veterans: {{ course_detail.get_num_past_students }}. </h6>
                         </div>
                         </div>
                     </div>

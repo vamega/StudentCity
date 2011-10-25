@@ -10,6 +10,7 @@ def index(request):
     c = {}
     c.update(csrf(request))
     
+    # no user info is being passed right now; the template is simply being rendered
     return render_to_response("profile/personal.html")
     
     # TODO: write the "profile/personal.html" to accept POST data or cookies and show personal page, 

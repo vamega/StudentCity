@@ -47,6 +47,10 @@ def register(request):
         if form.is_valid():
             new_user = form.save()
             return HttpResponseRedirect("/home")
+        else:
+            c['login_form'] = AuthenticationForm()
+            c['register_form'] = UserCreationForm()
+            return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
     else:
         c['login_form'] = AuthenticationForm()
         c['register_form'] = UserCreationForm()
