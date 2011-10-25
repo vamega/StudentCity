@@ -11,9 +11,23 @@
     
     
   	<script type="text/javascript">
-		$(document).ready(function() {								
-			// Validation for the registration!
-			$("#registration").validate({
+        function makeDate() {
+            var m_names = new Array("January", "February", "March", "April", "May", 
+            "June", "July", "August", "September", "October", "November", "December");
+            
+            var d = new Date();
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth();
+            var curr_year = d.getFullYear();
+            return m_names[curr_month] + " " + curr_date + ", " + curr_year;    
+        }
+        
+        $(document).ready(function() {								
+			$( "#random" ).html(Math.random());
+            
+            // Validation for the registration!
+			/*
+            $("#registration").validate({
 				rules: {	
 					rcsid: { required: true },
 					pass1: { required: true },
@@ -77,6 +91,7 @@
 					}, "json");
 				}		
 			});
+            */
 		});
 	</script>
     
@@ -101,7 +116,7 @@
         <div>
         <p class="float_left">With StudentCity, you can connect with your classmates in a whole new way, and actually meet people in the classroom, and get to know them outside the classroom. You never again have to worry about those embarassing time when you forget a name!</p>
             
-        <p class="float_right">Form groups, find out who has the same class as you, and also get information from those who took a class in the past. StudentCity connects you to other students from the past and present in order to better prepare you for the future.</p>
+        <p class="float_right">Form groups, find out who has the same class as you, and also get information from those who took a class in the past. StudentCity connects you to other students from the past and present in order to better prepare you for the future.<span id="random"></span></p>
         </div>
         
         <div class="float_left main_info">            
@@ -121,7 +136,7 @@
             <h1>New Users Register Here</h1>
             <div id="rightErrorMessageBoxServer" class="errorMessageBox"></div>
             <div id="rightErrorMessageBox" class="errorMessageBox"></div>
-            <form  id="registration" method="post">
+            <form  id="registration" method="post" action="/register/">
                 {% csrf_token %}
                 <table class="float_left">
                     <tr><th><label for="id_username">Username:</label></th><td>{{  register_form.username }}</td></tr>

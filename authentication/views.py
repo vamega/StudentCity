@@ -26,6 +26,21 @@ def index(request):
     c = {}
     c.update(csrf(request))
     
+    # TODO: create authentication test; if logged in, redirect to personal profile
+    if False:
+        # TODO: redirect to profile once it works
+        pass
+    else:
+        c['login_form'] = AuthenticationForm()
+        c['register_form'] = UserCreationForm()
+        return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
+
+    
+def register(request):
+    # csrf is used to prevent Cross-Site Request Forgeries (i.e. XSS attacks, SQL injections, etc.)
+    c = {}
+    c.update(csrf(request))
+    
     # if logged in, redirect to personal profile
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

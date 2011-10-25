@@ -10,6 +10,13 @@ class Course(models.Model):
     
     def course_code(self):
         return self.course_department + " " + str(self.course_number)
+        
+    def get_num_current_students(self):
+        return "unknown"
+    
+    def get_num_past_students(self):
+        return "unknown"
+
 
 class CourseDetail(models.Model):
     SEMESTER_CHOICES = (
