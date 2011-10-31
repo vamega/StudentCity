@@ -1,4 +1,6 @@
-{% extends "profile/base.html" %}
+{% extends "profile/base_with_classes.html" %}
+
+{% block username %}{{ user.username }}{% endblock username %}
 
 {% block main_content %}
 <div id="profile_content" style="width:100%; min-height:600px;">

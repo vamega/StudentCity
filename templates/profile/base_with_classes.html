@@ -1,0 +1,15 @@
+{% extends "profile/base.html" %}
+
+{% block left_side %}
+    <h3>Classes:</h3>
+    {% for course_detail in courses %}
+        <div class="course_tile" id="{{ course_detail.course.course_code }}">
+            <div class="text">
+                <h2>{{ course_detail.course.course_name }}</h2>
+                <h6>Currents: {{ course_detail.get_num_current_students }}. | Veterans: {{ course_detail.get_num_past_students }}. </h6>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock left_side %}
