@@ -68,7 +68,7 @@ def login(request):
         user = auth.authenticate(username=request.POST.get("username"), password=request.POST.get("password"))
         if user is not None and user.is_active:
             auth.login(request, user)
-            return HttpResponseRedirect("/account/profile")
+            return HttpResponseRedirect("/home")
         else:
             return HttpResponseRedirect("/?error=1")
         
