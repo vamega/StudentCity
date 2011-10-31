@@ -3,6 +3,8 @@ from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import * 
 from django.template import RequestContext
+from django.contrib import auth
+import logging
 
 # Builtin django forms imported:
 # - class AdminPasswordChangeForm
@@ -20,6 +22,7 @@ from django.template import RequestContext
 # - class UserCreationForm
 #       A form for creating a new user.
 
+logger = logging.getLogger('testing')
 
 def index(request):
     # csrf is used to prevent Cross-Site Request Forgeries (i.e. XSS attacks, SQL injections, etc.)
@@ -55,3 +58,17 @@ def register(request):
         c['login_form'] = AuthenticationForm()
         c['register_form'] = UserCreationForm()
         return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
+
+def login(request):
+    c = {}
+    c.update(csrf(request))
+
+    if request.method == 'POST':
+        logger.debug("User Name = %s, Password = %s" %(request.POST.get("id_username"),request.POST.get("id_password")))
+        user = auth.authenticate(username=request.POST.get("username"), password=request.POST.get("password"))
+        if user is not None and user.is_active:
+            auth.login(request, user)
+            return HttpResponseRedirect("/account/profile")
+        else:
+            return HttpResponseRedirect("/?error=1")
+        
