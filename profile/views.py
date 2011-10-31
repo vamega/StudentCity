@@ -9,9 +9,8 @@ def index(request):
     # csrf is used to prevent Cross-Site Request Forgeries (i.e. XSS attacks, SQL injections, etc.)
     c = {}
     c.update(csrf(request))
-    
     # no user info is being passed right now; the template is simply being rendered
-    return render_to_response("profile/personal.html")
+    return render_to_response("profile/personal.html", c)
     
     # TODO: write the "profile/personal.html" to accept POST data or cookies and show personal page, 
     #       then uncomment and adjust the below code to handle it
