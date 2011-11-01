@@ -30,12 +30,14 @@ def index(request):
     c.update(csrf(request))
     
     # TODO: create authentication test; if logged in, redirect to personal profile
-    if False:
-        # TODO: redirect to profile once it works
-        pass
+    if request.user.is_authenticated():
+        return HttpResponseRedirect("/home")
     else:
         c['login_form'] = AuthenticationForm()
         c['register_form'] = UserCreationForm()
+        # assert False
+        if request.GET.get('error') == '1':
+            c['error'] = 1
         return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
 
     
