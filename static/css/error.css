@@ -1,7 +1,6 @@
 /* CSS Document */
 
 .errorMessageBox {
-	display: none;
 	border: 1px solid #F00;
 	background-color: #FEE;
 	list-style: none;

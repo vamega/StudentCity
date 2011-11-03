@@ -121,8 +121,9 @@
         
         <div class="float_left main_info">            
             <h1>Existing Users Login</h1>
-            <div id="leftErrorMessageBoxServer" class="float_right errorMessageBox"></div>
-            <div id="leftErrorMessageBox" class="float_right errorMessageBox"></div>
+            {% if error == 1 %}
+            <div id="leftErrorMessageBox" class="float_right errorMessageBox">The username or password you entered is incorrect.</div>
+            {% endif %}
             <form id="login" method="post" action="/login">
                 {% csrf_token %}
                 <table class="float_right">
@@ -134,8 +135,9 @@
         </div>
         <div class="float_right main_info">
             <h1>New Users Register Here</h1>
-            <div id="rightErrorMessageBoxServer" class="errorMessageBox"></div>
+            {% if error == 2 %}
             <div id="rightErrorMessageBox" class="errorMessageBox"></div>
+            {% endif %}
             <form  id="registration" method="post" action="/register/">
                 {% csrf_token %}
                 <table class="float_left">
