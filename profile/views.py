@@ -23,3 +23,6 @@ def index(request):
     #        render_to_response("profile/personal.html", c)
     #else:
     #    return HttpResponseRedirect('/login')
+    
+def settings(request):
+    return render_to_response("profile/settings.html")
