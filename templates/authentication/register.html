@@ -136,7 +136,7 @@
         <div class="float_right main_info">
             <h1>New Users Register Here</h1>
             {% if error == 2 %}
-            <div id="rightErrorMessageBox" class="errorMessageBox"></div>
+            <div id="rightErrorMessageBox" class="errorMessageBox">The username you entered is not available.</div>
             {% endif %}
             <form  id="registration" method="post" action="/register/">
                 {% csrf_token %}

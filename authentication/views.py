@@ -73,4 +73,3 @@ def login(request):
             return HttpResponseRedirect("/home")
         else:
             return HttpResponseRedirect("/?error=1")
-        

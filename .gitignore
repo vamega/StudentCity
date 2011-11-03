@@ -1,3 +1,5 @@
+.ssh*
+.gitconfig
 local_database*
 database/*
 local_urls.py
