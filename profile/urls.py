@@ -4,5 +4,5 @@ from views import *
 urlpatterns = patterns('',
     # /profile/ will call the profile index view, which is the user's personal profile
     (r'^$', 'profile.views.index'),
-    (r'^/settings$', 'profile.views.settings'),
+    (r'^/settings/$', 'profile.views.settings'),
 )
