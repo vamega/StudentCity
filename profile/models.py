@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 class Course(models.Model):
     course_department = models.CharField(max_length=16)
@@ -49,13 +50,14 @@ class CourseDetail(models.Model):
         return self.course.course_name + " " + self.semester + " " + self.year + " " + str(self.section)
 
 class Student(models.Model):
+    user = models.ForeignKey(User, unique=True)
     rcs_id = models.CharField(max_length=128)
     first_name = models.CharField(max_length=256)
     middle_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
     class_year = models.CharField(max_length=4)
     rin = models.CharField(max_length=9)
-    profile_picture_url = models.CharField(max_length=512)
+    profile_picture_url = models.URLField()
     classes_current = models.ManyToManyField(CourseDetail, related_name='current')
     classes_taken = models.ManyToManyField(CourseDetail, related_name='taken')
     

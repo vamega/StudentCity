@@ -9,6 +9,7 @@ def index(request):
     # csrf is used to prevent Cross-Site Request Forgeries (i.e. XSS attacks, SQL injections, etc.)
     c = {}
     c.update(csrf(request))
+    c["user"] = request.user
     # no user info is being passed right now; the template is simply being rendered
     return render_to_response("profile/personal.html", c)
     
