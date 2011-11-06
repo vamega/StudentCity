@@ -1,8 +1,8 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
-from django.contrib.auth.forms import * 
-
+from django.contrib.auth.forms import *
+from django.template import RequestContext
 
 # Add profile app views here
 def index(request):
@@ -25,4 +25,4 @@ def index(request):
     #    return HttpResponseRedirect('/login')
     
 def settings(request):
-    return render_to_response("profile/settings.html")
+    return render_to_response("profile/settings.html", {}, context_instance=RequestContext(request))
