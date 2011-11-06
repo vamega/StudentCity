@@ -8,3 +8,4 @@ local.py
 *~
 *.sublime-project
 *.sublime-workspace
+.git-rewrite*
