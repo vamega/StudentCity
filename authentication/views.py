@@ -66,7 +66,7 @@ def login(request):
     c.update(csrf(request))
 
     if request.method == 'POST':
-        logger.debug("User Name = %s, Password = %s" %(request.POST.get("id_username"),request.POST.get("id_password")))
+        logger.debug("User Name = %s, Password = %s" %(request.POST.get("username"),request.POST.get("password")))
         user = auth.authenticate(username=request.POST.get("username"), password=request.POST.get("password"))
         if user is not None and user.is_active:
             auth.login(request, user)
