@@ -42,6 +42,8 @@ class CourseDetail(models.Model):
     year = models.CharField(max_length=4)
     semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
     section = models.IntegerField()
+    professor = models.CharField(max_length=64)
+    crn = models.PositiveIntegerField(unique=True)
 
     def __unicode__(self):
         return self.course.course_name + " " + self.semester + " " + self.year + " " + str(self.section)
