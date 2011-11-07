@@ -2,18 +2,18 @@
 
 {% block username %}
     {% if user == None %}
-        Nobody
+        Nobody!
     {% else %}
         {% if user.is_authenticated %}
-            {{ user.username }}
+            {{ student.first_name|default:user.username }}!
         {% else %}
-            Unauthenticated User
+            Unauthenticated User!
         {% endif %}
     {% endif %}
 {% endblock username %}
 
 {% block left_side %}
-    <h3>Classes:</h3>
+    <h2>Classes:</h2>
     {% if student.classes_current.all.count == 0 %}
         <br />
         <br />

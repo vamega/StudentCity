@@ -2,6 +2,8 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+
 
 class Course(models.Model):
     course_department = models.CharField(max_length=16)
@@ -50,11 +52,12 @@ class CourseDetail(models.Model):
 class Student(models.Model):
     user = models.ForeignKey(User, unique=True)
     rcs_id = models.CharField(max_length=128)
-    first_name = models.CharField(max_length=256)
-    middle_name = models.CharField(max_length=256)
-    last_name = models.CharField(max_length=256)
-    class_year = models.CharField(max_length=4)
-    profile_picture_url = models.URLField()
+    rin = models.CharField(max_length=9)
+    first_name = models.CharField(max_length=256, blank=True)
+    middle_name = models.CharField(max_length=256, blank=True)
+    last_name = models.CharField(max_length=256, blank=True)
+    class_year = models.CharField(max_length=4, blank=True)
+    profile_picture_url = models.URLField(blank=True, default='/static/images/default_profile_picture.png')
     classes_current = models.ManyToManyField(CourseDetail, related_name='current')
     classes_taken = models.ManyToManyField(CourseDetail, related_name='taken')
     
@@ -86,5 +89,11 @@ class Teacher(models.Model):
     def __unicode__(self):
         return self.rcs_id
 
+
+# The following models are ModelForms, i.e. Form subclasses used to update some of the above models.
+
+class PersonalInformationForm(ModelForm):
+    class Meta:
+        model = Student
+        fields = ('first_name', 'middle_name', 'last_name', 'class_year', 'profile_picture_url')
         
-import profile_forms
