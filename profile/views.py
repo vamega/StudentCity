@@ -22,17 +22,40 @@ def index(request):
     return render_to_response("profile/personal.html", c)
     
 
-def class_search(request):
+def course_search(request):
     c = {}
     c.update(csrf(request))
-    
+    c['course_search_form'] = CourseSearchForm(request.GET or None)
+    if request.GET.get("course_department") != u'':
+        # TO DO: Implement legitimate search functionality here.
+        # The following is simply a "proof-of-concept" of sorts allowing for demonstration.
+        c['search_results'] = []
+        if request.GET.get("course_department") == u'CSCI':
+            c['num_results'] = 8
+            for course in Course.objects.filter(course_department = u'CSCI'):
+                for course_detail in course.coursedetail_set.all():
+                    c['search_results'].append(course_detail)
+            
+    c['user'] = request.user
+    c['student'] = request.user.student_set.all()[0]
+    return render_to_response("profile/add_course.html", c, context_instance=RequestContext(request))
+
+def add_course(request):
+    c = {}
+    c.update(csrf(request))
+    if request.GET.get('dept') == u'' or request.GET.get('num') == u'':
+        return HttpResponseRedirect("/home/course_search")
+    logger.debug(request.GET.get('dept'), " ", request.GET.get('num'))
+    s = request.user.student_set.all()[0]
+    s.add_course(request.GET.get('dept'), request.GET.get('num'), request.GET.get('sec'), request.GET.get('sem'), request.GET.get('yr'), 'present')
+    s.save()
+    return HttpResponseRedirect("/home/course_search/")
     
     
 def settings(request):
     c = {}
     c.update(csrf(request))
     if request.user.student_set.all().count() == 0:
-        logger.debug("redirecting.")
         return HttpResponseRedirect("/?error=1")
     student = request.user.student_set.all()[0]
     privacy_settings = student.privacysettings_set.all()[0]
@@ -47,7 +70,8 @@ def edit_personal_info(request):
     c = {}
     c.update(csrf(request))
     if request.method == 'POST':
-        form = StudentForm(request.POST, instance=request.user.student_set.all()[0])
+        s = request.user.student_set.all()[0]
+        form = StudentForm(request.POST, instance=s)
         if form.is_valid():
             form.save()
             

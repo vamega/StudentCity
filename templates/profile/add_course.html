@@ -1,0 +1,43 @@
+{% extends "profile/base_with_classes.html" %}
+
+{% block style %}
+    td.spacer
+    {
+        width:      30px;
+    }
+{% endblock style %}
+    
+
+{% block main_content %}
+<div id="course_selection_content" style="width:100%; min-height:600px;">
+    <h2>Course Search</h2>
+    <div id="search">
+        <form action="/home/course_search/" method="get">
+        {% csrf_token %}
+            <table>
+                <tr><th>Department:</th><td class="spacer"></td><td>{{ course_search_form.course_department }}</td></tr>
+                <tr><th>Course Number:</th><td class="spacer"></td><td>{{ course_search_form.course_number }}</td></tr>
+                <tr><th>Year:</th><td class="spacer"></td><td>{{ course_search_form.year }}</td></tr>
+                <tr><th>Semester:</th><td class="spacer"></td><td>{{ course_search_form.semester }}</td></tr>
+                <tr><th>Section:</th><td class="spacer"></td><td>{{ course_search_form.section }}</td></tr>
+                <input class="float_right button_input" type="submit" value="Search" />
+            </table>
+        </form>
+    </div>
+    <div id="results">
+        <table id="results_table">
+        {% if num_results > 0 %}
+        <tr><td><h2>Search Results:</h2></td></tr>
+        <tr>
+            <td>Course Name:</td><td class="spacer"></td><td>Course Code:</td><td class="spacer"></td><td>Year:</td><td class="spacer"></td><td>Semester:</td><<td class="spacer"></td>td>Section:</td>
+        </tr>
+        {% for course_detail in search_results %}
+        <tr>
+            <td><a href="/home/add_course/?dept={{ course_detail.course.course_department }}&num={{ course_detail.course.course_number }}&sem={{ course_detail.semester }}&yr={{ course_detail.year }}&sec={{ course_detail.section }}">{{ course_detail.course.course_name }}</a></td><td class="spacer"></td><td><a href="/home/add_course?dept={{ course_detail.course.course_department }}&num={{ course_detail.course.course_number }}">{{ course_detail.course.course_code }}</a></td><td class="spacer"></td><td>{{ course_detail.year }}</td><td class="spacer"></td><td>{{ course_detail.semester }}</td><td class="spacer"></td><td>{{ course_detail.section }}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </table>
+    </div>
+</div>
+{% endblock main_content %}

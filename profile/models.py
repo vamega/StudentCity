@@ -62,13 +62,21 @@ class Student(models.Model):
     classes_taken = models.ManyToManyField(CourseDetail, related_name='taken')
     
 
-    def add_class(self, num, dept, name, sem, yr, sec, present_or_past):
+    def add_course(self, num, dept, name, sem, yr, sec, present_or_past):
         class_taken, created = Course.objects.get_or_create(course_number=num, course_department=dept, course_name=name)
         class_section, created = CourseDetail.objects.get_or_create(course=class_taken, semester=sem, year=yr, section=sec)
         if (present_or_past == 'present'):
             self.classes_current.add(class_section)
         else:
             self.classes_taken.add(class_section)
+    
+    def add_course(self, dept, num, section, semester, year, present_or_past):
+        course = Course.objects.get(course_number=num, course_department=dept)
+        course_detail = CourseDetail.objects.get(course=course, semester=semester, year=year, section=section)
+        if (present_or_past == 'present'):
+            self.classes_current.add(course_detail)
+        else:
+            self.classes_taken.add(course_detail)
     
     def name(self):
         return self.first_name + " " + self.middle_name + " " + self.last_name
