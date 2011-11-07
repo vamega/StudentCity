@@ -119,7 +119,7 @@
         <p class="float_right">Form groups, find out who has the same class as you, and also get information from those who took a class in the past. StudentCity connects you to other students from the past and present in order to better prepare you for the future.<span id="random"></span></p>
         </div>
         
-        <div class="float_left main_info">            
+        <div class="float_left main_info">
             <h1>Existing Users Login</h1>
             {% if error == 1 %}
             <div id="leftErrorMessageBox" class="float_right errorMessageBox">The username or password you entered is incorrect.</div>
@@ -127,8 +127,8 @@
             <form id="login" method="post" action="/login">
                 {% csrf_token %}
                 <table class="float_right">
-                    <tr><th><label for="id_username">Username:</label></th><td>{{ login_form.username }}</td></tr>
-                    <tr><th><label for="id_password">Password:</label></th><td>{{ login_form.password }}</td></tr>
+                    <tr><th><label for="id_username" style="color:#FFF;">Username:</label></th><td>{{  login_form.username }}</td></tr>
+                    <tr><th><label for="id_password" style="color:#FFF;">Password:</label></th><td>{{  login_form.password }}</td></tr>
                 </table>
                 <input class="float_right button_input" type="submit" value="Login" style="clear:both;" />
             </form>
@@ -141,9 +141,9 @@
             <form  id="registration" method="post" action="/register/">
                 {% csrf_token %}
                 <table class="float_left">
-                    <tr><th><label for="id_username">Username:</label></th><td>{{  register_form.username }}</td></tr>
-                    <tr><th><label for="id_password1">Password:</label></th><td>{{  register_form.password1 }}</td></tr>
-                    <tr><th><label for="id_password2">Confirm Password:</label></th><td>{{  register_form.password2 }}</td></tr>
+                    <tr><th><label for="id_username" style="color:#FFF;">Username:</label></th><td>{{  register_form.username }}</td></tr>
+                    <tr><th><label for="id_password1" style="color:#FFF;">Password:</label></th><td>{{  register_form.password1 }}</td></tr>
+                    <tr><th><label for="id_password2" style="color:#FFF;">Confirm Password:</label></th><td>{{  register_form.password2 }}</td></tr>
                 </table>
                 <input class="float_right button_input" type="submit" value="Register" />
             </form>

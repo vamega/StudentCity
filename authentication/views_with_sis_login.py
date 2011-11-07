@@ -1,11 +1,11 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
-from django.contrib.auth.forms import *
+from django.contrib.auth.forms import * 
 from django.template import RequestContext
 from django.contrib import auth
-from profile.models import *
-import logging
+import logging, urllib, urllib2, cookielib
 
 # Builtin django forms imported:
 # - class AdminPasswordChangeForm
@@ -36,7 +36,7 @@ def index(request):
     else:
         c['login_form'] = AuthenticationForm()
         c['register_form'] = UserCreationForm()
-        
+        # assert False
         if request.GET.get('error') == '1':
             c['error'] = 1
         return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
@@ -47,24 +47,20 @@ def register(request):
     c = {}
     c.update(csrf(request))
     
-    error_string = ''
     # if logged in, redirect to personal profile
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
-            logger.debug("Valid new user found:\t" + new_user.username)
-            student = Student(user=new_user)
-            student.save()
-            privacy = PrivacySettings(student=student)
-            privacy.save()
-            user = auth.authenticate(username=request.POST.get("username"), password=request.POST.get("password1"))
-            auth.login(request, user)
             return HttpResponseRedirect("/home")
         else:
-            logger.debug("Invalid form. Probably this user already exists.")
-            error_string = '?error=3'
-    return HttpResponseRedirect("/"+error_string)
+            c['login_form'] = AuthenticationForm()
+            c['register_form'] = UserCreationForm()
+            return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
+    else:
+        c['login_form'] = AuthenticationForm()
+        c['register_form'] = UserCreationForm()
+        return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
 
 def login(request):
     c = {}
@@ -74,8 +70,17 @@ def login(request):
         logger.debug("User Name = %s, Password = %s" %(request.POST.get("username"),request.POST.get("password")))
         user = auth.authenticate(username=request.POST.get("username"), password=request.POST.get("password"))
         if user is not None and user.is_active:
+
+	    #This code works but for some reason SIS will not allow it to login
+            cj = cookielib.CookieJar()
+            opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
+            login_data = urllib.urlencode({'username' : request.POST.get("username"), 'j_password' : request.POST.get("password")})
+            opener.open('https://sis.rpi.edu/rss/twbkwbis.P_ValLogin', login_data)
+            #resp = opener.open('http://google.com')
+            
             auth.login(request, user)
             return HttpResponseRedirect("/home")
+            
+            
         else:
             return HttpResponseRedirect("/?error=1")
-    

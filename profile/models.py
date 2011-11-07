@@ -4,6 +4,10 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
+SEMESTER_CHOICES = (
+    ('F', 'Fall'),
+    ('S', 'Spring'),
+)
 
 class Course(models.Model):
     course_department = models.CharField(max_length=16)
@@ -37,10 +41,6 @@ class Course(models.Model):
 
 
 class CourseDetail(models.Model):
-    SEMESTER_CHOICES = (
-        ('F', 'Fall'),
-        ('S', 'Spring'),
-    )
     course = models.ForeignKey(Course)
     year = models.CharField(max_length=4)
     semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
@@ -90,10 +90,12 @@ class Teacher(models.Model):
         return self.rcs_id
 
 
-# The following models are ModelForms, i.e. Form subclasses used to update some of the above models.
-
-class PersonalInformationForm(ModelForm):
-    class Meta:
-        model = Student
-        fields = ('first_name', 'middle_name', 'last_name', 'class_year', 'profile_picture_url')
-        
+class PrivacySettings(models.Model):
+    student = models.ForeignKey(Student, unique=True)
+    allow_others_to_view_personal_information = models.BooleanField()
+    allow_others_to_view_profile_picture = models.BooleanField()
+    allow_others_to_view_interests = models.BooleanField()
+    allow_others_to_view_clubs = models.BooleanField()
+    allow_others_to_send_me_messages = models.BooleanField()
+    allow_others_to_send_me_email = models.BooleanField()
+    allow_others_to_view_classes = models.BooleanField()
