@@ -50,6 +50,10 @@
             $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
             $(this).css( "background-image", "url(/static/images/course_tile_long.png)" )
         });
+        
+        
+        // Force a click event on Personal Information:
+        $('#personal_info').click();
     });
 {% endblock script %}
     
@@ -83,28 +87,34 @@
 
 {% block main_content %}
 <div id="settings_content" style="width:100%; min-height:600px;">
-     <div id="personal" color="black">
+     <div id="personal">
           <h2 class="main_heading">Personal Settings</h2><br />
-          <form id="personal_info" method="POST" action="/home/settings">
+          <form id="personal_info" method="POST" action="/home/settings/edit_personal_info/">
           {% csrf_token %}
                 <table>
-                    <tr><th><label for="id_first_name">First Name:</label></th><td class="spacer"></td><td>{{ settings_form.first_name }}</td></tr>
-                    <tr><th><label for="id_middle_name">Middle Name:</label></th><td class="spacer"></td><td>{{ settings_form.middle_name }}</td></tr>
-                    <tr><th><label for="id_last_name">Last Name:</label></th><td class="spacer"></td><td>{{ settings_form.last_name }}</td></tr>
-                    <tr><th><label for="id_class_year">Class Year:</label></th><td class="spacer"></td><td>{{ settings_form.class_year }}</td></tr>
-                    <tr><th><label for="id_profile_picture_url">Profile Picture:</label></th><td class="spacer"></td><td>{{ settings_form.profile_picture_url }}</td></tr>
+                    <tr><th><label for="id_first_name">First Name:</label></th><td class="spacer"></td><td>{{ personal_form.first_name }}</td></tr>
+                    <tr><th><label for="id_middle_name">Middle Name:</label></th><td class="spacer"></td><td>{{ personal_form.middle_name }}</td></tr>
+                    <tr><th><label for="id_last_name">Last Name:</label></th><td class="spacer"></td><td>{{ personal_form.last_name }}</td></tr>
+                    <tr><th><label for="id_rcs_id">RCS ID:</label></th><td class="spacer"></td><td>{{ personal_form.rcs_id }}</td></tr>
+                    <tr><th><label for="id_class_year">Class Year:</label></th><td class="spacer"></td><td>{{ personal_form.class_year }}</td></tr>
+                    <tr><th><label for="id_profile_picture_url">Profile Picture:</label></th><td class="spacer"></td><td>{{ personal_form.profile_picture_url }}</td></tr>
                 </table>
                 <input class="float_right button_input" type="submit" value="Save" />
           </form>
      </div>
      <div id="privacy">
           <h2 class="main_heading">Privacy</h2>
+          <form id="personal_info" method="POST" action="/home/settings/edit_privacy_settings/">
+                {% csrf_token %}
+                <table>{{ privacy_form.as_table }}</table>
+                <input class="float_right button_input" type="submit" value="Save" />
+          </form>
      </div>
      <div id="interest">
-          <h2 class="main_heading">Interest</h2>
+          <h2 class="main_heading">Interests</h2>
      </div>
      <div id="club">
-          <h2 class="main_heading">Club</h2>
+          <h2 class="main_heading">Clubs</h2>
      </div>
 </div>
 {% endblock main_content %}

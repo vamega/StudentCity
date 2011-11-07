@@ -4,7 +4,10 @@ from django.core.context_processors import csrf
 from django.contrib.auth.forms import * 
 from django.template import RequestContext
 from profile.models import *
+from profile.forms import *
+import logging
 
+logger = logging.getLogger('testing')
 
 # Add profile app views here
 def index(request):
@@ -12,40 +15,51 @@ def index(request):
     c = {}
     c.update(csrf(request))
     if (not request.user.is_authenticated()) or (request.user == None):
-        return HttpResponseRedirect("/")
-    c["user"] = request.user
-    c["student"] = request.user.student_set.all()[0]
-    # no user info is being passed right now; the template is simply being rendered
+        return HttpResponseRedirect("/?error=11")
+    logger.debug(request.user.username or None)
+    c["user"] = request.user or None
+    c["student"] = request.user.student_set.all()[0] or None
     return render_to_response("profile/personal.html", c)
+    
 
+def class_search(request):
+    c = {}
+    c.update(csrf(request))
+    
+    
     
 def settings(request):
     c = {}
     c.update(csrf(request))
-    u = request.user 
-    s = u.student_set.all()[0]
+    if request.user.student_set.all().count() == 0:
+        logger.debug("redirecting.")
+        return HttpResponseRedirect("/?error=1")
+    student = request.user.student_set.all()[0]
+    privacy_settings = student.privacysettings_set.all()[0]
+    
+    c["user"] = request.user
+    c["student"] = student
+    c["personal_form"] = StudentForm(request.POST or None, instance=student)
+    c["privacy_form"] = PrivacySettingsForm(request.POST or None, instance=privacy_settings)
+    return render_to_response("profile/settings.html", c, context_instance=RequestContext(request))
+    
+def edit_personal_info(request):
+    c = {}
+    c.update(csrf(request))
     if request.method == 'POST':
-        info_form = PersonalInformationForm(request.POST, instance=s)
-        if info_form.is_valid():
-            info_form.save()
-            '''
-            s.first_name = info_form.first_name
-            s.middle_name = info_form.middle_name
-            s.last_name = info_form.last_name
-            s.class_year = info_form.class_year
-            s.profile_picture_url = info_form.profile_picture_url
-            s.save()
-            '''
-    '''
-    initial_form_vals = {
-        'first_name'          : s.first_name,
-        'middle_name'         : s.middle_name,
-        'last_name'           : s.last_name,
-        'class_year'          : s.class_year,
-        'profile_picture_url' : s.profile_picture_url,
-    }
-    '''
-    c["user"] = u
-    c["student"] = s
-    c["settings_form"] = PersonalInformationForm(instance=s)
-    return render_to_response('profile/settings.html', c, context_instance=RequestContext(request))
+        form = StudentForm(request.POST, instance=request.user.student_set.all()[0])
+        if form.is_valid():
+            form.save()
+            
+    return HttpResponseRedirect("/home/settings/")
+    
+def edit_privacy_settings(request):
+    c = {}
+    c.update(csrf(request))
+    if request.method == 'POST':
+        p = request.user.student_set.all()[0].privacysettings_set.all()[0]
+        form = PrivacySettingsForm(request.POST, instance=p)
+        if form.is_valid():
+            new_privacy_settings = form.save(commit=False)
+            new_privacy_settings.save()
+    return HttpResponseRedirect("/home/settings/")
