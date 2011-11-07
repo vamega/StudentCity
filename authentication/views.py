@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
-from django.contrib.auth.forms import * 
+from django.contrib.auth.forms import *
 from django.template import RequestContext
 from django.contrib import auth
 import logging

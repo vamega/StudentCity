@@ -63,19 +63,22 @@
     }
     #left_side
     {
-        position:   absolute; 
-        top:        173px; 
-        left:       400px;
-        float:      none;
-        clear:      none;
+        background-color:   #FFFFFF;
+        position:           absolute; 
+        top:                173px; 
+        left:               400px;
+        float:              none;
+        clear:              none;
+        box-shadow:         3px 8px 30px 4px #222222;
     }
     #right_side
     {
-        position:   absolute; 
-        top:        170px; 
-        left:       675px;
-        float:      none;
-        clear:      none;
+        position:           absolute; 
+        top:                170px; 
+        left:               700px;
+        float:              none;
+        clear:              none;
+        box-shadow:         3px 8px 30px 4px #222222;
     }
     {% block style %}
     {% endblock style %}
@@ -92,7 +95,7 @@
             </div>
             
             <div class="float_right">
-                <h3 style="text-align: right"><a href="" id="settings_link">Edit Privacy Settings</a> | <a href="logout" id="logout">Logout</a></h3>
+                <h3 style="text-align: right"><a href="/home/settings" id="settings_link">Edit Privacy Settings</a> | <a href="logout" id="logout">Logout</a></h3>
                 <form id="site_search">
                     <input id="submit" class="search_submit" type="submit" value="" />
                     <input id="main_search" type="text" value="Search site" />
