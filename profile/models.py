@@ -2,6 +2,12 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+
+SEMESTER_CHOICES = (
+    ('F', 'Fall'),
+    ('S', 'Spring'),
+)
 
 class Course(models.Model):
     course_department = models.CharField(max_length=16)
@@ -35,10 +41,6 @@ class Course(models.Model):
 
 
 class CourseDetail(models.Model):
-    SEMESTER_CHOICES = (
-        ('F', 'Fall'),
-        ('S', 'Spring'),
-    )
     course = models.ForeignKey(Course)
     year = models.CharField(max_length=4)
     semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
@@ -52,23 +54,31 @@ class CourseDetail(models.Model):
 class Student(models.Model):
     user = models.ForeignKey(User, unique=True)
     rcs_id = models.CharField(max_length=128)
-    first_name = models.CharField(max_length=256)
-    middle_name = models.CharField(max_length=256)
-    last_name = models.CharField(max_length=256)
-    class_year = models.CharField(max_length=4)
     rin = models.CharField(max_length=9)
-    profile_picture_url = models.URLField()
+    first_name = models.CharField(max_length=256, blank=True)
+    middle_name = models.CharField(max_length=256, blank=True)
+    last_name = models.CharField(max_length=256, blank=True)
+    class_year = models.CharField(max_length=4, blank=True)
+    profile_picture_url = models.URLField(blank=True, default='/static/images/default_profile_picture.png')
     classes_current = models.ManyToManyField(CourseDetail, related_name='current')
     classes_taken = models.ManyToManyField(CourseDetail, related_name='taken')
     
 
-    def add_class(self, num, dept, name, sem, yr, sec, present_or_past):
+    def add_course(self, num, dept, name, sem, yr, sec, present_or_past):
         class_taken, created = Course.objects.get_or_create(course_number=num, course_department=dept, course_name=name)
         class_section, created = CourseDetail.objects.get_or_create(course=class_taken, semester=sem, year=yr, section=sec)
         if (present_or_past == 'present'):
             self.classes_current.add(class_section)
         else:
             self.classes_taken.add(class_section)
+    
+    def add_course(self, dept, num, section, semester, year, present_or_past):
+        course = Course.objects.get(course_number=num, course_department=dept)
+        course_detail = CourseDetail.objects.get(course=course, semester=semester, year=year, section=section)
+        if (present_or_past == 'present'):
+            self.classes_current.add(course_detail)
+        else:
+            self.classes_taken.add(course_detail)
     
     def name(self):
         return self.first_name + " " + self.middle_name + " " + self.last_name
@@ -88,3 +98,14 @@ class Teacher(models.Model):
 
     def __unicode__(self):
         return self.rcs_id
+
+
+class PrivacySettings(models.Model):
+    student = models.ForeignKey(Student, unique=True)
+    allow_others_to_view_personal_information = models.BooleanField()
+    allow_others_to_view_profile_picture = models.BooleanField()
+    allow_others_to_view_interests = models.BooleanField()
+    allow_others_to_view_clubs = models.BooleanField()
+    allow_others_to_send_me_messages = models.BooleanField()
+    allow_others_to_send_me_email = models.BooleanField()
+    allow_others_to_view_classes = models.BooleanField()
