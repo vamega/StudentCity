@@ -20,13 +20,20 @@
 	cursor: pointer;	
 }
 
+.privacy_forms{
+        color:#000;
+        width:100%; 
+        min-height:600px;
+}
+
 #dashboard #right_side {
 	position: relative;
 	height: auto;
 	width: 505px;
 	background-color: #FFF;
 	margin-top: 3px;
-	padding: 25px;	
+	padding: 25px;
+        color: #000;
 }
 
 .course_tile .text {
