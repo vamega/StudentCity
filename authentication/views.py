@@ -46,6 +46,7 @@ def register(request):
     c = {}
     c.update(csrf(request))
     
+    error_string = ''
     # if logged in, redirect to personal profile
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -53,13 +54,11 @@ def register(request):
             new_user = form.save()
             return HttpResponseRedirect("/home")
         else:
-            c['login_form'] = AuthenticationForm()
-            c['register_form'] = UserCreationForm()
-            return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
+            error_string = '?error=3'
     else:
         c['login_form'] = AuthenticationForm()
         c['register_form'] = UserCreationForm()
-        return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
+        return render_to_response('authentication/register.html'+error_string, c, context_instance=RequestContext(request))
 
 def login(request):
     c = {}

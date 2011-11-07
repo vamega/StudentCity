@@ -1,8 +1,59 @@
 {% extends "profile/base.html" %}
-{% block links %}
-<h3 style="text-align: right"><a href="/" id="home">Home</a> | <a href="logout" id="logout">Logout</a></h3>
-{% endblock links %}
 
+{% block style %}
+    .course_tile
+    {
+        background-image:   url(/static/images/course_tile.png);
+    }
+    td.spacer
+    {
+        width:          30px;
+    }
+{% endblock style %}
+    
+
+{% block script %}
+    $(document).ready(function(){
+        $('#personal').hide();
+        $('#privacy').hide();
+        $('#interest').hide();
+        $('#club').hide();
+        $('#personal_info').click(function(){
+            $('#personal').show();
+            $('#privacy').hide();
+            $('#interest').hide();
+            $('#club').hide();
+            $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
+            $(this).css( "background-image", "url(/static/images/course_tile_long.png)" );
+        });
+        $('#privacy_set').click(function(){
+            $('#personal').hide();
+            $('#privacy').show();
+            $('#interest').hide();
+            $('#club').hide();
+            $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
+            $(this).css( "background-image", "url(/static/images/course_tile_long.png)" );
+        });
+        $('#interests').click(function(){
+            $('#personal').hide();
+            $('#privacy').hide();
+            $('#interest').show();
+            $('#club').hide();
+            $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
+            $(this).css( "background-image", "url(/static/images/course_tile_long.png)" );
+        });
+        $('#clubs').click(function(){
+            $('#personal').hide();
+            $('#privacy').hide();
+            $('#interest').hide();
+            $('#club').show();
+            $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
+            $(this).css( "background-image", "url(/static/images/course_tile_long.png)" )
+        });
+    });
+{% endblock script %}
+    
+    
 {% block left_side %}
 <div id="settings_options">
      <ul>
@@ -33,62 +84,27 @@
 {% block main_content %}
 <div id="settings_content" style="width:100%; min-height:600px;">
      <div id="personal" color="black">
+          <h2 class="main_heading">Personal Settings</h2><br />
+          <form id="personal_info" method="POST" action="/home/settings">
           {% csrf_token %}
-          <form id="personal_info" method="POST" action="edit_personal_info">
                 <table>
-                {{ student_form.as_table }}
+                    <tr><th><label for="id_first_name">First Name:</label></th><td class="spacer"></td><td>{{ settings_form.first_name }}</td></tr>
+                    <tr><th><label for="id_middle_name">Middle Name:</label></th><td class="spacer"></td><td>{{ settings_form.middle_name }}</td></tr>
+                    <tr><th><label for="id_last_name">Last Name:</label></th><td class="spacer"></td><td>{{ settings_form.last_name }}</td></tr>
+                    <tr><th><label for="id_class_year">Class Year:</label></th><td class="spacer"></td><td>{{ settings_form.class_year }}</td></tr>
+                    <tr><th><label for="id_profile_picture_url">Profile Picture:</label></th><td class="spacer"></td><td>{{ settings_form.profile_picture_url }}</td></tr>
                 </table>
                 <input class="float_right button_input" type="submit" value="Save" />
           </form>
      </div>
      <div id="privacy">
-          <a>Privacy</a>
+          <h2 class="main_heading">Privacy</h2>
      </div>
      <div id="interest">
-          <a>Interest</a>
+          <h2 class="main_heading">Interest</h2>
      </div>
      <div id="club">
-          <a>Club</a>
+          <h2 class="main_heading">Club</h2>
      </div>
 </div>
-<script>
-        $(document).ready(function(){
-             $('#personal').hide();
-             $('#privacy').hide();
-             $('#interest').hide();
-             $('#club').hide();
-             $('#personal_info').click(function(){
-                  $('#personal').show();
-                  $('#privacy').hide();
-                  $('#interest').hide();
-                  $('#club').hide();
-                  $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
-                  $(this).css( "background-image", "url(/static/images/course_tile_long.png)" )
-             });
-             $('#privacy_set').click(function(){
-                  $('#personal').hide();
-                  $('#privacy').show();
-                  $('#interest').hide();
-                  $('#club').hide();
-                  $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
-                  $(this).css( "background-image", "url(/static/images/course_tile_long.png)" )
-             });
-             $('#interests').click(function(){
-                  $('#personal').hide();
-                  $('#privacy').hide();
-                  $('#interest').show();
-                  $('#club').hide();
-                  $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
-                  $(this).css( "background-image", "url(/static/images/course_tile_long.png)" )
-             });
-             $('#clubs').click(function(){
-                  $('#personal').hide();
-                  $('#privacy').hide();
-                  $('#interest').hide();
-                  $('#club').show();
-                  $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
-                  $(this).css( "background-image", "url(/static/images/course_tile_long.png)" )
-             });
-        });
-</script>
 {% endblock main_content %}
