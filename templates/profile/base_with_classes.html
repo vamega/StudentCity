@@ -1,17 +1,5 @@
 {% extends "profile/base.html" %}
 
-{% block username %}
-    {% if user == None %}
-        Nobody!
-    {% else %}
-        {% if user.is_authenticated %}
-            {{ student.first_name|default:user.username }}!
-        {% else %}
-            Unauthenticated User!
-        {% endif %}
-    {% endif %}
-{% endblock username %}
-
 {% block left_side %}
     <h2>Classes:</h2>
     {% if student.classes_current.all.count == 0 %}

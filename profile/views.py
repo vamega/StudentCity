@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
-from django.contrib.auth.forms import * 
+from django.contrib.auth.forms import *
 from django.template import RequestContext
 from profile.models import *
 from profile.forms import *
@@ -51,14 +51,12 @@ def add_course(request):
     s.save()
     return HttpResponseRedirect("/home/course_search/")
 
-
 def course_group(request):
     course_code = request.POST.get('course_code')
     (department, s, number) = course_code.partition(' ')
     course_detail = CourseDetail.objects.all()
     # This isn't finished
 
-    
 def settings(request):
     c = {}
     c.update(csrf(request))

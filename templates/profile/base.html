@@ -90,7 +90,18 @@
         <div id="logo"></div>
         <div id="header_wrapper">
             <div class="float_left">
-                <h3>Welcome {% block username %}{{ student.first_name|default:user.username|default:"Mr. Unknown User." }}{% endblock username %}</h3>
+                <h3>Welcome 
+                {% block username %}
+                {% if user == None %}
+                   Nobody!
+                {% else %}
+                   {% if user.is_authenticated %}
+                      {{ student.first_name|default:user.username }}!
+                   {% else %}
+                      Unauthenticated User!
+                   {% endif %}
+                {% endif %}
+                {% endblock username %}</h3>
                 <h3 id="date"></h3>
             </div>
             

@@ -2,7 +2,6 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
-from django.forms import ModelForm
 
 SEMESTER_CHOICES = (
     ('F', 'Fall'),
@@ -93,7 +92,6 @@ class Teacher(models.Model):
         return self.first_name + self.middle_name + self.last_name
     def __unicode__(self):
         return self.rcs_id
-
 
 class PrivacySettings(models.Model):
     student = models.ForeignKey(Student, unique=True)
