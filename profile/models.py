@@ -2,7 +2,8 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
-from django.forms import ModelForm
+
+
 
 SEMESTER_CHOICES = (
     ('F', 'Fall'),
@@ -59,7 +60,6 @@ class Student(models.Model):
     last_name = models.CharField(max_length=256, blank=True)
     class_year = models.CharField(max_length=4, blank=True)
     profile_picture_url = models.URLField(blank=True, default='/static/images/default_profile_picture.png')
-
     classes_current = models.ManyToManyField(CourseDetail, related_name='current')
     classes_taken = models.ManyToManyField(CourseDetail, related_name='taken')
     
@@ -98,7 +98,6 @@ class Teacher(models.Model):
 
     def __unicode__(self):
         return self.rcs_id
-
 
 class PrivacySettings(models.Model):
     student = models.ForeignKey(Student, unique=True)

@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
-from django.contrib.auth.forms import * 
+from django.contrib.auth.forms import *
 from django.template import RequestContext
 from profile.models import *
 from profile.forms import *
@@ -52,8 +52,16 @@ def add_course(request):
     s.add_course(request.GET.get('dept'), request.GET.get('num'), request.GET.get('sec'), request.GET.get('sem'), request.GET.get('yr'), 'present')
     s.save()
     return HttpResponseRedirect("/home/course_search/")
-    
-    
+
+    # if logged in, redirect to personal profile
+    #if request.method == 'POST':
+    #    form = UserCreationForm(request.POST)
+    #    if form.is_valid():
+    #        # TODO: Add POST data (user info) to 'c' variable
+    #        render_to_response("profile/personal.html", c)
+    #else:
+    #    return HttpResponseRedirect('/login')
+
 def settings(request):
     c = {}
     c.update(csrf(request))
@@ -115,7 +123,6 @@ def edit_personal_info(request):
         form = StudentForm(request.POST, instance=s)
         if form.is_valid():
             form.save()
-            
     return HttpResponseRedirect("/home/settings/")
     
 def edit_privacy_settings(request):

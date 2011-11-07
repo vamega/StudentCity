@@ -2,17 +2,15 @@ from django import forms
 from django.forms import Form, ModelForm
 from profile.models import *
 
-
 class StudentForm(ModelForm):
     class Meta:
         model = Student
-        fields = ('first_name', 'middle_name', 'last_name', 'rcs_id', 'class_year', 'profile_picture_url')
-        
+        fields = ("rcs_id", "first_name", "middle_name", "last_name", "class_year", "rin")
+
 class PrivacySettingsForm(ModelForm):
     class Meta:
         model = PrivacySettings
         exclude = ('student')
-
 
 class CourseSearchForm(Form):
     course_department = forms.CharField(max_length=16)
