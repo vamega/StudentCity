@@ -13,7 +13,10 @@
     <div id="profile_picture" style="border:3px solid black; width:150px; position:absolute; left:40px; top:40px; max-height:250px;" >
         <img src="{{ student.profile_picture_url }}" style="width:150px" />
     </div>
-    <div id="profile_topright" style="border:3px solid black; width:300px; min-height:250px; position:absolute; left:220px; top:40px;">
+    <div id="profile_topright" style="border:3px solid black; width:280px; min-height:230px; position:absolute; left:220px; top:40px; padding:10px;">
+        <p>{{ student.first_name }} {{ student.last_name }}</p>
+        <p>Class of {{ student.class_year }}</p>
+        <p></p>
     </div>
     <div id="profile_bottom" style="border:3px solid black; width:480px; min-height:350px; position:absolute; left:40px; top:320px;">
     </div>

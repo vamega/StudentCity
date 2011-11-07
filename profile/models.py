@@ -61,7 +61,6 @@ class Student(models.Model):
     classes_current = models.ManyToManyField(CourseDetail, related_name='current')
     classes_taken = models.ManyToManyField(CourseDetail, related_name='taken')
     
-
     def add_course(self, num, dept, name, sem, yr, sec, present_or_past):
         class_taken, created = Course.objects.get_or_create(course_number=num, course_department=dept, course_name=name)
         class_section, created = CourseDetail.objects.get_or_create(course=class_taken, semester=sem, year=yr, section=sec)
@@ -90,10 +89,8 @@ class Teacher(models.Model):
     middle_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
     courses_taught = models.ManyToManyField(CourseDetail)
-    
     def name(self):
         return self.first_name + self.middle_name + self.last_name
-
     def __unicode__(self):
         return self.rcs_id
 
@@ -107,3 +104,16 @@ class PrivacySettings(models.Model):
     allow_others_to_send_me_messages = models.BooleanField()
     allow_others_to_send_me_email = models.BooleanField()
     allow_others_to_view_classes = models.BooleanField()
+
+    
+class PrivateMessage(models.Model):
+    author = models.ForeignKey(User, related_name='PM_author')
+    recipients = models.ManyToManyField(User, related_name='PM_recipients')
+    contents = models.TextField()
+    timestamp = models.TimeField()
+    
+class GroupPost(models.Model):
+    author = models.ForeignKey(User)
+    group = models.ForeignKey(Course)
+    contents = models.TextField()
+    timestamp = models.TimeField()

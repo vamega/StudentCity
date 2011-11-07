@@ -50,7 +50,14 @@ def add_course(request):
     s.add_course(request.GET.get('dept'), request.GET.get('num'), request.GET.get('sec'), request.GET.get('sem'), request.GET.get('yr'), 'present')
     s.save()
     return HttpResponseRedirect("/home/course_search/")
-    
+
+
+def course_group(request):
+    course_code = request.POST.get('course_code')
+    (department, s, number) = course_code.partition(' ')
+    course_detail = CourseDetail.objects.all()
+    # This isn't finished
+
     
 def settings(request):
     c = {}
@@ -73,8 +80,10 @@ def edit_personal_info(request):
         s = request.user.student_set.all()[0]
         form = StudentForm(request.POST, instance=s)
         if form.is_valid():
-            form.save()
-            
+            new_personal_info = form.save(commit=False)
+            new_personal_info.save()
+        else:
+            logger.debug("invalid form in edit_personal_info")
     return HttpResponseRedirect("/home/settings/")
     
 def edit_privacy_settings(request):
