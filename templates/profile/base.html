@@ -1,14 +1,6 @@
 <!DOCTYPE html>
-
-<!-- 
-
-Expected POST objects:
-
-- courses : list/tuple of course_detail model objects associated with the current student
-
--->
-
 <html>
+
 <head>
     <title>StudentCity | {% block title %}Dashboard{% endblock title %}</title>
     <link rel="stylesheet" type="text/css" href="/static/css/base.css" />
@@ -18,36 +10,14 @@ Expected POST objects:
     <script type="text/javascript" src="/static/javascript/custom_functions.js"></script>
 
     <script>
+    
     $( document ).ready( function () {
+        $("#left_side").css("position", "absolute")
+        $("#right_side").css("position", "absolute")
         
         $( "#date" ).html(makeDate());
         clearOrRestoreSearchBar();
-        /*
-        $( ".course_tile" ).click( function () {
-            $( ".course_tile" ).css( "background-image", "url(./images/course_tile.png)" );
-            $(this).css( "background-image", "url(./images/course_tile_long.png)" );
-            
-            $.get("includes/course_info.php", { id: $(this).attr("id") }, function (data) {
-                $( "#right_side" ).html(data);
-            });
-        });
         
-        $("#submit").click(function(e) { 
-            e.preventDefault();
-            
-            $.get("includes/search.php", { term: $("#main_search").val() }, function (data) {
-                openMyModal(data);
-            });
-        });
-        
-        $("#settings_link").click(function(e) { 
-            e.preventDefault();
-            
-            $.get("includes/dashboard_settings.php", 0, function (data) {
-                openMyModal(data);
-            });
-        });
-        */
         $(".search_person").click(function(e) {
             e.preventDefault();
             
@@ -81,7 +51,38 @@ Expected POST objects:
             }
         });
     }
+    
+    {% block script %}
+    {% endblock script %}
     </script>
+    
+    <style type="text/css">
+    div
+    {
+        font-size:  10pt;
+    }
+    #left_side
+    {
+        background-color:   #FFFFFF;
+        position:           absolute; 
+        top:                173px; 
+        left:               400px;
+        float:              none;
+        clear:              none;
+        box-shadow:         3px 8px 30px 4px #222222;
+    }
+    #right_side
+    {
+        position:           absolute; 
+        top:                170px; 
+        left:               700px;
+        float:              none;
+        clear:              none;
+        box-shadow:         3px 8px 30px 4px #222222;
+    }
+    {% block style %}
+    {% endblock style %}
+    </style>
 </head>
 
 <body id="dashboard">    
@@ -89,13 +90,24 @@ Expected POST objects:
         <div id="logo"></div>
         <div id="header_wrapper">
             <div class="float_left">
-                <h3>Welcome {% block username %}Mr. Unknown User{% endblock username %}!</h3>
+                <h3>Welcome 
+                {% block username %}
+                {% if user == None %}
+                   Nobody!
+                {% else %}
+                   {% if user.is_authenticated %}
+                      {{ student.first_name|default:user.username }}!
+                   {% else %}
+                      Unauthenticated User!
+                   {% endif %}
+                {% endif %}
+                {% endblock username %}</h3>
                 <h3 id="date"></h3>
             </div>
             
             <div class="float_right">
                 {% block links %}
-                <h3 style="text-align: right"><a href="home/settings" id="settings_link">Edit Privacy Settings</a> | <a href="/logout" id="logout">Logout</a></h3>
+                <h3 style="text-align: right"><a href="/home" id="home">Home</a> | <a href="/home/settings" id="settings_link">Settings</a> | <a href="logout" id="logout">Logout</a></h3>
                 {% endblock links %}
                 <form id="site_search">
                     <input id="submit" class="search_submit" type="submit" value="" />
@@ -104,24 +116,13 @@ Expected POST objects:
             </div>
          </div>
     </div>
-    <div id="wrapper" class="index">
-        <div id="left_side" class="float_left" style="position:relative;">
-        {% block left_side %}
-            <h3>Classes:</h3>
-            {% for course_detail in courses %}
-                <div class="course_tile" id="{{ course_detail.course.course_code }}">
-                    <div class="text">
-                        <h2>{{ course_detail.course.course_name }}</h2>
-                        <h6>Currents: {{ course_detail.get_num_current_students }}. | Veterans: {{ course_detail.get_num_past_students }}. </h6>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        {% endblock left_side %}
+    <!--<div id="wrapper" class="index">-->
+        <div id="left_side" style="padding:15px;">
+            {% block left_side %}
+            {% endblock left_side %}
         </div>
         
-        <div id="right_side" class="float_right">
+        <div id="right_side">
         {% block main_content %}
             <h1>Welcome to Student City!</h1>
             <p>
@@ -129,9 +130,10 @@ Expected POST objects:
             </p>
         {% endblock main_content %}
         </div>
-    </div>
+    <!--</div>-->
     
-    <div class="clear"></div>
+    <!--<div class="clear"></div>-->
     <div id="footer"></div>
 </body>
+
 </html>

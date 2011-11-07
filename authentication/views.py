@@ -1,9 +1,10 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
-from django.contrib.auth.forms import * 
+from django.contrib.auth.forms import *
 from django.template import RequestContext
 from django.contrib import auth
+from profile.models import *
 import logging
 
 # Builtin django forms imported:
@@ -35,7 +36,7 @@ def index(request):
     else:
         c['login_form'] = AuthenticationForm()
         c['register_form'] = UserCreationForm()
-        # assert False
+        
         if request.GET.get('error') == '1':
             c['error'] = 1
         return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
@@ -46,20 +47,24 @@ def register(request):
     c = {}
     c.update(csrf(request))
     
+    error_string = ''
     # if logged in, redirect to personal profile
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
+            logger.debug("Valid new user found:\t" + new_user.username)
+            student = Student(user=new_user)
+            student.save()
+            privacy = PrivacySettings(student=student)
+            privacy.save()
+            user = auth.authenticate(username=request.POST.get("username"), password=request.POST.get("password1"))
+            auth.login(request, user)
             return HttpResponseRedirect("/home")
         else:
-            c['login_form'] = AuthenticationForm()
-            c['register_form'] = UserCreationForm()
-            return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
-    else:
-        c['login_form'] = AuthenticationForm()
-        c['register_form'] = UserCreationForm()
-        return render_to_response('authentication/register.html', c, context_instance=RequestContext(request))
+            logger.debug("Invalid form. Probably this user already exists.")
+            error_string = '?error=3'
+    return HttpResponseRedirect("/"+error_string)
 
 def login(request):
     c = {}
@@ -73,3 +78,4 @@ def login(request):
             return HttpResponseRedirect("/home")
         else:
             return HttpResponseRedirect("/?error=1")
+    

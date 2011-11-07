@@ -1,21 +1,17 @@
 {% extends "profile/base_with_classes.html" %}
 
-{% block username %}
-    {% if user == None %}
-        Nobody
-    {% else %}
-        {% if user.is_authenticated %}
-            {{ user.username }}
-        {% else %}
-            Unauthenticated User
-        {% endif %}
-    {% endif %}
-{% endblock username %}
+{% block script %}
+    $(document).ready(function(){
+        pic_height = parseInt($("#profile_picture").css("height"));
+        topright_height = parseInt($("#profile_topright").css("height"));
+        $("#profile_content").css("height",((pic_height>topright_height ? pic_height : topright_height) + parseInt($("#profile_bottom").css("height")) + 60).toString() + "px" );
+    }); 
+{% endblock script %}
 
 {% block main_content %}
 <div id="profile_content" style="width:100%; min-height:600px;">
     <div id="profile_picture" style="border:3px solid black; width:150px; position:absolute; left:40px; top:40px; max-height:250px;" >
-        <img src="{{ student.profile_picture_url|default:'/static/images/default_profile_picture.png' }}" style="width:150px" />
+        <img src="{{ student.profile_picture_url }}" style="width:150px" />
     </div>
     <div id="profile_links" style="width:175px; position:absolute; left:40px; top:200px;">
         <a href="home/settings" class="box_left">Edit Profile</a>
@@ -25,14 +21,5 @@
     </div>
     <div id="profile_bottom" style="border:3px solid black; width:480px; min-height:350px; position:absolute; left:40px; top:320px;">
     </div>
-    <script>
-        $(document).ready(function(){
-            pic_height = parseInt($("#profile_picture").css("height"));
-            topright_height = parseInt($("#profile_topright").css("height"));
-            $("#profile_content").css("height",((pic_height>topright_height ? pic_height : topright_height) + parseInt($("#profile_bottom").css("height")) + 60).toString() + "px" );
-        });    
-    </script>
 </div>
-
-
 {% endblock main_content %}

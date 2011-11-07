@@ -1,15 +1,20 @@
 {% extends "profile/base.html" %}
 
 {% block left_side %}
-    <h3>Classes:</h3>
-    {% for course_detail in courses %}
-        <div class="course_tile" id="{{ course_detail.course.course_code }}">
-            <div class="text">
-                <h2>{{ course_detail.course.course_name }}</h2>
-                <h6>Currents: {{ course_detail.get_num_current_students }}. | Veterans: {{ course_detail.get_num_past_students }}. </h6>
-                </div>
+    <h2>Classes:</h2>
+    {% if student.classes_current.all.count == 0 %}
+        <br />
+        <br />
+        You are currently not signed up for any classes.<br />
+    {% else %}
+        {% for course_detail in student.classes_current.all %}
+            <div class="course_tile" id="{{ course_detail.course.course_code }}">
+                <div class="text">
+                    <h2>{{ course_detail.course.course_name }}</h2>
+                    <h6>Currents: {{ course_detail.get_num_current_students }}. | Veterans: {{ course_detail.get_num_past_students }}. </h6>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
+    <a href="/profile/course_search">Click here to register for more classes.</a>
 {% endblock left_side %}
