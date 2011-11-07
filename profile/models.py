@@ -3,6 +3,8 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 
+
+
 SEMESTER_CHOICES = (
     ('F', 'Fall'),
     ('S', 'Spring'),
@@ -52,6 +54,7 @@ class Student(models.Model):
     user = models.ForeignKey(User, unique=True)
     rcs_id = models.CharField(max_length=128)
     rin = models.CharField(max_length=9)
+
     first_name = models.CharField(max_length=256, blank=True)
     middle_name = models.CharField(max_length=256, blank=True)
     last_name = models.CharField(max_length=256, blank=True)

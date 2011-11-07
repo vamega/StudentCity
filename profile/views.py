@@ -9,11 +9,13 @@ import logging
 
 logger = logging.getLogger('testing')
 
+
 # Add profile app views here
 def index(request):
     # csrf is used to prevent Cross-Site Request Forgeries (i.e. XSS attacks, SQL injections, etc.)
     c = {}
     c.update(csrf(request))
+
     if (not request.user.is_authenticated()) or (request.user == None):
         return HttpResponseRedirect("/?error=11")
     logger.debug(request.user.username or None)
@@ -71,6 +73,45 @@ def settings(request):
     c["privacy_form"] = PrivacySettingsForm(request.POST or None, instance=privacy_settings)
     return render_to_response("profile/settings.html", c, context_instance=RequestContext(request))
     
+    
+def search(request):
+    # csrf is used to prevent Cross-Site Request Forgeries (i.e. XSS attacks, SQL injections, etc.)
+    c = {}
+    c.update(csrf(request))
+    
+    if search.has_looked():
+        return HttpResponseRedirect("profile/course_search")
+    else:
+	found_classes = {}
+	found_dep = {}
+	found_number = {}
+	found_name = {}
+	
+        #c['search_form'] = SearchForm()
+        
+        for i in course_search.course_department:
+	    if i == models.Model.course_department:
+		temp = models.Model.course_department + ' ' + models.Model.course_number + ' ' + models.Model.course_name
+		found_dep.append(temp)
+		
+	for i in course_search.course_number:
+	    if i == models.Model.course_department:
+		temp = models.Model.course_department + ' ' + models.Model.course_number + ' ' + models.Model.course_name
+		found_number.append(temp)
+
+	for i in course_search.course_name:
+	    if i == models.Model.course_department:
+		temp = models.Model.course_department + ' ' + models.Model.course_number + ' ' + models.Model.course_name
+		found_name.append(temp)
+	    
+        
+        if request.GET.get('error') == '1':
+            c['error'] = 1
+        
+        
+        return render_to_response('profile/course_search.html', c, context_instance=RequestContext(request))
+
+
 def edit_personal_info(request):
     c = {}
     c.update(csrf(request))
@@ -94,3 +135,4 @@ def edit_privacy_settings(request):
             new_privacy_settings = form.save(commit=False)
             new_privacy_settings.save()
     return HttpResponseRedirect("/home/settings/")
+
