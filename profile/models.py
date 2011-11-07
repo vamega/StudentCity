@@ -86,3 +86,13 @@ class Teacher(models.Model):
 
     def __unicode__(self):
         return self.rcs_id
+
+class PrivacySettings(models.Model):
+    student = models.ForeignKey(Student)
+    allow_others_to_view_personal_information = models.BooleanField()
+    allow_others_to_view_profile_picture = models.BooleanField()
+    allow_others_to_view_interests = models.BooleanField()
+    allow_others_to_view_clubs = models.BooleanField()
+    allow_others_to_send_me_messages = models.BooleanField()
+    allow_others_to_send_me_email = models.BooleanField()
+    allow_others_to_view_classes = models.BooleanField()

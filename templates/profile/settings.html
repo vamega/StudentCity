@@ -1,6 +1,19 @@
 {% extends "profile/base.html" %}
+
+{% block username %}
+    {% if user == None %}
+        Nobody
+    {% else %}
+        {% if user.is_authenticated %}
+            {{ user.username }}
+        {% else %}
+            Unauthenticated User
+        {% endif %}
+    {% endif %}
+{% endblock username %}
+
 {% block links %}
-<h3 style="text-align: right"><a href="/" id="home">Home</a> | <a href="logout" id="logout">Logout</a></h3>
+<h3 style="text-align: right"><a href="/" id="home">Home</a> | <a href="/logout/" id="logout">Logout</a></h3>
 {% endblock links %}
 
 {% block left_side %}
@@ -31,18 +44,20 @@
 {% endblock left_side %}
 
 {% block main_content %}
-<div id="settings_content" style="width:100%; min-height:600px;">
-     <div id="personal" color="black">
-          {% csrf_token %}
-          <form id="personal_info" method="POST" action="edit_personal_info">
-                <table>
-                {{ student_form.as_table }}
-                </table>
+<div class="privacy_forms" id="settings_content">
+     <div id="personal">
+          <form id="personal_info" method="POST" action="edit_personal_info/">
+                {% csrf_token %}
+                <table>{{ pi_form.as_table }}</table>
                 <input class="float_right button_input" type="submit" value="Save" />
           </form>
      </div>
      <div id="privacy">
-          <a>Privacy</a>
+          <form id="personal_info" method="POST" action="edit_privacy_settings/">
+                {% csrf_token %}
+                <table>{{ ps_form.as_table }}</table>
+                <input class="float_right button_input" type="submit" value="Save" />
+          </form>
      </div>
      <div id="interest">
           <a>Interest</a>
