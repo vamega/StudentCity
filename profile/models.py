@@ -54,7 +54,6 @@ class Student(models.Model):
     middle_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
     class_year = models.CharField(max_length=4)
-    rin = models.CharField(max_length=9)
     profile_picture_url = models.URLField()
     classes_current = models.ManyToManyField(CourseDetail, related_name='current')
     classes_taken = models.ManyToManyField(CourseDetail, related_name='taken')
@@ -86,3 +85,6 @@ class Teacher(models.Model):
 
     def __unicode__(self):
         return self.rcs_id
+
+        
+import profile_forms

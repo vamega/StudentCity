@@ -1,16 +1,16 @@
 {% extends "profile/base.html" %}
 
-{% block script %}
-$(document).ready(function(){
-    
-});
-{% endblock script %}
-
-{% block style %}
-#left_side {
-    background-color:   #FFFFFF;
-}
-{% endblock style %}
+{% block username %}
+    {% if user == None %}
+        Nobody
+    {% else %}
+        {% if user.is_authenticated %}
+            {{ user.username }}
+        {% else %}
+            Unauthenticated User
+        {% endif %}
+    {% endif %}
+{% endblock username %}
 
 {% block left_side %}
     <h3>Classes:</h3>

@@ -1,17 +1,5 @@
 {% extends "profile/base_with_classes.html" %}
 
-{% block username %}
-    {% if user == None %}
-        Nobody
-    {% else %}
-        {% if user.is_authenticated %}
-            {{ user.username }}
-        {% else %}
-            Unauthenticated User
-        {% endif %}
-    {% endif %}
-{% endblock username %}
-
 {% block main_content %}
 <div id="profile_content" style="width:100%; min-height:600px;">
     <div id="profile_picture" style="border:3px solid black; width:150px; position:absolute; left:40px; top:40px; max-height:250px;" >
@@ -29,6 +17,4 @@
         });    
     </script>
 </div>
-
-
 {% endblock main_content %}
