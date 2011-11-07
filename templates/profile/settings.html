@@ -7,7 +7,7 @@
     }
     td.spacer
     {
-        width:          30px;
+        width:              30px;
     }
 {% endblock style %}
     
@@ -88,7 +88,7 @@
 {% block main_content %}
 <div id="settings_content" style="width:100%; min-height:600px;">
      <div id="personal">
-          <h2 class="main_heading">Personal Settings</h2><br />
+          <h2 class="main_heading">Personal Information</h2><br />
           <form id="personal_info" method="POST" action="/home/settings/edit_personal_info/">
           {% csrf_token %}
                 <table>

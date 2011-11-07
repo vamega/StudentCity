@@ -1,4 +1,4 @@
-import django.forms
+from django import forms
 from django.forms import Form, ModelForm
 from profile.models import *
 
@@ -15,8 +15,10 @@ class PrivacySettingsForm(ModelForm):
 
 
 class CourseSearchForm(Form):
-    course_department = forms.CharField()
+    course_department = forms.CharField(max_length=16)
     course_number = forms.IntegerField(required=False)
     # TODO: Implement course_name search with substring comparison, etc.
     #course_name = forms.CharField()
-    
+    year = forms.CharField(max_length=4)
+    semester = forms.ChoiceField(choices=SEMESTER_CHOICES)
+    section = forms.IntegerField()
