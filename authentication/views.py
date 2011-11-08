@@ -52,6 +52,7 @@ def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            # Make a new user
             new_user = form.save()
             logger.debug("Valid new user found:\t" + new_user.username)
             student = Student(user=new_user)
