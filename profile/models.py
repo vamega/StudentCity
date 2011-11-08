@@ -9,6 +9,13 @@ SEMESTER_CHOICES = (
     ('S', 'Spring'),
 )
 
+
+
+SEMESTER_CHOICES = (
+    ('F', 'Fall'),
+    ('S', 'Spring'),
+)
+
 class Course(models.Model):
     course_department = models.CharField(max_length=16)
     course_number = models.IntegerField()
@@ -53,6 +60,8 @@ class Student(models.Model):
     user = models.ForeignKey(User, unique=True)
     rcs_id = models.CharField(max_length=128)
     rin = models.CharField(max_length=9)
+
+
     first_name = models.CharField(max_length=256, blank=True)
     middle_name = models.CharField(max_length=256, blank=True)
     last_name = models.CharField(max_length=256, blank=True)

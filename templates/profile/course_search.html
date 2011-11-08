@@ -1,0 +1,28 @@
+{% extends "profile/base.html" %}
+
+{% block left_side %}
+    <h3>Classes:</h3>
+    {% for course_detail in courses %}
+        <div class="course_tile" id="{{ course_detail.course.course_code }}">
+            <div class="text">
+                <h2>{{ course_detail.course.course_name }}</h2>
+                <h6>Currents: {{ course_detail.get_num_current_students }}. | Veterans: {{ course_detail.get_num_past_students }}. </h6>
+                </div>
+                </div>
+            </div>
+        </div>
+
+	<div class="search">
+	<form id="search" method="post" action="/course_search">
+                {% csrf_token %}
+                <table class="float_right">
+                    <tr><th><label for="department">Course Department:</label></th><td>{{  course_search.department }}</td></tr>
+                    <tr><th><label for="number">Course Number:</label></th><td>{{  course_search.number }}</td></tr>
+                    <tr><th><label for="name">Course Name:</label></th><td>{{  course_search.name }}</td></tr>
+                    <tr><th><label for="description">Course Description:</label></th><td>{{  course_search.description }}</td></tr>
+                </table>
+                <input class="float_right button_input" type="submit" value="Search" style="clear:both;" />
+            </form>
+	</div>
+    {% endfor %}
+{% endblock left_side %}
