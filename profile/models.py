@@ -59,7 +59,7 @@ class Student(models.Model):
     middle_name = models.CharField(max_length=256, blank=True)
     last_name = models.CharField(max_length=256, blank=True)
     class_year = models.CharField(max_length=4, blank=True)
-    profile_picture_url = models.URLField(blank=True, default='/static/images/default_profile_picture.png')
+    profile_picture_url = models.URLField(blank=True, default='http://localhost:8000/static/images/default_profile_picture.png')
     classes_current = models.ManyToManyField(CourseDetail, related_name='current')
     classes_taken = models.ManyToManyField(CourseDetail, related_name='taken')
     
