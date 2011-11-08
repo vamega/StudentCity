@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     (r'^$', 'profile.views.index'),
     (r'^/course_search/$', 'profile.views.course_search'),
     (r'^/add_course/$', 'profile.views.add_course'),
+    (r'^/course_group/$', 'profile.views.course_group'),
     (r'^/settings/$', 'profile.views.settings'),
     (r'^/settings/edit_personal_info/', 'profile.views.edit_personal_info'),
     (r'^/settings/edit_privacy_settings/', 'profile.views.edit_privacy_settings')

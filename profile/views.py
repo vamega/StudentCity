@@ -53,14 +53,11 @@ def add_course(request):
     s.save()
     return HttpResponseRedirect("/home/course_search/")
 
-    # if logged in, redirect to personal profile
-    #if request.method == 'POST':
-    #    form = UserCreationForm(request.POST)
-    #    if form.is_valid():
-    #        # TODO: Add POST data (user info) to 'c' variable
-    #        render_to_response("profile/personal.html", c)
-    #else:
-    #    return HttpResponseRedirect('/login')
+def course_group(request):
+    course_code = request.POST.get('course_code')
+    (department, s, number) = course_code.partition(' ')
+    course_detail = CourseDetail.objects.all()
+    # This isn't finished
 
 
 def course_search(request):
@@ -153,7 +150,10 @@ def edit_personal_info(request):
         s = request.user.student_set.all()[0]
         form = StudentForm(request.POST, instance=s)
         if form.is_valid():
-            form.save()
+            new_personal_info = form.save(commit=False)
+            new_personal_info.save()
+        else:
+            logger.debug("invalid form in edit_personal_info")
 
     return HttpResponseRedirect("/home/settings/")
     
