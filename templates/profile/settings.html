@@ -57,7 +57,6 @@
     });
 {% endblock script %}
     
-    
 {% block left_side %}
 <div id="settings_options">
      <ul>
@@ -103,15 +102,20 @@
           </form>
      </div>
      <div id="privacy">
+
+
           <h2 class="main_heading">Privacy</h2>
           <form id="personal_info" method="POST" action="/home/settings/edit_privacy_settings/">
                 {% csrf_token %}
                 <table>{{ privacy_form.as_table }}</table>
+
                 <input class="float_right button_input" type="submit" value="Save" />
           </form>
      </div>
      <div id="interest">
-          <h2 class="main_heading">Interests</h2>
+
+     <h2 class="main_heading">Interests</h2>
+
      </div>
      <div id="club">
           <h2 class="main_heading">Clubs</h2>
