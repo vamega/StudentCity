@@ -13,7 +13,7 @@
         </div>
 
 	<div class="search">
-	<form id="search" method="post" action="/course_search">
+	    <form id="search" method="post" action="/course_search">
                 {% csrf_token %}
                 <table class="float_right">
                     <tr><th><label for="department">Course Department:</label></th><td>{{  course_search.department }}</td></tr>

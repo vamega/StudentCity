@@ -12,7 +12,7 @@
 <div id="course_selection_content" style="width:100%; min-height:600px;">
     <h2>Course Search</h2>
     <div id="search">
-        <form action="/home/course_search/" method="get">
+        <form action="/home/course_search/" method="post">
         {% csrf_token %}
             <table>
                 <tr><th>Department:</th><td class="spacer"></td><td>{{ course_search_form.course_department }}</td></tr>
