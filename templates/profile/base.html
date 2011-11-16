@@ -140,7 +140,7 @@
     
     <!--<div class="clear"></div>-->
     <div id="footer"></div>
-    (% if debug_bool == True %}
+    {% if debug %}
     <div id="debug" style="position:absolute; left:0px; top:0px; background-color:red; width:200px; height:200px;">
     {% block debug %}
     <p>{{ debug }}</p>
