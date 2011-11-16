@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     (r'^/course_group/$', 'profile.views.course_group'),
     (r'^/settings/$', 'profile.views.settings'),
     (r'^/settings/edit_personal_info/', 'profile.views.edit_personal_info'),
-    (r'^/settings/edit_privacy_settings/', 'profile.views.edit_privacy_settings')
+    (r'^/settings/edit_privacy_settings/', 'profile.views.edit_privacy_settings'),
+    (r'^/profile/', 'profile.views.profile_page'),
 )

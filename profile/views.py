@@ -167,6 +167,17 @@ def edit_privacy_settings(request):
             new_privacy_settings = form.save(commit=False)
             new_privacy_settings.save()
     return HttpResponseRedirect("/home/settings/")
+    
+def profile_page(request):
+    c = {}
+    c.update(csrf(request))
+
+    if (not request.user.is_authenticated()) or (request.user == None):
+        return HttpResponseRedirect("/?error=11")
+
+    c["user"] = request.user or None
+    c["student"] = request.user.student_set.all()[0] or None
+    return render_to_response("profile/profile_page.html", c)
 
 
 

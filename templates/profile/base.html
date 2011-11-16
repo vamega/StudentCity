@@ -121,6 +121,7 @@
          </div>
     </div>
     <!--<div id="wrapper" class="index">-->
+    {% block main_content_area %}
         <div id="left_side" style="padding:15px;">
             {% block left_side %}
             {% endblock left_side %}
@@ -134,6 +135,7 @@
             </p>
         {% endblock main_content %}
         </div>
+    {% endblock main_content_area %}
     <!--</div>-->
     
     <!--<div class="clear"></div>-->
