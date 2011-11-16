@@ -1,5 +1,6 @@
 {% extends "profile/base_with_classes.html" %}
 
+{% load custom_filters %}
 {% block style %}
     td.spacer
     {
@@ -26,14 +27,25 @@
     </div>
     <div id="results">
         <table id="results_table">
-        {% if num_results > 0 %}
+        {% if search_results|length > 0 %}
         <tr><td><h2>Search Results:</h2></td></tr>
         <tr>
-            <td>Course Name:</td><td class="spacer"></td><td>Course Code:</td><td class="spacer"></td><td>Year:</td><td class="spacer"></td><td>Semester:</td><<td class="spacer"></td>td>Section:</td>
+            <td>Course Name:</td><td class="spacer"></td><td>Course Code:</td><td class="spacer"></td><td>Year:</td><td class="spacer"></td><td>Semester:</td><td class="spacer"></td><td>Section:</td>
         </tr>
         {% for course_detail in search_results %}
         <tr>
-            <td><a href="/home/add_course/?dept={{ course_detail.course.course_department }}&num={{ course_detail.course.course_number }}&sem={{ course_detail.semester }}&yr={{ course_detail.year }}&sec={{ course_detail.section }}">{{ course_detail.course.course_name }}</a></td><td class="spacer"></td><td><a href="/home/add_course?dept={{ course_detail.course.course_department }}&num={{ course_detail.course.course_number }}">{{ course_detail.course.course_code }}</a></td><td class="spacer"></td><td>{{ course_detail.year }}</td><td class="spacer"></td><td>{{ course_detail.semester }}</td><td class="spacer"></td><td>{{ course_detail.section }}</td>
+            <td>
+		<form name="add_{{ course_detail.course.course_code|strip_spaces }}_{{ course_detail.section }}" method="POST" action="/home/add_course/">
+		{% csrf_token %}
+		<input type="hidden" name="dept" value="{{ course_detail.course.course_department }}" />
+		<input type="hidden" name="num" value="{{ course_detail.course.course_number }}" />
+		<input type="hidden" name="yr" value="{{ course_detail.year }}" />
+		<input type="hidden" name="sem" value="{{ course_detail.semester }}" />
+		<input type="hidden" name="sec" value="{{ course_detail.section }}" />
+		<a href="javascript:document.add_{{ course_detail.course.course_code|strip_spaces }}_{{ course_detail.section }}.submit()">{{ course_detail.course.course_name }}</a>
+		</form>
+	    </td>
+	    <td class="spacer"></td><td><a href="/home/add_course?dept={{ course_detail.course.course_department }}&num={{ course_detail.course.course_number }}">{{ course_detail.course.course_code }}</a></td><td class="spacer"></td><td>{{ course_detail.year }}</td><td class="spacer"></td><td>{{ course_detail.semester }}</td><td class="spacer"></td><td>{{ course_detail.section }}</td>
         </tr>
         {% endfor %}
         {% endif %}

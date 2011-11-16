@@ -28,7 +28,7 @@ def course_search(request):
     c = {}
     c.update(csrf(request))
 
-    form = CourseSearchForm(request.POST or None)
+    c['course_search_form'] = CourseSearchForm(request.POST or None)
     
     search_options = {}
     
@@ -48,12 +48,12 @@ def course_search(request):
             else:
                 new_options[key] = search_options[key]
     
-    c['course_search_form'] = form
+    
     c['search_results'] = CourseDetail.objects.filter(**new_options)
     c['user'] = request.user
     c['student'] = request.user.student_set.all()[0]
     
-    c['debug'] = "Search options:\n\n" + str(search_options)
+    #c['debug'] = "Search options:\n\n" + str(new_options)
     return render_to_response("profile/add_course.html", c, context_instance=RequestContext(request))
     
 
