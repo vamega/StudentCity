@@ -53,7 +53,7 @@ def course_search(request):
     c['user'] = request.user
     c['student'] = request.user.student_set.all()[0]
     
-    c['debug'] = "Search options:<br /><br />" + str(search_options)
+    c['debug'] = "Search options:\n\n" + str(search_options)
     return render_to_response("profile/add_course.html", c, context_instance=RequestContext(request))
     
 
