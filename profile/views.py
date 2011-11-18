@@ -27,29 +27,45 @@ def index(request):
 def course_search(request):
     c = {}
     c.update(csrf(request))
-    c['course_search_form'] = CourseSearchForm(request.GET or None)
-    if request.GET.get("course_department") != u'':
-        # TO DO: Implement legitimate search functionality here.
-        # The following is simply a "proof-of-concept" of sorts allowing for demonstration.
-        c['search_results'] = []
-        if request.GET.get("course_department") == u'CSCI':
-            c['num_results'] = 8
-            for course in Course.objects.filter(course_department = u'CSCI'):
-                for course_detail in course.coursedetail_set.all():
-                    c['search_results'].append(course_detail)
-            
+
+    c['course_search_form'] = CourseSearchForm(request.POST or None)
+    
+    search_options = {}
+    
+    search_options['course_department'] = request.POST.get('course_department')
+    search_options['course_number'] = request.POST.get('course_number')
+    search_options['year'] = request.POST.get('year')
+    search_options['section'] = request.POST.get('section')
+    
+    #assert(False)
+    
+    new_options = {}
+    for key in search_options:
+        if search_options[key] != u'':
+            if key.startswith('course'):
+                new_key = 'course__' + key
+                new_options[new_key] = search_options[key]
+            else:
+                new_options[key] = search_options[key]
+    
+    
+    c['search_results'] = CourseDetail.objects.filter(**new_options)
     c['user'] = request.user
     c['student'] = request.user.student_set.all()[0]
+    
+    #c['debug'] = "Search options:\n\n" + str(new_options)
     return render_to_response("profile/add_course.html", c, context_instance=RequestContext(request))
+    
+
 
 def add_course(request):
     c = {}
     c.update(csrf(request))
-    if request.GET.get('dept') == u'' or request.GET.get('num') == u'':
-        return HttpResponseRedirect("/home/course_search")
-    logger.debug(request.GET.get('dept'), " ", request.GET.get('num'))
+    if request.POST.get('dept') == u'' or request.POST.get('num') == u'':
+        return HttpResponseRedirect("/home/course_search", c)
+    logger.debug(request.POST.get('dept'), " ", request.POST.get('num'))
     s = request.user.student_set.all()[0]
-    s.add_course(request.GET.get('dept'), request.GET.get('num'), request.GET.get('sec'), request.GET.get('sem'), request.GET.get('yr'), 'present')
+    s.add_course(request.POST.get('dept'), request.POST.get('num'), request.POST.get('sec'), request.POST.get('sem'), request.POST.get('yr'), 'present')
     s.save()
     return HttpResponseRedirect("/home/course_search/")
 
@@ -87,6 +103,9 @@ def add_course(request):
     s.add_course(request.GET.get('dept'), request.GET.get('num'), request.GET.get('sec'), request.GET.get('sem'), request.GET.get('yr'), 'present')
     s.save()
     return HttpResponseRedirect("/home/course_search/")
+=======
+
+>>>>>>> bbf890a2f3bc8d1ee38e42bc3f7ab3f8be52fa91
     
 def settings(request):
     c = {}
@@ -165,3 +184,17 @@ def edit_privacy_settings(request):
             new_privacy_settings = form.save(commit=False)
             new_privacy_settings.save()
     return HttpResponseRedirect("/home/settings/")
+    
+def profile_page(request):
+    c = {}
+    c.update(csrf(request))
+
+    if (not request.user.is_authenticated()) or (request.user == None):
+        return HttpResponseRedirect("/?error=11")
+
+    c["user"] = request.user or None
+    c["student"] = request.user.student_set.all()[0] or None
+    return render_to_response("profile/profile_page.html", c)
+
+
+

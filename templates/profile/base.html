@@ -121,6 +121,7 @@
          </div>
     </div>
     <!--<div id="wrapper" class="index">-->
+    {% block main_content_area %}
         <div id="left_side" style="padding:15px;">
             {% block left_side %}
             {% endblock left_side %}
@@ -134,10 +135,21 @@
             </p>
         {% endblock main_content %}
         </div>
+    {% endblock main_content_area %}
     <!--</div>-->
     
     <!--<div class="clear"></div>-->
     <div id="footer"></div>
+
+    {% if debug %}
+    <div id="debug" style="position:absolute; left:0px; top:0px; background-color:red; width:200px; height:200px;">
+    {% block debug %}
+    <p>{{ debug }}</p>
+    <p>{{ search_results }}</p>
+    {% endblock debug %}
+    </div>
+    {% endif %}
+
 </body>
 
 </html>

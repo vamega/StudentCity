@@ -10,12 +10,6 @@ SEMESTER_CHOICES = (
 )
 
 
-
-SEMESTER_CHOICES = (
-    ('F', 'Fall'),
-    ('S', 'Spring'),
-)
-
 class Course(models.Model):
     course_department = models.CharField(max_length=16)
     course_number = models.IntegerField()
@@ -25,7 +19,7 @@ class Course(models.Model):
     def course_code(self):
         return self.course_department + " " + str(self.course_number)
 
-    def get_num_students(self, past_or_present):
+    def get_num_students(self, past_or_present='present'):
         date_time = datetime.now()
         if date_time.month in (1, 2, 3, 4, 5, 6):
             sem = 'S'
@@ -36,7 +30,7 @@ class Course(models.Model):
         if (past_or_present == 'present'):
             course_detail = self.coursedetail_set.filter(year__exact=yr, semester__exact=sem)
             for cd in course_detail:
-                count += cd.current.count()
+                count += cd.student_set.count()
         elif (past_or_present == 'past'):
             course_detail = self.coursedetail_set.exclude(year__exact=yr, semester__exact=sem)
             for cd in course_detail:
