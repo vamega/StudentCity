@@ -22,7 +22,7 @@ def index(request):
     c["user"] = request.user or None
     c["student"] = request.user.student_set.all()[0] or None
     return render_to_response("profile/personal.html", c)
- 
+
 
 def course_search(request):
     c = {}
@@ -59,7 +59,6 @@ def course_group(request):
     course_detail = CourseDetail.objects.all()
     # This isn't finished
 
-
 def course_search(request):
     c = {}
     c.update(csrf(request))
@@ -88,7 +87,6 @@ def add_course(request):
     s.add_course(request.GET.get('dept'), request.GET.get('num'), request.GET.get('sec'), request.GET.get('sem'), request.GET.get('yr'), 'present')
     s.save()
     return HttpResponseRedirect("/home/course_search/")
-    
     
 def settings(request):
     c = {}
@@ -167,6 +165,3 @@ def edit_privacy_settings(request):
             new_privacy_settings = form.save(commit=False)
             new_privacy_settings.save()
     return HttpResponseRedirect("/home/settings/")
-
-
-

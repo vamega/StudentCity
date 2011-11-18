@@ -105,7 +105,6 @@ class Teacher(models.Model):
     def __unicode__(self):
         return self.rcs_id
 
-
 class PrivacySettings(models.Model):
     student = models.ForeignKey(Student, unique=True)
     allow_others_to_view_personal_information = models.BooleanField()
@@ -116,15 +115,15 @@ class PrivacySettings(models.Model):
     allow_others_to_send_me_email = models.BooleanField()
     allow_others_to_view_classes = models.BooleanField()
 
-    
-class PrivateMessage(models.Model):
+class MessageDescriptor(models.Model):
     author = models.ForeignKey(User, related_name='PM_author')
-    recipients = models.ManyToManyField(User, related_name='PM_recipients')
     contents = models.TextField()
     timestamp = models.TimeField()
+
+class PrivateMessage(models.Model):
+    details = models.ForeignKey(MessageDescriptor, unique = True)
+    recipients = models.ManyToManyField(User, related_name='PM_recipients')
     
 class GroupPost(models.Model):
-    author = models.ForeignKey(User)
+    details = models.ForeignKey(MessageDescriptor, unique = True)
     group = models.ForeignKey(Course)
-    contents = models.TextField()
-    timestamp = models.TimeField()
