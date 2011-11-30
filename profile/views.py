@@ -192,14 +192,41 @@ def edit_ratings(request):
     c = {}
     c.update(csrf(request))
     if request.method == 'POST':
-        #rating = Ratings.objects.get(course=request.POST.get('course'), rater=request.POST.get('rater'))
         form = RatingsForm(request.POST)
         if form.is_valid():
             new_ratings = form.save(commit=False)
-            #new_ratings.timestamp = datetime.now()
             new_ratings.save()
         else:
-            logger.debug("invalid form in edit_personal_info")
+            logger.debug("invalid form in edit_ratings")
+
+    return HttpResponseRedirect("/home")
+    
+def recommendations(request, course_id):
+    c = {}
+    c.update(csrf(request))
+    if request.user.student_set.all().count() == 0:
+        return HttpResponseRedirect("/?error=1")
+    student = request.user.student_set.all()[0]
+    course = CourseDetail.objects.get(id=course_id)
+    recommendation = Recommendations(course=course, recommender=student, would_recommend_course="Y", comments="")
+
+    c["user"] = request.user
+    c["student"] = student
+    c["recommendations_form"] = RecommendationsForm(request.POST or None, instance=recommendation)
+    return render_to_response("profile/recommendations.html", c, context_instance=RequestContext(request))
+    
+
+def edit_recommendations(request):
+    c = {}
+    c.update(csrf(request))
+    if request.method == 'POST':
+        form = RecommendationsForm(request.POST)
+        if form.is_valid():
+            new_recommendation = form.save(commit=False)
+            new_recommendation.timestamp = datetime.now()
+            new_recommendation.save()
+        else:
+            logger.debug("invalid form in edit_recommendations")
 
     return HttpResponseRedirect("/home")
 

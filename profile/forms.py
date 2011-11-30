@@ -28,12 +28,15 @@ class CourseSearchForm(Form):
 class RatingsForm(ModelForm):
     course = forms.ModelChoiceField(queryset=CourseDetail.objects.all(),widget=forms.HiddenInput())
     rater = forms.ModelChoiceField(queryset=Student.objects.all(),widget=forms.HiddenInput())
-    #timestamp = forms.DateTimeField(datetime.now,widget=forms.HiddenInput())
 
     class Meta:
         model = Ratings
+        exclude = ("timestamp")
 
-class RecommendationForm(ModelForm):
+class RecommendationsForm(ModelForm):
+    course = forms.ModelChoiceField(queryset=CourseDetail.objects.all(),widget=forms.HiddenInput())
+    recommender = forms.ModelChoiceField(queryset=Student.objects.all(),widget=forms.HiddenInput())
+
     class Meta:
         model = Recommendations
-        fields = ('would_recommend_course', 'comments')
+        exclude = ("timestamp")
