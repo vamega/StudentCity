@@ -11,7 +11,6 @@ body {
 #wrapper {
 	width: 800px;
 	height: 200px;
-	
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -130,7 +129,6 @@ p.float_right {
         height: auto;
         background-color: #FFFFFF;
         box-shadow: 3px 8px 30px 4px #222222;
-        float: center;
 }
 
 #profile_area #left_profile{
@@ -157,6 +155,7 @@ p.float_right {
         padding-left: 20px;
         padding-right: 20px;
         margin-top: 20px;
+        margin-bottom: 20px;
         background-color: #B9E0F7;
 
 }
@@ -174,6 +173,8 @@ p.float_right {
 	padding-left: 20px;
 	padding-right: 20px;
 	margin-top: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 #profile_area #left_profile #interests_and_clubs{
@@ -183,6 +184,39 @@ p.float_right {
 	padding-right: 20px;
 	margin-top: 20px;
 	margin-bottom: 20px;
+}
+
+#profile_area #right_profile #options a{
+        background-color: #0067B1;
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 13px;
+}
+
+#profile_area #right_profile #options #message{
+        position: relative;
+        left: 15px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+}
+
+#profile_area #right_profile #options #recommendation{
+        position: relative;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+}
+
+#profile_area #right_profile #options #invite_study_group{
+        position: relative;
+        left: 30px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
 }
 
 .float_right label {

@@ -155,15 +155,21 @@ def edit_privacy_settings(request):
             new_privacy_settings.save()
     return HttpResponseRedirect("/home/settings/")
     
-def profile_page(request):
+def profile_page(request, student_id):
     c = {}
     c.update(csrf(request))
 
     if (not request.user.is_authenticated()) or (request.user == None):
         return HttpResponseRedirect("/?error=11")
 
+    student_var = Student.objects.get(id=student_id)
     c["user"] = request.user or None
     c["student"] = request.user.student_set.all()[0] or None
+    c["student_profile"] = student_var
+    c["privacy"] = c["student_profile"].privacysettings_set.all()[0]
+    c["interests"] = c["student_profile"].interests.split(",");
+    c["clubs"] = c["student_profile"].clubs.split(",");
+
     return render_to_response("profile/profile_page.html", c)
 
 

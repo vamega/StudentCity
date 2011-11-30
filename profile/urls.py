@@ -10,5 +10,5 @@ urlpatterns = patterns('',
     (r'^/settings/$', 'profile.views.settings'),
     (r'^/settings/edit_personal_info/', 'profile.views.edit_personal_info'),
     (r'^/settings/edit_privacy_settings/', 'profile.views.edit_privacy_settings'),
-    (r'^/profile/', 'profile.views.profile_page'),
+    (r'^/profile/(?P<student_id>\d+)/', 'profile.views.profile_page'),
 )

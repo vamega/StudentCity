@@ -12,6 +12,25 @@
     {% endif %}
 {% endblock username %}
 
+{% block script %}
+    $(document).ready(function(){
+        $('.course_tile h5').hide();
+        $('.hidden').hide();
+
+        $( ".course_tile" ).click( function () {
+           $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
+           $( ".course_tile" ).css("height", "75px");
+           $('.course_tile h5').hide();
+           $(this).css( "background-image", "url(/static/images/course_tile_long_courses.png)" );
+           $(this).css( "height", "135px");
+           $(this).find("h5").show();
+           
+           var main_info = $(this).find(".hidden").html();
+           $("#right_side").html(main_info);
+         });
+    });
+{% endblock script %}
+
 {% block left_side %}
     <h2>Classes:</h2>
     {% if student.classes_current.all.count == 0 %}
@@ -23,7 +42,38 @@
             <div class="course_tile" id="{{ course_detail.course.course_code }}">
                 <div class="text">
                     <h2>{{ course_detail.course.course_name }}</h2>
-                    <h6>Currents: {{ course_detail.get_num_current_students }}. | Veterans: {{ course_detail.get_num_past_students }}. </h6>
+                    <h6>Currents: {{ course_detail.get_num_current_students }} | Veterans: {{ course_detail.get_num_past_students }} </h6>
+                    <h5>Resources</h5><h5>My Study Groups</h5><h5>Ratings</h5><h5>Recommendations</h5>
+                </div>
+                <div class="hidden" id="hide">
+                    <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>
+                    <br />
+                    <h3 style="font-weight: bold; font-size: 18px;">Description:</h3>
+                    <p>{{ course_detail.course.course_description }}</p>
+                    <br />
+                    <h3 style="font-weight: bold; font-size: 18px;">People Taking This Course</h3>
+                    <div class="in_course" id="current_course_takers">
+                         {% for course in course_detail.course.coursedetail_set.all %}
+                           {% for person in course.current.all %}
+                           <div class="person_block" id="{{ person.id }}">
+                                <a href="/home/profile/{{ person.id }}"><img class="person_image" src="{{ person.profile_picture_url }}" /></a>
+                                <h5 class="person_name">{{ person.first_name }} {{ person.last_name }}</h5>
+                           </div>
+          		   {% endfor %}
+		         {% endfor %}
+                    </div>
+                    <br />
+                    <h3 style="font-weight: bold; font-size: 18px;">People Who Completed This Course</h3>
+                    <div class="in_course" id="past_course_takers">
+                         {% for course in course_detail.course.coursedetail_set.all %}
+                         {% for person in course.taken.all %}
+                           <div class="person_block" id="{{ person.id }}">
+                                <a href="home/profile/{{ person.id }}"><img class="person_image" src="{{ person.profile_picture_url }}" /></a>
+                                <h5 class="person_name">{{ person.first_name }} {{ person.last_name }}</h5>
+                           </div>
+		           {% endfor %}
+		         {% endfor %}
+                    </div>
                 </div>
             </div>
         {% endfor %}
