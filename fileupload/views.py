@@ -7,14 +7,16 @@ from profile.models import *
 from profile.forms import *
 from django import forms
 from fileupload.form import *
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+import string
+import random
+
 import logging
 
 logger = logging.getLogger('testing')
 
 
-
-# Imaginary function to handle an uploaded file.
-#from somewhere import handle_uploaded_file
 
 
 def upload_file(request):
@@ -26,32 +28,26 @@ def upload_file(request):
       return HttpResponseRedirect("/?error=11")
     
     
-    
-        
-##    search_options = {}
-    
-##    search_options['title'] = request.POST.get('title')
-##    search_options['file'] = request.POST.get('file')
      
     
     if request.method == 'POST':
-      #form = UploadFileForm(request.POST, request.FILES)
       form = c['UploadFileForm'] = UploadFileForm(request.POST, request.FILES, RequestContext(request))
-      #if form.is_valid():
+
       if c['UploadFileForm'].is_valid():
-        handle_uploaded_file(request.FILES['file'])
-        return HttpResponseRedirect('fileupload/form')
+        handle_uploaded_file(request.FILES['file'], c)
+        return HttpResponseRedirect('fileupload/upload.html')
         
     else:
-        #form = UploadFileForm()
         form = c['UploadFileForm'] = UploadFileForm()
     return render_to_response('fileupload/upload.html', {'form': c['UploadFileForm']}, RequestContext(request))
-    #return render_to_response('fileupload/upload.html', {'form': form})
-##    return render_to_response('fileupload/upload.html', {'form': search_options}, c)
 
 
-def handle_uploaded_file(f):
-    destination = open('file.txt', 'wb+')
+
+def handle_uploaded_file(f, c):
+    location = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(16))
+
+    destination = open(location, 'wb+')
     for chunk in f.chunks():
         destination.write(chunk)
     destination.close()
+ 
