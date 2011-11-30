@@ -12,21 +12,36 @@
     {% endif %}
 {% endblock username %}
 
+{% block style %}
+   table, td, tr, th
+    {
+        border: 2px solid black; 
+        width: 100%; 
+        text-align: center;
+    }
+{% endblock style %}
+
 {% block script %}
     $(document).ready(function(){
         $('.course_tile h5').hide();
         $('.hidden').hide();
+        $('.ratings_class').hide();
 
-        $( ".course_tile" ).click( function () {
+        $( ".course_details" ).click( function () {
            $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
            $( ".course_tile" ).css("height", "75px");
            $('.course_tile h5').hide();
-           $(this).css( "background-image", "url(/static/images/course_tile_long_courses.png)" );
-           $(this).css( "height", "135px");
-           $(this).find("h5").show();
+           $(this).parent().parent().css( "background-image", "url(/static/images/course_tile_long_courses.png)" );
+           $(this).parent().parent().css( "height", "135px");
+           $(this).parent().parent().find("h5").show();
            
-           var main_info = $(this).find(".hidden").html();
+           var main_info = $(this).parent().parent().find(".hidden").html();
            $("#right_side").html(main_info);
+         });
+
+         $( ".ratings_link").click( function () {
+           var ratings_info = $(this).find(".ratings_class").html();
+           $("#right_side").html(ratings_info);
          });
     });
 {% endblock script %}
@@ -41,9 +56,45 @@
         {% for course_detail in student.classes_current.all %}
             <div class="course_tile" id="{{ course_detail.course.course_code }}">
                 <div class="text">
-                    <h2>{{ course_detail.course.course_name }}</h2>
-                    <h6>Currents: {{ course_detail.get_num_current_students }} | Veterans: {{ course_detail.get_num_past_students }} </h6>
-                    <h5>Resources</h5><h5>My Study Groups</h5><h5>Ratings</h5><h5>Recommendations</h5>
+                    <div class="course_details">
+                         <h2>{{ course_detail.course.course_name }}</h2>
+                         <h6>Currents: {{ course_detail.get_num_current_students }} | Veterans: {{ course_detail.get_num_past_students }} </h6>
+                    </div>
+                    <div class="resources_link">
+                         <h5>Resources</h5>
+                    </div>
+                    <div class="my_study_group_link">
+                         <h5>My Study Groups</h5>
+                    </div>
+                    <div class="ratings_link">
+                         <h5>Ratings</h5>
+                         <div class="ratings_class">
+                              <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>
+                              <br />
+                              <table>
+                              <tr>
+                              <th>User</th>
+                              <th>Easiness</th>
+                              <th>Course Material</th>
+                              <th>Course Subject Interest</th>
+                              </tr>
+                              {% for course in course_detail.course.coursedetail_set.all %}
+                                 {% for rate in course.ratings_set.all %}
+                                    <tr>
+                                    <td>{{ rate.rater.rcs_id }}</td>
+                                    <td>{{ rate.easiness }}</td>
+                                    <td>{{ rate.course_material }}</td>
+                                    <td>{{ rate.course_subject_interest }}</td>
+                                    </tr>
+                                 {% endfor %}
+                              {% endfor %}
+                              </table>
+                              <a href="/home/ratings/{{ course_detail.id }}" class="float_right button_input">Rate this Course</a>
+                         </div>
+                    </div>
+                    <div class="recommendations_link">
+                         <h5>Recommendations</h5>
+                    </div>
                 </div>
                 <div class="hidden" id="hide">
                     <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>

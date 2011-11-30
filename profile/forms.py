@@ -1,10 +1,7 @@
 from django import forms
+from datetime import datetime
 from django.forms import Form, ModelForm
 from profile.models import *
-
-
-
-
 
 class StudentForm(ModelForm):
     class Meta:
@@ -27,3 +24,16 @@ class CourseSearchForm(Form):
     semester = forms.ChoiceField(choices=SEMESTER_CHOICES)
 
     section = forms.IntegerField()
+    
+class RatingsForm(ModelForm):
+    course = forms.ModelChoiceField(queryset=CourseDetail.objects.all(),widget=forms.HiddenInput())
+    rater = forms.ModelChoiceField(queryset=Student.objects.all(),widget=forms.HiddenInput())
+    #timestamp = forms.DateTimeField(datetime.now,widget=forms.HiddenInput())
+
+    class Meta:
+        model = Ratings
+
+class RecommendationForm(ModelForm):
+    class Meta:
+        model = Recommendations
+        fields = ('would_recommend_course', 'comments')

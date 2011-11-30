@@ -9,6 +9,19 @@ SEMESTER_CHOICES = (
     ('S', 'Spring'),
 )
 
+RECOMMEND_COURSE_CHOICES = (
+    ('Y', 'Yes'),
+    ('N', 'No'),
+)
+
+RATINGS_CHOICES = (
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5),
+)
+
 
 class Course(models.Model):
     course_department = models.CharField(max_length=16)
@@ -114,6 +127,7 @@ class PrivateMessage(models.Model):
     author = models.ForeignKey(User, related_name='PM_author')
     recipients = models.ManyToManyField(User, related_name='PM_recipients')
     contents = models.TextField()
+    read = models.BooleanField()
     timestamp = models.TimeField()
     
 class GroupPost(models.Model):
@@ -121,3 +135,19 @@ class GroupPost(models.Model):
     group = models.ForeignKey(Course)
     contents = models.TextField()
     timestamp = models.TimeField()
+
+class Ratings(models.Model):
+    course = models.ForeignKey(CourseDetail)
+    rater = models.ForeignKey(Student)
+    easiness = models.IntegerField(choices=RATINGS_CHOICES)
+    course_material = models.IntegerField(choices=RATINGS_CHOICES)
+    course_subject_interest = models.IntegerField(choices=RATINGS_CHOICES)
+    timestamp = models.DateTimeField(default=datetime.now)
+
+class Recommendations(models.Model):
+    course = models.ForeignKey(CourseDetail)
+    recommender = models.ForeignKey(Student)
+    would_recommend_course = models.CharField(max_length=1, choices=RECOMMEND_COURSE_CHOICES)
+    comments = models.CharField(max_length=256)
+    timestamp = models.DateTimeField()
+
