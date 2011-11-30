@@ -37,7 +37,7 @@ def course_search(request):
     search_options['course_number'] = request.POST.get('course_number')
     search_options['year'] = request.POST.get('year')
     search_options['section'] = request.POST.get('section')
-    
+
     #assert(False)
     
     new_options = {}
@@ -104,10 +104,7 @@ def add_course(request):
     s.add_course(request.GET.get('dept'), request.GET.get('num'), request.GET.get('sec'), request.GET.get('sem'), request.GET.get('yr'), 'present')
     s.save()
     return HttpResponseRedirect("/home/course_search/")
-=======
 
->>>>>>> bbf890a2f3bc8d1ee38e42bc3f7ab3f8be52fa91
-    
 def settings(request):
     c = {}
     c.update(csrf(request))

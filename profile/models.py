@@ -61,7 +61,7 @@ class CourseDetail(models.Model):
     semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
     section = models.IntegerField()
     professor = models.ManyToManyField('Teacher')
-    crn = models.PositiveIntegerField(primary_key=True)
+    crn = models.PositiveIntegerField(unique=True)
 
     def __unicode__(self):
         return self.course.course_name + " " + self.semester + " " + self.year + " " + str(self.section)
@@ -90,9 +90,9 @@ class Student(models.Model):
     classes_current = models.ManyToManyField(CourseDetail, related_name='current')
     classes_taken = models.ManyToManyField(CourseDetail, related_name='taken')
 
-    def add_course(self, dept, num, section, semester, year, present_or_past):
+    def add_course(self, dept, num, section, semester, year, crn, present_or_past):
         course = Course.objects.get(course_number=num, course_department=dept)
-        course_detail = CourseDetail.objects.get(course=course, semester=semester, year=year, section=section)
+        course_detail = CourseDetail.objects.get(course=course, semester=semester, year=year, section=section, crn=crn)
         if (present_or_past == 'present'):
             self.classes_current.add(course_detail)
         else:
