@@ -1,0 +1,87 @@
+{% extends "profile/base.html" %}
+
+{% block script %}
+    $(document).ready(function(){
+        pic_height = parseInt($("#profile_picture").css("height"));
+        topright_height = parseInt($("#profile_topright").css("height"));
+        $("#profile_content").css("height",((pic_height>topright_height ? pic_height : topright_height) + parseInt($("#profile_bottom").css("height")) + 60).toString() + "px" );
+    }); 
+{% endblock script %}
+
+{% block main_content_area %}
+   <div id="profile_area">
+        <div id="left_profile">
+             <div id="profile_pic">
+                  {% if privacy.allow_others_to_view_profile_picture %}
+                     <img src="{{ student_profile.profile_picture_url }}" style="width:150px" />
+                  {% else %}
+                     <img src="http://localhost:8000/static/images/default_profile_picture.png" style="width:150px" />
+                  {% endif %}
+             </div>
+             <div id="personal_info">
+                  <h1 style="text-align: center; font-size: 20px;">{{ student_profile.first_name }} {{ student_profile.last_name }}</h1>
+             </div>
+             <div id="interests_and_clubs">
+                  {% if privacy.allow_others_to_view_interests %}
+                     <h1 style="padding-top: 5px; font-size: 18px;">Interests:</h1>
+                     <br />
+                     <ul>
+                     {% for interest in interests %}
+                        <li>{{ interest }}</li>
+                     {% endfor %}
+                     </ul>
+                  {% else %}
+                     <h1 style="padding-top: 5px;">{{ student_profile.first_name }} interests are private</h1>
+                  {% endif %}
+                  <br />
+                  {% if privacy.allow_others_to_view_clubs %}
+                     <h1 style="font-size: 18px;">Clubs:</h1>
+                     <br />
+                     <ul style="padding-bottom: 5px;">
+                     {% for club in clubs %}
+                        <li>{{ club }}</li>
+                     {% endfor %}
+                     </ul>
+                  {% else %}
+                     <h1 style="padding-top: 5px;">{{ student_profile.first_name }} clubs are private</h1>
+                  {% endif %}
+             </div>
+        </div>
+        <div id="right_profile">
+             <div id="options">
+                  <br />
+                  <a href="/home/recommendation/{{ student_profile.id }}" id="recommendation">Get a Course Recommendation</a>
+                  <a href="/home/message/{{ student_profile.id }}" id="message">Send Message</a>
+                  <a href="/home/invite_study_group/{{ student_profile.id }}" id="invite_study_group">Invite to a Study Group</a>
+                  <br /><br />
+             </div>
+             <div id="courses">
+                  {% if not privacy.allow_others_to_view_classes %}
+                     <h1 style="padding-top: 5px; padding-bottom: 5px; font-weight: bold; font-size: 24px;">{{ student_profile.first_name }} {{ student_profile.last_name }}'s class information is private.</h1>
+                  {% else %}
+                     <h1 style="padding-top: 5px; font-weight: bold; font-size: 24px;">Courses Currently Enrolled In:</h1>
+                     {% if student_profile.classes_current.all.count == 0 %}
+                        <br />
+                        {{ student_profile.first_name }} {{ student_profile.last_name }} is currently not signed up for any classes.<br />
+                     {% else %}
+                        {% for course_detail in student_profile.classes_current.all %}
+                           <h2>{{ course_detail.course.course_name }}</h2>
+                        {% endfor %}
+                     {% endif %}
+                     <br />
+                     <br />
+                     <h1 style="font-weight: bold; font-size: 24px;">Courses Taken in the Past:</h1>
+                     {% if student_profile.classes_taken.all.count == 0 %}
+                        <br />
+                        <h1 style="padding-bottom: 5px;">{{ student_profile.first_name }} {{ student_profile.last_name }} currently does not have any past classes.</h1>
+                     {% else %}
+                        {% for course_detail in student_profile.classes_taken.all %}
+                           <h2>{{ course_detail.course.course_name }}</h2>
+                        {% endfor %}
+                        <br />
+                     {% endif %}
+                  {% endif %}
+             </div>
+        </div>
+   </div>
+{% endblock main_content_area %}

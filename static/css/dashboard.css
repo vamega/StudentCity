@@ -128,7 +128,7 @@
 	border: 1px solid #000;	
 	padding: 10px;
 	padding-bottom: 0px;
-	overflow-y: auto;
+	overflow: scroll;
 }
 
 .in_course_title {

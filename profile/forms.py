@@ -9,7 +9,7 @@ from profile.models import *
 class StudentForm(ModelForm):
     class Meta:
         model = Student
-        fields = ("rcs_id", "first_name", "middle_name", "last_name", "class_year", "profile_picture_url")
+        fields = ("rcs_id", "first_name", "middle_name", "last_name", "class_year", "profile_picture_url", "interests", "clubs")
 
 
 class PrivacySettingsForm(ModelForm):
