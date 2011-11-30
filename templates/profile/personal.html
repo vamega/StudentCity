@@ -1,6 +1,7 @@
 {% extends "profile/base_with_classes.html" %}
 
 {% block script %}
+{{ block.super }}
     $(document).ready(function(){
         pic_height = parseInt($("#profile_picture").css("height"));
         topright_height = parseInt($("#profile_topright").css("height"));

@@ -12,6 +12,19 @@
     {% endif %}
 {% endblock username %}
 
+{% block script %}
+{{ block.super }}
+
+/*
+$(document).ready(function () {
+    $(".course_tile").click(function(){
+	$.post('/home/course_group/', { course_code : $(this).attr('id'), csrf}, function(data) { $("#right_side").html(data); });
+    });
+});
+*/
+{% endblock script %}
+
+
 {% block left_side %}
     <h2>Classes:</h2>
     {% if student.classes_current.all.count == 0 %}
@@ -28,5 +41,5 @@
             </div>
         {% endfor %}
     {% endif %}
-    <a href="/home/course_search">Click here to register for more classes.</a>
+    <a href="/home/course_search/">Click here to register for more classes.</a>
 {% endblock left_side %}

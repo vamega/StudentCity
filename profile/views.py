@@ -69,10 +69,32 @@ def add_course(request):
     s.save()
     return HttpResponseRedirect("/home/course_search/")
 
-def course_group(request):
+    
+    
+def course_group_main(request):
+    c = {}
+    c.update(csrf(request))
     course_code = request.POST.get('course_code')
     (department, s, number) = course_code.partition(' ')
-    course_detail = CourseDetail.objects.all()
+    course = Course.objects.filter(course_department=department, course_number=number)[0]
+    course_details = CourseDetail.objects.all()
+    
+    c["course"] = course
+    c["course_details"] = course_details
+    return render_to_response("profile/course_group_main.html", c)
+    
+    
+    
+def course_group(request):
+    c = {}
+    c.update(csrf(request))
+    course_code = request.POST.get('course_code')
+    (department, s, number) = course_code.partition(' ')
+    course = Course.objects.filter(course_department=department, course_number=number)[0]
+    course_details = CourseDetail.objects.all()
+    c['course'] = course
+    return render_to_response("profile/course_group.html", c)
+    
     # This isn't finished
 
 
