@@ -5,7 +5,10 @@ from django.core.context_processors import csrf
 from django.contrib.auth.forms import * 
 from django.template import RequestContext
 from django.contrib import auth
-import logging, urllib, urllib2, cookielib
+import cookielib
+import urllib, urllib2
+import logging
+import ssl
 
 # Builtin django forms imported:
 # - class AdminPasswordChangeForm
@@ -73,11 +76,18 @@ def login(request):
 
 	    #This code works but for some reason SIS will not allow it to login
             cj = cookielib.CookieJar()
-            opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
-            login_data = urllib.urlencode({'username' : request.POST.get("username"), 'j_password' : request.POST.get("password")})
+            opener = urllib2.build_opener(urllib2.request.HTTPSHandler(), urllib2.HTTPCookieProcessor(cj))
+
+            # urllib2.install_opener(urllib2.request.build_opener(urllib.request.HTTPSHandler(context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))))
+
+            # login_data = urllib.urlencode({'username' : request.POST.get("username"), 'j_password' : request.POST.get("password")})
+            login_data = urllib.urlencode({'username' : "vamega", 'j_password' : ""})
             opener.open('https://sis.rpi.edu/rss/twbkwbis.P_ValLogin', login_data)
-            #resp = opener.open('http://google.com')
-            
+            # opener.open('https://accounts.google.com/ServiceLogin?service=mail', login_data)
+            resp = opener.open('https://sis.rpi.edu/rss/twbkwbis.P_GenMenu?name=bmenu.P_StuMainMnu')
+
+            logger.debug(resp.read())
+
             auth.login(request, user)
             return HttpResponseRedirect("/home")
             

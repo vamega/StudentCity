@@ -23,7 +23,7 @@ def index(request):
     c["user"] = request.user or None
     c["student"] = request.user.student_set.all()[0] or None
     return render_to_response("profile/personal.html", c)
- 
+
 
 def course_search(request):
     c = {}
@@ -76,7 +76,37 @@ def course_group(request):
     course_detail = CourseDetail.objects.all()
     # This isn't finished
 
+def course_search(request):
+    c = {}
+    c.update(csrf(request))
+    c['course_search_form'] = CourseSearchForm(request.GET or None)
+    if request.GET.get("course_department") != u'':
+        # TO DO: Implement legitimate search functionality here.
+        # The following is simply a "proof-of-concept" of sorts allowing for demonstration.
+        c['search_results'] = []
+        if request.GET.get("course_department") == u'CSCI':
+            c['num_results'] = 8
+            for course in Course.objects.filter(course_department = u'CSCI'):
+                for course_detail in course.coursedetail_set.all():
+                    c['search_results'].append(course_detail)
+            
+    c['user'] = request.user
+    c['student'] = request.user.student_set.all()[0]
+    return render_to_response("profile/add_course.html", c, context_instance=RequestContext(request))
 
+def add_course(request):
+    c = {}
+    c.update(csrf(request))
+    if request.GET.get('dept') == u'' or request.GET.get('num') == u'':
+        return HttpResponseRedirect("/home/course_search")
+    logger.debug(request.GET.get('dept'), " ", request.GET.get('num'))
+    s = request.user.student_set.all()[0]
+    s.add_course(request.GET.get('dept'), request.GET.get('num'), request.GET.get('sec'), request.GET.get('sem'), request.GET.get('yr'), 'present')
+    s.save()
+    return HttpResponseRedirect("/home/course_search/")
+=======
+
+>>>>>>> bbf890a2f3bc8d1ee38e42bc3f7ab3f8be52fa91
     
 def settings(request):
     c = {}
