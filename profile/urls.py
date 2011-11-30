@@ -11,4 +11,6 @@ urlpatterns = patterns('',
     (r'^/settings/edit_personal_info/', 'profile.views.edit_personal_info'),
     (r'^/settings/edit_privacy_settings/', 'profile.views.edit_privacy_settings'),
     (r'^/profile/(?P<student_id>\d+)/', 'profile.views.profile_page'),
+    (r'^/ratings/(?P<course_id>\d+)/', 'profile.views.ratings'),
+    (r'^/edit_ratings/', 'profile.views.edit_ratings'),
 )

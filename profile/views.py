@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from datetime import datetime
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import * 
 from django.template import RequestContext
@@ -201,6 +202,36 @@ def profile_page(request, student_id):
     c["clubs"] = c["student_profile"].clubs.split(",");
 
     return render_to_response("profile/profile_page.html", c)
+    
+def ratings(request, course_id):
+    c = {}
+    c.update(csrf(request))
+    if request.user.student_set.all().count() == 0:
+        return HttpResponseRedirect("/?error=1")
+    student = request.user.student_set.all()[0]
+    course = CourseDetail.objects.get(id=course_id)
+    rating = Ratings(course=course, rater=student, easiness=1, course_material=1, course_subject_interest=1)
+
+    c["user"] = request.user
+    c["student"] = student
+    c["ratings_form"] = RatingsForm(request.POST or None, instance=rating)
+    return render_to_response("profile/ratings.html", c, context_instance=RequestContext(request))
+    
+
+def edit_ratings(request):
+    c = {}
+    c.update(csrf(request))
+    if request.method == 'POST':
+        #rating = Ratings.objects.get(course=request.POST.get('course'), rater=request.POST.get('rater'))
+        form = RatingsForm(request.POST)
+        if form.is_valid():
+            new_ratings = form.save(commit=False)
+            #new_ratings.timestamp = datetime.now()
+            new_ratings.save()
+        else:
+            logger.debug("invalid form in edit_personal_info")
+
+    return HttpResponseRedirect("/home")
 
 
 

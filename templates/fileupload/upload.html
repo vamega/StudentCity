@@ -1,0 +1,26 @@
+{% extends "profile/base_with_classes.html" %}
+
+{% load custom_filters %}
+{% block style %}
+    td.spacer
+    {
+        width:      30px;
+    }
+{% endblock style %}
+    
+
+{% block main_content %}
+
+
+  <form action="fileupload/form.py" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <table>
+
+      <tr><td>Title:</td><td><input type="text" name="title" /></td></tr>
+      <tr><td>File:</td><td><input type="file" name="file" /></td></tr>
+    </table>
+      <input type="submit" value="Submit" class = "float_right button_input" />
+
+  </form> 
+
+{% endblock main_content %}
