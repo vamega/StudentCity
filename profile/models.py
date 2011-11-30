@@ -90,9 +90,9 @@ class Student(models.Model):
     classes_current = models.ManyToManyField(CourseDetail, related_name='current')
     classes_taken = models.ManyToManyField(CourseDetail, related_name='taken')
 
-    def add_course(self, dept, num, section, semester, year, crn, present_or_past):
+    def add_course(self, dept, num, section, semester, year, present_or_past):
         course = Course.objects.get(course_number=num, course_department=dept)
-        course_detail = CourseDetail.objects.get(course=course, semester=semester, year=year, section=section, crn=crn)
+        course_detail = CourseDetail.objects.get(course=course, semester=semester, year=year, section=section)
         if (present_or_past == 'present'):
             self.classes_current.add(course_detail)
         else:
