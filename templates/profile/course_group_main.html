@@ -1,6 +1,7 @@
 {% extends "profile/base_with_classes.html" %}
 
 {% block script %}
+{{ block.super }}
     $(document).ready(function(){
         $(".course_tile").click(function(){
             $.ajax({
