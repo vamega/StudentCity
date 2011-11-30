@@ -26,5 +26,8 @@ urlpatterns = patterns('',
 
     # Serving static files
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    
+    # File Upload
+    (r'^fileupload/', 'fileupload.views.upload_file'),
 )
 

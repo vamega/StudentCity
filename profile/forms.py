@@ -1,15 +1,12 @@
 from django import forms
+from datetime import datetime
 from django.forms import Form, ModelForm
 from profile.models import *
-
-
-
-
 
 class StudentForm(ModelForm):
     class Meta:
         model = Student
-        fields = ("rcs_id", "first_name", "middle_name", "last_name", "class_year", "profile_picture_url")
+        fields = ("rcs_id", "first_name", "middle_name", "last_name", "class_year", "profile_picture_url", "interests", "clubs")
 
 
 class PrivacySettingsForm(ModelForm):
@@ -27,3 +24,19 @@ class CourseSearchForm(Form):
     semester = forms.ChoiceField(choices=SEMESTER_CHOICES)
 
     section = forms.IntegerField()
+    
+class RatingsForm(ModelForm):
+    course = forms.ModelChoiceField(queryset=CourseDetail.objects.all(),widget=forms.HiddenInput())
+    rater = forms.ModelChoiceField(queryset=Student.objects.all(),widget=forms.HiddenInput())
+
+    class Meta:
+        model = Ratings
+        exclude = ("timestamp")
+
+class RecommendationsForm(ModelForm):
+    course = forms.ModelChoiceField(queryset=CourseDetail.objects.all(),widget=forms.HiddenInput())
+    recommender = forms.ModelChoiceField(queryset=Student.objects.all(),widget=forms.HiddenInput())
+
+    class Meta:
+        model = Recommendations
+        exclude = ("timestamp")

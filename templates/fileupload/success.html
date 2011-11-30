@@ -1,0 +1,19 @@
+{% extends "profile/base_with_classes.html" %}
+
+{% load custom_filters %}
+{% block style %}
+    td.spacer
+    {
+        width:      30px;
+    }
+{% endblock style %}
+    
+
+{% block main_content %}
+
+
+<h1><center>File Uploaded Successfully</center></h1>
+
+return HttpResponseRedirect('fileupload/upload.html')
+
+{% endblock main_content %}

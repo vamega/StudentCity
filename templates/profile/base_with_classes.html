@@ -12,16 +12,48 @@
     {% endif %}
 {% endblock username %}
 
-{% block script %}
-{{ block.super }}
 
-/*
-$(document).ready(function () {
-    $(".course_tile").click(function(){
-	$.post('/home/course_group/', { course_code : $(this).attr('id'), csrf}, function(data) { $("#right_side").html(data); });
+{% block style %}
+   table, td, tr, th
+    {
+        border: 2px solid black; 
+        width: 100%; 
+        text-align: center;
+        width: auto;
+        padding: 5px;
+    }
+{% endblock style %}
+
+
+{% block script %}
+    $(document).ready(function(){
+        $('.course_tile h5').hide();
+        $('.hidden').hide();
+        $('.ratings_class').hide();
+        $('.recommendations_class').hide();
+
+        $( ".course_details" ).click( function () {
+           $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
+           $( ".course_tile" ).css("height", "75px");
+           $('.course_tile h5').hide();
+           $(this).parent().parent().css( "background-image", "url(/static/images/course_tile_long_courses.png)" );
+           $(this).parent().parent().css( "height", "135px");
+           $(this).parent().parent().find("h5").show();
+           
+           var main_info = $(this).parent().parent().find(".hidden").html();
+           $("#right_side").html(main_info);
+         });
+
+         $( ".ratings_link").click( function () {
+           var ratings_info = $(this).find(".ratings_class").html();
+           $("#right_side").html(ratings_info);
+         });
+
+         $( ".recommendations_link").click( function () {
+           var recommendations_info = $(this).find(".recommendations_class").html();
+           $("#right_side").html(recommendations_info);
+         });
     });
-});
-*/
 {% endblock script %}
 
 
@@ -35,8 +67,106 @@ $(document).ready(function () {
         {% for course_detail in student.classes_current.all %}
             <div class="course_tile" id="{{ course_detail.course.course_code }}">
                 <div class="text">
-                    <h2>{{ course_detail.course.course_name }}</h2>
-                    <h6>Currents: {{ course_detail.get_num_current_students }}. | Veterans: {{ course_detail.get_num_past_students }}. </h6>
+                    <div class="course_details">
+                         <h2>{{ course_detail.course.course_name }}</h2>
+                         <h6>Currents: {{ course_detail.get_num_current_students }} | Veterans: {{ course_detail.get_num_past_students }} </h6>
+                    </div>
+                    <div class="resources_link">
+                         <h5>Resources</h5>
+                    </div>
+                    <div class="my_study_group_link">
+                         <h5>My Study Groups</h5>
+                    </div>
+                    <div class="ratings_link">
+                         <h5>Ratings</h5>
+                         <div class="ratings_class">
+                              <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>
+                              <br />
+                              <table>
+                              <tr>
+                              <th>User</th>
+                              <th>Easiness</th>
+                              <th>Course Material</th>
+                              <th>Course Subject Interest</th>
+                              <th>Year Taken</th>
+                              <th>Semeseter Taken</th>
+                              </tr>
+                              {% for course in course_detail.course.coursedetail_set.all %}
+                                 {% for rate in course.ratings_set.all %}
+                                    <tr>
+                                    <td>{{ rate.rater.rcs_id }}</td>
+                                    <td>{{ rate.easiness }}</td>
+                                    <td>{{ rate.course_material }}</td>
+                                    <td>{{ rate.course_subject_interest }}</td>
+                                    <td>{{ rate.course.year }}</td>
+                                    <td>{{ rate.course.semester }}</td>
+                                    </tr>
+                                 {% endfor %}
+                              {% endfor %}
+                              </table>
+                              <br/>
+                              <a href="/home/ratings/{{ course_detail.id }}" style="background-color: #B9E0F7; color: black; padding: 2px; border: 2px solid #0067B1">Rate this Course</a>
+                         </div>
+                    </div>
+                    <div class="recommendations_link">
+                         <h5>Recommendations</h5>
+                         <div class="recommendations_class">
+                              <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>
+                              <br />
+                              <table>
+                              <tr>
+                              <th>User</th>
+                              <th>Recommend</th>
+                              <th>Comments</th>
+                              <th>Year Taken</th>
+                              <th>Semeseter Taken</th>
+                              </tr>
+                              {% for course in course_detail.course.coursedetail_set.all %}
+                                 {% for recommendation in course.recommendations_set.all %}
+                                    <tr>
+                                    <td>{{ recommendation.recommender.rcs_id }}</td>
+                                    <td>{{ recommendation.would_recommend_course }}</td>
+                                    <td>{{ recommendation.comments }}</td>
+                                    <td>{{ recommendation.course.year }}</td>
+                                    <td>{{ recommendation.course.semester }}</td>
+                                    </tr>
+                                 {% endfor %}
+                              {% endfor %}
+                              </table>
+                              <br />
+                              <a href="/home/recommendations/{{ course_detail.id }}" style="background-color: #B9E0F7; color: black; padding: 2px; border: 2px solid #0067B1">Recommend this Course</a>
+                         </div>
+                    </div>
+                </div>
+                <div class="hidden" id="hide">
+                    <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>
+                    <br />
+                    <h3 style="font-weight: bold; font-size: 18px;">Description:</h3>
+                    <p>{{ course_detail.course.course_description }}</p>
+                    <br />
+                    <h3 style="font-weight: bold; font-size: 18px;">People Taking This Course</h3>
+                    <div class="in_course" id="current_course_takers">
+                         {% for course in course_detail.course.coursedetail_set.all %}
+                           {% for person in course.current.all %}
+                           <div class="person_block" id="{{ person.id }}">
+                                <a href="/home/profile/{{ person.id }}"><img class="person_image" src="{{ person.profile_picture_url }}" /></a>
+                                <h5 class="person_name">{{ person.first_name }} {{ person.last_name }}</h5>
+                           </div>
+          		   {% endfor %}
+		         {% endfor %}
+                    </div>
+                    <br />
+                    <h3 style="font-weight: bold; font-size: 18px;">People Who Completed This Course</h3>
+                    <div class="in_course" id="past_course_takers">
+                         {% for course in course_detail.course.coursedetail_set.all %}
+                         {% for person in course.taken.all %}
+                           <div class="person_block" id="{{ person.id }}">
+                                <a href="home/profile/{{ person.id }}"><img class="person_image" src="{{ person.profile_picture_url }}" /></a>
+                                <h5 class="person_name">{{ person.first_name }} {{ person.last_name }}</h5>
+                           </div>
+		           {% endfor %}
+		         {% endfor %}
+                    </div>
                 </div>
             </div>
         {% endfor %}
