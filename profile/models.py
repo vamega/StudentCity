@@ -7,6 +7,7 @@ from django.forms import ModelForm
 SEMESTER_CHOICES = (
     ('F', 'Fall'),
     ('S', 'Spring'),
+    ('B', 'Summer')
 )
 
 
@@ -46,8 +47,8 @@ class CourseDetail(models.Model):
     year = models.CharField(max_length=4)
     semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
     section = models.IntegerField()
-    professor = models.CharField(max_length=64)
-    crn = models.PositiveIntegerField(unique=True)
+    professor = models.ManyToManyField('Teacher')
+    crn = models.PositiveIntegerField(primary_key=True)
 
     def __unicode__(self):
         return self.course.course_name + " " + self.semester + " " + self.year + " " + str(self.section)
@@ -93,11 +94,10 @@ class Student(models.Model):
 class Teacher(models.Model):
     rcs_id = models.CharField(max_length=128)
     first_name = models.CharField(max_length=256)
-    middle_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
     courses_taught = models.ManyToManyField(CourseDetail)
     def name(self):
-        return self.first_name + self.middle_name + self.last_name
+        return self.first_name + self.last_name
     def __unicode__(self):
         return self.rcs_id
 
