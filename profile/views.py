@@ -212,7 +212,7 @@ def recommendations(request, course_id):
     c["student"] = student
     c["recommendations_form"] = RecommendationsForm(request.POST or None, instance=recommendation)
     return render_to_response("profile/recommendations.html", c, context_instance=RequestContext(request))
-    
+
 
 def edit_recommendations(request):
     c = {}
@@ -227,6 +227,62 @@ def edit_recommendations(request):
             logger.debug("invalid form in edit_recommendations")
 
     return HttpResponseRedirect("/home")
+
+def message(request, student_id, previous_message_id):
+    c = {}
+    c.update(csrf(request))
+    if request.user.student_set.all().count() == 0:
+        return HttpResponseRedirect("/?error=1")
+
+    student = request.user.student_set.all()[0]
+    if previous_message_id > 0:
+        message = PrivateMessage(author=student, subject="", contents="", read=False, previous_message=previous_message_id, timestamp=datetime.now())
+    else:
+        message = PrivateMessage(author=student, subject="", contents="", read=False, previous_message=0, timestamp=datetime.now())
+    
+    message.save()
+
+    if student_id > 0:
+        recipient = Student.objects.get(id=student_id)
+        message.recipients.add(recipient)
+
+    c["user"] = request.user
+    c["student"] = student
+    c["message_form"] = MessageForm(request.POST or None, instance=message)
+    message.delete()
+    return render_to_response("profile/message.html", c, context_instance=RequestContext(request))
+    
+def send_message(request):
+    c = {}
+    c.update(csrf(request))
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            recipients = form.cleaned_data['recipients']
+            new_message = form.save(commit=False)
+            new_message.timestamp = datetime.now()
+            new_message.read = False
+            new_message.save()
+            for recipient in recipients:
+                new_message.recipients.add(recipient)
+        else:
+            logger.debug("invalid form in edit_recommendations")
+
+    return HttpResponseRedirect("/home")
+    
+def view_message(request, message_id):
+    c = {}
+    c.update(csrf(request))
+    student = request.user.student_set.all()[0]
+    message = PrivateMessage.objects.get(id=message_id)
+    message.read = True
+    message.save()
+    
+    c["user"] = request.user
+    c["student"] = student
+    c["message"] = message
+    
+    return render_to_response("profile/view_message.html", c, context_instance=RequestContext(request))
 
 
 

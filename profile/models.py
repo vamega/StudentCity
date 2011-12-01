@@ -125,11 +125,13 @@ class PrivacySettings(models.Model):
 
     
 class PrivateMessage(models.Model):
-    author = models.ForeignKey(User, related_name='PM_author')
-    recipients = models.ManyToManyField(User, related_name='PM_recipients')
+    author = models.ForeignKey(Student, related_name='PM_author')
+    recipients = models.ManyToManyField(Student, related_name='PM_recipients')
+    subject = models.CharField(max_length=256)
     contents = models.TextField()
     read = models.BooleanField()
-    timestamp = models.TimeField()
+    previous_message = models.PositiveIntegerField(blank=True)
+    timestamp = models.DateTimeField()
     
 class GroupPost(models.Model):
     author = models.ForeignKey(User)

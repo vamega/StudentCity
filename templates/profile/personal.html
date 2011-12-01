@@ -15,7 +15,25 @@
     </div>
 
     <div id="profile_topright" style="border:3px solid black; width:280px; min-height:230px; position:absolute; left:220px; top:40px; padding:10px; overflow: scroll;">
-        <p style="background-color: #B9E0F7">Inbox:</p>
+        <div style="background-color: #B9E0F7">
+          <p style="font-size: 20px; font-weight: bold">Inbox:</p>
+          <p>
+          {% for message in student.PM_recipients.all %}
+             {% if not message.read %}
+                <a href="/home/view_message/{{ message.id }}" style="font-weight: bold;">{{ message.subject }} from {{ message.author.name }}</a><br />
+             {% endif%}
+          {% endfor %}
+          </p>
+          <br />
+          <p style="font-size: 20px; font-weight: bold">Read Messages:</p>
+          <p>
+          {% for message in student.PM_recipients.all %}
+             {% if message.read %}
+                <a href="/home/view_message/{{ message.id }}">{{ message.subject }} from {{ message.author.name }}</a><br />
+             {% endif%}
+          {% endfor %}
+          </p>
+        </div>
     </div>
     <div id="profile_links" style="width:175px; position:absolute; left:40px; top:210px;">
         <a href="home/settings" class="box_left">Edit Profile</a>

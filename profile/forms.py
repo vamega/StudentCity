@@ -24,7 +24,7 @@ class CourseSearchForm(Form):
     semester = forms.ChoiceField(choices=SEMESTER_CHOICES)
 
     section = forms.IntegerField()
-    
+
 class RatingsForm(ModelForm):
     course = forms.ModelChoiceField(queryset=CourseDetail.objects.all(),widget=forms.HiddenInput())
     rater = forms.ModelChoiceField(queryset=Student.objects.all(),widget=forms.HiddenInput())
@@ -40,3 +40,12 @@ class RecommendationsForm(ModelForm):
     class Meta:
         model = Recommendations
         exclude = ("timestamp")
+
+class MessageForm(ModelForm):
+    author = forms.ModelChoiceField(queryset=Student.objects.all(), widget=forms.HiddenInput())
+    previous_message = forms.IntegerField(widget=forms.HiddenInput())
+    recipients = forms.ModelMultipleChoiceField(queryset=Student.objects.filter(privacysettings__allow_others_to_send_me_messages__exact=True))
+
+    class Meta:
+        model = PrivateMessage
+        exclude = ("timestamp", "read")
