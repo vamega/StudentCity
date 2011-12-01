@@ -27,6 +27,7 @@ def upload_file(request):
   
     c = {}
     c.update(csrf(request))
+    c['user'] = request.user
     
     if (not request.user.is_authenticated()) or (request.user == None):
       return HttpResponseRedirect("/?error=11")
@@ -51,9 +52,10 @@ def upload_file(request):
 
 
 def handle_uploaded_file(f, c):
-#    location = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(16))
+# location = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(16))
 
 # Builds location to save uploaded file under the course number then title user inputed
+    c['user'] = request.user
     location = 'static/userupload/'
     location += str(c['course'])
     location += '/'
