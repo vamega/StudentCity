@@ -1,5 +1,6 @@
 {% extends "profile/base.html" %}
 
+
 {% block username %}
     {% if user == None %}
         Nobody!
@@ -138,6 +139,65 @@ table, td, tr, th
 	  $("#right_side").html(study_group_info);
 	
 	});
+
+	//----------------------- Code pertaining to creating a new Study Group------------------------------
+	$('#create_study_group_popup').hide();
+    
+	$('.flipflop').each(function(){
+	    id = $(this).attr('id');
+	    checkbox = $('<input type="checkbox" class="course_students_checkbox" name="course_students" value="' + id + '" />').appendTo('#po_hidden');
+	    checkbox.attr('checked', false);
+	});
+    
+	$("#create_study_group_trigger").click(function() {
+	    $(this).html("shown");
+	    $("#create_study_group_popup").show();
+	});
+    
+	$("#next_btn").click(function(){
+	    $("#po1").hide();
+	    $("#po2").show();
+	});
+    
+	function realign(parent) {
+	    row = 10;
+	    col = 10;
+	    $(parent + ' > .flipflop').each(function() {
+		$(this).css('left', col);
+		$(this).css('top', row);
+		//snap.css('left', col);
+		//snap.css('top', row);
+		
+		if (col < $(parent).width() - 3*$(this).width()) {
+		    col += 50;
+		}
+		else {
+		    col = 10;
+		    row += 60;
+		}
+    
+	    });
+	}
+	
+	realign('#course_students');
+
+    
+	$('.flipflop').click(function(){
+	    if ($(this).parent().attr('id') == 'invite_box') {
+		$(this).appendTo($('#course_students'));
+		id = $(this).attr('id');
+		$('.course_students_checkbox[value='+id+']').attr('checked', false);
+		realign('#course_students');
+		realign('#invite_box');
+	    }
+	    else {
+		$(this).appendTo($('#invite_box'));
+		id = $(this).attr('id');
+		$('.course_students_checkbox[value='+id+']').attr('checked', true);
+		realign('#course_students');
+		realign('#invite_box');
+	    }
+	});
 	
     });
     
@@ -206,7 +266,7 @@ table, td, tr, th
                          {% for person in course.taken.all %}
                            <div class="person_block" id="{{ person.id }}">
                                 <a href="home/profile/{{ person.id }}"><img class="person_image" src="{{ person.profile_picture_url }}" /></a>
-                                <h5 class="person_name">{{ person.first_name|default:person.rcs_id}} {{ person.last_name }}</h5>
+                                <h5 class="person_name">{{ person.first_name }} {{ person.last_name }}</h5>
                            </div>
 		           {% endfor %}
 		         {% endfor %}

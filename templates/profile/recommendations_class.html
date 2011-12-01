@@ -1,0 +1,28 @@
+<div class="recommendations_class">
+    <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>
+    <br />
+    <h1 style="font-weight: bold; font-size: 18px;">Recommendations</h1>
+    <br />
+    <table>
+	<tr>
+	    <th>User</th>
+	    <th>Recommend</th>
+	    <th>Comments</th>
+	    <th>Year Taken</th>
+	    <th>Semeseter Taken</th>
+	</tr>
+	{% for course in course_detail.course.coursedetail_set.all %}
+	{% for recommendation in course.recommendations_set.all %}
+	<tr>
+	    <td>{{ recommendation.recommender.rcs_id }}</td>
+	    <td>{{ recommendation.would_recommend_course }}</td>
+	    <td>{{ recommendation.comments }}</td>
+	    <td>{{ recommendation.course.year }}</td>
+	    <td>{{ recommendation.course.semester }}</td>
+	</tr>
+	{% endfor %}
+	{% endfor %}
+    </table>
+    <br />
+    <a href="/home/recommendations/{{ course_detail.id }}" style="background-color: #B9E0F7; color: black; padding: 2px; border: 2px solid #0067B1">Recommend this Course</a>
+</div>
