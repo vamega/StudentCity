@@ -33,9 +33,12 @@ def upload_file(request):
     if request.method == 'POST':
       form = c['UploadFileForm'] = UploadFileForm(request.POST, request.FILES, RequestContext(request))
 
+# If the form was valid build the dictionary and send to function to handle file upload
       if c['UploadFileForm'].is_valid():
+	c['title'] = request.POST['title']
+	c['course_num'] = request.POST['course_num']
         handle_uploaded_file(request.FILES['file'], c)
-        return HttpResponseRedirect('fileupload/upload.html')
+        return HttpResponseRedirect('fileupload/success.html')
         
     else:
         form = c['UploadFileForm'] = UploadFileForm()
@@ -44,9 +47,15 @@ def upload_file(request):
 
 
 def handle_uploaded_file(f, c):
-    location = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(16))
+#    location = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(16))
 
+# Builds location to save uploaded file under the course number then title user inputed
+    location = 'fileupload/userupload/'
+    location += str(c['course_num'])
+    location += '/'
+    location += str(c['title'])
     destination = open(location, 'wb+')
+
     for chunk in f.chunks():
         destination.write(chunk)
     destination.close()
