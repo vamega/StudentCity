@@ -2,6 +2,7 @@ from BeautifulSoup import BeautifulStoneSoup
 from profile.models import *
 import urllib2
 
+
 def parseSemesterData(semesterData):
     desc = semesterData.split(' ')
 
@@ -57,7 +58,11 @@ def getCourseData(url):
             details.section = section
 
             details.crn = currSection['crn']
-            details.save()
+            
+            try:
+                details.save()
+            except:
+                continue
 
             for professor_name in professor_names:
                 professor = None
