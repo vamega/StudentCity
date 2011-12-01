@@ -14,7 +14,7 @@
 
 
 {% block style %}
-   table, td, tr, th
+    table, td, tr, th
     {
         border: 2px solid black; 
         width: 100%; 
@@ -26,6 +26,7 @@
 
 
 {% block script %}
+{{ block.super }}
     $(document).ready(function(){
         $('.course_tile h5').hide();
         $('.hidden').hide();
@@ -139,6 +140,7 @@
                     </div>
                 </div>
                 <div class="hidden" id="hide">
+		    {% include 'profile/create_study_group_popup.html' %}
                     <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>
                     <br />
                     <h3 style="font-weight: bold; font-size: 18px;">Description:</h3>
