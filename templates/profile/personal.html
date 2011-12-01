@@ -1,12 +1,14 @@
 {% extends "profile/base_with_classes.html" %}
 
-{% block script1 %}
+
+{% block script %}
+{{ block.super }}
     $(document).ready(function(){
         pic_height = parseInt($("#profile_picture").css("height"));
         topright_height = parseInt($("#profile_topright").css("height"));
         $("#profile_content").css("height",((pic_height>topright_height ? pic_height : topright_height) + parseInt($("#profile_bottom").css("height")) + 60).toString() + "px" );
     }); 
-{% endblock script1 %}
+{% endblock script %}
 
 {% block main_content %}
 <div id="profile_content" style="width:100%; min-height:600px;">

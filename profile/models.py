@@ -154,3 +154,8 @@ class Recommendations(models.Model):
     comments = models.TextField(max_length=256, blank=True)
     timestamp = models.DateTimeField(default=datetime.now)
 
+class StudyGroup(models.Model):
+    course = models.ForeignKey(Course)
+    members = models.ManyToManyField(Student)
+    name = models.CharField(max_length=256)
+

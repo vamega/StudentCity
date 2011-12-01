@@ -1,4 +1,6 @@
 {% extends "profile/base.html" %}
+{% load custom_filters %}
+
 
 {% block username %}
     {% if user == None %}
@@ -12,8 +14,9 @@
     {% endif %}
 {% endblock username %}
 
+
 {% block style %}
-   table, td, tr, th
+    table, td, tr, th
     {
         border: 2px solid black; 
         width: 100%; 
@@ -23,12 +26,15 @@
     }
 {% endblock style %}
 
+
 {% block script %}
+{{ block.super }}
     $(document).ready(function(){
         $('.course_tile h5').hide();
         $('.hidden').hide();
         $('.ratings_class').hide();
         $('.recommendations_class').hide();
+        $('.resources_class').hide();
 
         $( ".course_details" ).click( function () {
            $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
@@ -42,6 +48,11 @@
            $("#right_side").html(main_info);
          });
 
+	 $( ".resources_link").click( function () {
+	   var resources_info = $(this).find(".resources_class").html();
+	   $("#right_side").html(resources_info);
+	 });
+
          $( ".ratings_link").click( function () {
            var ratings_info = $(this).find(".ratings_class").html();
            $("#right_side").html(ratings_info);
@@ -53,6 +64,7 @@
          });
     });
 {% endblock script %}
+
 
 {% block left_side %}
     <h2>Classes:</h2>
@@ -70,6 +82,13 @@
                     </div>
                     <div class="resources_link">
                          <h5>Resources</h5>
+			 <div class="resources_class">
+			      {% for x in course_detail.course.course_name|get_resources %}
+			      <a href="static/userupload/{{course_detail.course.course_name}}/{{x}}">{{x}}</a>
+			      {% endfor %}
+			      <br /><br />
+			      <a href="fileupload/upload.html">Upload New Resources</a>
+			 </div>
                     </div>
                     <div class="my_study_group_link">
                          <h5>My Study Groups</h5>
@@ -136,6 +155,7 @@
                     </div>
                 </div>
                 <div class="hidden" id="hide">
+		    {% include 'profile/create_study_group_popup.html' %}
                     <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>
                     <br />
                     <h3 style="font-weight: bold; font-size: 18px;">Description:</h3>
@@ -168,5 +188,5 @@
             </div>
         {% endfor %}
     {% endif %}
-    <a href="/home/course_search">Click here to register for more classes.</a>
+    <a href="/home/course_search/">Click here to register for more classes.</a>
 {% endblock left_side %}
