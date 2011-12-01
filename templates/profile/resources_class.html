@@ -1,7 +1,8 @@
 <div class="resources_class">
-      {% for x in course_detail.course.course_name|get_resources %}
-      <a href="static/userupload/{{course_detail.course.course_name}}/{{x}}">{{x}}</a>
-      {% endfor %}
-      <br /><br />
-      <a href="fileupload/upload.html">Upload New Resources</a>
+     {% for x in course_detail.course.course_name|get_resources %}
+     <a href="static/userupload/{{course_detail.course.course_name}}/{{x}}">{{x}}</a>
+     <br />
+     {% endfor %}
+     <br /><br />
+     <a href="fileupload/upload.html">Upload New Resources</a>
 </div>

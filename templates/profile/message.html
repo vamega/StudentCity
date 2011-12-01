@@ -1,0 +1,14 @@
+{% extends "profile/base_with_classes.html" %}
+
+{% block main_content %}
+<div id="messages_div">
+     <h2 class="main_heading">Private Messaging System</h2>
+     <br />
+     <form id="PM_form_id" method="POST" action="/home/send_message/">
+           {% csrf_token %}
+           <table>{{ message_form.as_table }}</table>
+
+           <input class="float_right button_input" type="submit" value="Send Message" />
+     </form>
+</div>
+{% endblock main_content %}
