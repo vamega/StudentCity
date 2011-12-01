@@ -1,3 +1,4 @@
+{% load custom_filters %}
 <div class="resources_class">
      {% for x in course_detail.course.course_name|get_resources %}
      <a href="static/userupload/{{course_detail.course.course_name}}/{{x}}">{{x}}</a>
