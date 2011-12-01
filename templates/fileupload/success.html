@@ -7,13 +7,19 @@
         width:      30px;
     }
 {% endblock style %}
-    
+
+<head>
+<script type="text/javascript">
+function delayer(){window.location = "upload.html"}
+</script>
+</head>
+  
 
 {% block main_content %}
-
+<body onLoad="setTimeout('delayer()', 5000)">
 
 <h1><center>File Uploaded Successfully</center></h1>
 
-return HttpResponseRedirect('fileupload/upload.html')
 
+</body>
 {% endblock main_content %}

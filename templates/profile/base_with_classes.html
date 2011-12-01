@@ -1,4 +1,6 @@
 {% extends "profile/base.html" %}
+{% load custom_filters %}
+
 
 {% block username %}
     {% if user == None %}
@@ -32,6 +34,7 @@
         $('.hidden').hide();
         $('.ratings_class').hide();
         $('.recommendations_class').hide();
+        $('.resources_class').hide();
 
         $( ".course_details" ).click( function () {
            $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
@@ -44,6 +47,11 @@
            var main_info = $(this).parent().parent().find(".hidden").html();
            $("#right_side").html(main_info);
          });
+
+	 $( ".resources_link").click( function () {
+	   var resources_info = $(this).find(".resources_class").html();
+	   $("#right_side").html(resources_info);
+	 });
 
          $( ".ratings_link").click( function () {
            var ratings_info = $(this).find(".ratings_class").html();
@@ -74,6 +82,13 @@
                     </div>
                     <div class="resources_link">
                          <h5>Resources</h5>
+			 <div class="resources_class">
+			      {% for x in course_detail.course.course_name|get_resources %}
+			      <a href="static/useruploads/{{x}}">{{x}}</a>
+			      {% endfor %}
+			      <br /><br />
+			      <a href="fileupload/upload.html">Upload New Resources</a>
+			 </div>
                     </div>
                     <div class="my_study_group_link">
                          <h5>My Study Groups</h5>
