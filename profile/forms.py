@@ -49,3 +49,4 @@ class MessageForm(ModelForm):
     class Meta:
         model = PrivateMessage
         exclude = ("timestamp", "read")
+

@@ -306,5 +306,17 @@ def view_message(request, message_id):
     
     return render_to_response("profile/view_message.html", c, context_instance=RequestContext(request))
 
-
+def course_recommendation(request, student_id):
+    c = {}
+    c.update(csrf(request))
+    student = Student.objects.get(id=student_id)
+    recommendations = Recommendations.objects.filter(recommender=student)
+    ratings = Ratings.objects.filter(rater=student)
+    
+    student = request.user.student_set.all()[0]
+    c["user"] = request.user
+    c["student"] = student
+    c["recommendation"] = recommendations
+    c["ratings"] = ratings
+    return render_to_response("profile/course_recommendations.html", c, context_instance=RequestContext(request))
 

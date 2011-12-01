@@ -19,4 +19,5 @@ urlpatterns = patterns('',
     (r'^/send_message/', 'profile.views.send_message'),
     (r'^/view_message/(?P<message_id>\d+)/', 'profile.views.view_message'),
     (r'^/create_study_group/', 'profile.views.create_study_group'),
+    (r'^/course_recommendation/(?P<student_id>\d+)/', 'profile.views.course_recommendation'),
 )
