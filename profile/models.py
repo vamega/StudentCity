@@ -156,6 +156,6 @@ class Recommendations(models.Model):
 
 class StudyGroup(models.Model):
     course = models.ForeignKey(Course)
-    members = models.ManyToManyField(Student)
+    members = models.ManyToManyField(Student, related_name='study_groups')
     name = models.CharField(max_length=256)
-
+    max_capacity = models.IntegerField()

@@ -28,6 +28,9 @@ def upload_file(request):
     c = {}
     c.update(csrf(request))
     
+    c["user"] = request.user
+    c["student"] = request.user.student_set.all()[0]
+    
     if (not request.user.is_authenticated()) or (request.user == None):
       return HttpResponseRedirect("/?error=11")
     
@@ -42,11 +45,12 @@ def upload_file(request):
 	c['title'] = request.POST['title']
 	c['course'] = request.POST['course']
         handle_uploaded_file(request.FILES['file'], c)
-        return HttpResponseRedirect('fileupload/success.html')
+        c['success'] = True
         
     else:
         form = c['UploadFileForm'] = UploadFileForm()
-    return render_to_response('fileupload/upload.html', {'form': c['UploadFileForm']}, RequestContext(request))
+        c['form'] = UploadFileForm()
+    return render_to_response('fileupload/upload.html', c, RequestContext(request))
 
 
 

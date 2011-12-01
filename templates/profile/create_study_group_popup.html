@@ -1,44 +1,54 @@
-<style>
-  
-  .create_study_group_popup
-  {
-  }
-  
-  .popup_bg
-  {
-    width:100%;
-    height:100%;
-    background-color:#FFFFFF;
-    opacity:0.4;
-    z-index:1;
-  }
-  
-  .popup_overlay
-  {
-    z-index:5;
-  }
-  
-</style>
+<div id="create_study_group_popup">
+    <div id="popup_bg"></div>
+    <div id="popup_overlay_base">
+	<form method="POST" action="/doesnotexistyet">
 
-<script>
-  $(document).ready(function(){
-    $(".create_study_group_popup").hide();
-    
-    $("#show_popup").click(function(){
-      $(".popup_overlay").hide();
-      $(".create_study_group_popup").show();
-    });
-  });
-</script>
+	<div class="popup_overlay" id="po1" >
+	    <table>
+	    <tr><td>
+	        <table>
+		    <tr>
+		        <td><label for="title">Title:</label></td><td><input type="text" name="sg_title" /></td>
+		    </tr>
+		    <tr>
+		        <td><label for="max_capacity">Max Capacity:</label></td><td><input type="text" name="max_capacity" /></td>
+		    </tr>
+	        </table>
+	    </td></tr>
+	    <tr><td>
+	        <table>
+		    <tr>
+		        <td>Invite Classmates: (click to remove)</td>
+		    </tr>
+		    <tr>
+		        <td><div id="invite_box"></div></td>
+		    </tr>
+		    <tr>
+		        <td>Current Students: (click to add)</td>
+		    </tr>
+		    <tr>
+		        <td>
+                            <div id="course_students">
+			    {% for person in course.current.all %}
+			        <div class="person_block flipflop" id="{{ person.id }}">
+				    <img class="person_image" src="{{ person.profile_picture_url }}" />
+				    <h5 class="person_name">{{ person.first_name }} {{ person.last_name }}</h5>
+			        </div>
+			    {% endfor %}
+			    </div>
+		        </td>
+		    </tr>
+		    <tr>
+		        <td style="text-align:right;"><input type="submit" id="sg_submit"></td>
+	            </tr>
+	        </table>
+            </td></tr>
+            </table>
+	</div>
 
-<div class="create_study_group_popup" id="csgp_{{ course_detail.course.course_code }}">
-    <div class="popup_bg"></div>
-    
-    <div class="popup_overlay" id="{{ course_detail.course.course_code }}" >
+	<div class="popup_overlay" id="po_hidden" >
+	</div>
+
+	</form>
     </div>
-    <div class="popup_overlay" id="{{ course_detail.course.course_code }}" >
-    </div>
-    <div class="popup_overlay" id="{{ course_detail.course.course_code }}" >
-    </div>
-    
 </div>

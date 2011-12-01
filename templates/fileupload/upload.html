@@ -11,7 +11,9 @@
 
 {% block main_content %}
 
-
+  {% if success %}
+  <center><h5>Success! Upoad another?</h5></center>
+  {% endif %}
   <form action="fileupload/form.py" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
 

@@ -1,8 +1,10 @@
+{% load custom_filters %}
 <div class="resources_class">
-     {% for x in course_detail.course.course_name|get_resources %}
-     <a href="static/userupload/{{course_detail.course.course_name}}/{{x}}">{{x}}</a>
-     <br />
-     {% endfor %}
-     <br /><br />
-     <a href="fileupload/upload.html">Upload New Resources</a>
+    <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>
+    {% for x in course_detail.course.course_name|get_resources %}
+    <a href="static/userupload/{{course_detail.course.course_name}}/{{x}}">{{x}}</a>
+    <br />
+    {% endfor %}
+    <br /><br />
+    <a href="fileupload/upload.html">Upload New Resources</a>
 </div>
