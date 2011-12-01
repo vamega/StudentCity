@@ -82,13 +82,8 @@
                     </div>
                     <div class="resources_link">
                          <h5>Resources</h5>
-			 <div class="resources_class">
-			      {% for x in course_detail.course.course_name|get_resources %}
-			      <a href="static/userupload/{{course_detail.course.course_name}}/{{x}}">{{x}}</a>
-			      {% endfor %}
-			      <br /><br />
-			      <a href="fileupload/upload.html">Upload New Resources</a>
-			 </div>
+			 <!-- "resources_class.html" is the template for the resource list that appears when the above link is clicked. -->
+			 {% include "profile/resources_class.html" %}
                     </div>
                     <div class="my_study_group_link">
                          <h5>My Study Groups</h5>
