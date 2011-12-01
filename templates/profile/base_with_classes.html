@@ -83,7 +83,7 @@
                          <h5>Resources</h5>
 			 <div class="resources_class">
 			      {% for x in course_detail.course.course_name|get_resources %}
-			      <a href="static/useruploads/{{x}}">{{x}}</a>
+			      <a href="static/userupload/{{course_detail.course.course_name}}/{{x}}">{{x}}</a>
 			      {% endfor %}
 			      <br /><br />
 			      <a href="fileupload/upload.html">Upload New Resources</a>
