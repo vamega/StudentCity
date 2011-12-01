@@ -1,0 +1,14 @@
+{% extends "profile/base_with_classes.html" %}
+
+{% block main_content %}
+<div id="ratings_div">
+     <h2 class="main_heading">Course Recommendation</h2>
+     <br />
+     <form id="ratings_form_id" method="POST" action="/home/edit_recommendations/">
+           {% csrf_token %}
+           <table>{{ recommendations_form.as_table }}</table>
+
+           <input class="float_right button_input" type="submit" value="Save" />
+     </form>
+</div>
+{% endblock main_content %}

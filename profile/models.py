@@ -7,6 +7,20 @@ from django.forms import ModelForm
 SEMESTER_CHOICES = (
     ('F', 'Fall'),
     ('S', 'Spring'),
+    ('B', 'Summer')
+)
+
+RECOMMEND_COURSE_CHOICES = (
+    ('Y', 'Yes'),
+    ('N', 'No'),
+)
+
+RATINGS_CHOICES = (
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5),
 )
 
 
@@ -46,6 +60,8 @@ class CourseDetail(models.Model):
     year = models.CharField(max_length=4)
     semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
     section = models.IntegerField()
+    professor = models.ManyToManyField('Teacher')
+    crn = models.PositiveIntegerField(unique=True)
 
     def __unicode__(self):
         return self.course.course_name + " " + self.semester + " " + self.year + " " + str(self.section)
@@ -68,8 +84,8 @@ class Student(models.Model):
     middle_name = models.CharField(max_length=256, blank=True)
     last_name = models.CharField(max_length=256, blank=True)
     class_year = models.CharField(max_length=4, blank=True)
-    interests = models.CharField(max_length=1280, blank=True)
-    clubs = models.CharField(max_length=1280, blank=True)
+    interests = models.TextField(max_length=1280, blank=True)
+    clubs = models.TextField(max_length=1280, blank=True)
     profile_picture_url = models.URLField(blank=True, default='http://localhost:8000/static/images/default_profile_picture.png')
     classes_current = models.ManyToManyField(CourseDetail, related_name='current')
     classes_taken = models.ManyToManyField(CourseDetail, related_name='taken')
@@ -91,14 +107,12 @@ class Student(models.Model):
 class Teacher(models.Model):
     rcs_id = models.CharField(max_length=128)
     first_name = models.CharField(max_length=256)
-    middle_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
     courses_taught = models.ManyToManyField(CourseDetail)
     def name(self):
-        return self.first_name + self.middle_name + self.last_name
+        return self.first_name + self.last_name
     def __unicode__(self):
         return self.rcs_id
-
 
 class PrivacySettings(models.Model):
     student = models.ForeignKey(Student, unique=True)
@@ -114,6 +128,7 @@ class PrivateMessage(models.Model):
     author = models.ForeignKey(User, related_name='PM_author')
     recipients = models.ManyToManyField(User, related_name='PM_recipients')
     contents = models.TextField()
+    read = models.BooleanField()
     timestamp = models.TimeField()
     
 class GroupPost(models.Model):
@@ -121,3 +136,19 @@ class GroupPost(models.Model):
     group = models.ForeignKey(Course)
     contents = models.TextField()
     timestamp = models.TimeField()
+
+class Ratings(models.Model):
+    course = models.ForeignKey(CourseDetail)
+    rater = models.ForeignKey(Student)
+    easiness = models.IntegerField(choices=RATINGS_CHOICES)
+    course_material = models.IntegerField(choices=RATINGS_CHOICES)
+    course_subject_interest = models.IntegerField(choices=RATINGS_CHOICES)
+    timestamp = models.DateTimeField(default=datetime.now)
+
+class Recommendations(models.Model):
+    course = models.ForeignKey(CourseDetail)
+    recommender = models.ForeignKey(Student)
+    would_recommend_course = models.CharField(max_length=1, choices=RECOMMEND_COURSE_CHOICES)
+    comments = models.TextField(max_length=256, blank=True)
+    timestamp = models.DateTimeField(default=datetime.now)
+

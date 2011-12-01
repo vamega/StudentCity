@@ -71,7 +71,7 @@
                     <tr><th><label for="id_first_name">First Name:</label></th><td class="spacer"></td><td>{{ personal_form.first_name }}</td></tr>
                     <tr><th><label for="id_middle_name">Middle Name:</label></th><td class="spacer"></td><td>{{ personal_form.middle_name }}</td></tr>
                     <tr><th><label for="id_last_name">Last Name:</label></th><td class="spacer"></td><td>{{ personal_form.last_name }}</td></tr>
-                    <tr><th><label for="id_rcs_id">RCS ID:</label></th><td class="spacer"></td><td>{{ personal_form.rcs_id }}</td></tr>
+                    <tr><th><label for="id_rcs_id">RCS ID:*</label></th><td class="spacer"></td><td>{{ personal_form.rcs_id }}</td></tr>
                     <tr><th><label for="id_class_year">Class Year:</label></th><td class="spacer"></td><td>{{ personal_form.class_year }}</td></tr>
                     <tr><th><label for="id_profile_picture_url">Profile Picture:</label></th><td class="spacer"></td><td>{{ personal_form.profile_picture_url }}</td></tr>
                     <tr><th><label for="id_interests">Interests:</label></th><td class="spacer"></td><td>{{ personal_form.interests }}</td></tr>
@@ -81,10 +81,9 @@
           </form>
           <br />
           <p>Separate interests and clubs by a ","</p>
+          <p>*RCS_ID is required</p>
      </div>
      <div id="privacy">
-
-
           <h2 class="main_heading">Privacy</h2>
           <form id="personal_info" method="POST" action="/home/settings/edit_privacy_settings/">
                 {% csrf_token %}

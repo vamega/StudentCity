@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from datetime import datetime
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import * 
 from django.template import RequestContext
@@ -22,7 +23,7 @@ def index(request):
     c["user"] = request.user or None
     c["student"] = request.user.student_set.all()[0] or None
     return render_to_response("profile/personal.html", c)
- 
+
 
 def course_search(request):
     c = {}
@@ -36,7 +37,7 @@ def course_search(request):
     search_options['course_number'] = request.POST.get('course_number')
     search_options['year'] = request.POST.get('year')
     search_options['section'] = request.POST.get('section')
-    
+
     #assert(False)
     
     new_options = {}
@@ -67,16 +68,36 @@ def add_course(request):
     s = request.user.student_set.all()[0]
     s.add_course(request.POST.get('dept'), request.POST.get('num'), request.POST.get('sec'), request.POST.get('sem'), request.POST.get('yr'), 'present')
     s.save()
-    return HttpResponseRedirect("/home/course_search/")
-
-def course_group(request):
-    course_code = request.POST.get('course_code')
-    (department, s, number) = course_code.partition(' ')
-    course_detail = CourseDetail.objects.all()
-    # This isn't finished
-
+    return HttpResponseRedirect("/home")
 
     
+    
+def course_group_main(request):
+    c = {}
+    c.update(csrf(request))
+    course_code = request.POST.get('course_code')
+    (department, s, number) = course_code.partition(' ')
+    course = Course.objects.filter(course_department=department, course_number=number)[0]
+    course_details = CourseDetail.objects.all()
+    
+    c["course"] = course
+    c["course_details"] = course_details
+    return render_to_response("profile/course_group_main.html", c)
+    
+    
+    
+def course_group(request):
+    c = {}
+    c.update(csrf(request))
+    course_code = request.POST.get('course_code')
+    (department, s, number) = course_code.partition(' ')
+    course = Course.objects.filter(course_department=department, course_number=number)[0]
+    course_details = CourseDetail.objects.all()
+    c['course'] = course
+    return render_to_response("profile/course_group.html", c)
+    
+    # This isn't finished
+
 def settings(request):
     c = {}
     c.update(csrf(request))
@@ -171,6 +192,63 @@ def profile_page(request, student_id):
     c["clubs"] = c["student_profile"].clubs.split(",");
 
     return render_to_response("profile/profile_page.html", c)
+    
+def ratings(request, course_id):
+    c = {}
+    c.update(csrf(request))
+    if request.user.student_set.all().count() == 0:
+        return HttpResponseRedirect("/?error=1")
+    student = request.user.student_set.all()[0]
+    course = CourseDetail.objects.get(id=course_id)
+    rating = Ratings(course=course, rater=student, easiness=1, course_material=1, course_subject_interest=1)
+
+    c["user"] = request.user
+    c["student"] = student
+    c["ratings_form"] = RatingsForm(request.POST or None, instance=rating)
+    return render_to_response("profile/ratings.html", c, context_instance=RequestContext(request))
+    
+
+def edit_ratings(request):
+    c = {}
+    c.update(csrf(request))
+    if request.method == 'POST':
+        form = RatingsForm(request.POST)
+        if form.is_valid():
+            new_ratings = form.save(commit=False)
+            new_ratings.save()
+        else:
+            logger.debug("invalid form in edit_ratings")
+
+    return HttpResponseRedirect("/home")
+    
+def recommendations(request, course_id):
+    c = {}
+    c.update(csrf(request))
+    if request.user.student_set.all().count() == 0:
+        return HttpResponseRedirect("/?error=1")
+    student = request.user.student_set.all()[0]
+    course = CourseDetail.objects.get(id=course_id)
+    recommendation = Recommendations(course=course, recommender=student, would_recommend_course="Y", comments="")
+
+    c["user"] = request.user
+    c["student"] = student
+    c["recommendations_form"] = RecommendationsForm(request.POST or None, instance=recommendation)
+    return render_to_response("profile/recommendations.html", c, context_instance=RequestContext(request))
+    
+
+def edit_recommendations(request):
+    c = {}
+    c.update(csrf(request))
+    if request.method == 'POST':
+        form = RecommendationsForm(request.POST)
+        if form.is_valid():
+            new_recommendation = form.save(commit=False)
+            new_recommendation.timestamp = datetime.now()
+            new_recommendation.save()
+        else:
+            logger.debug("invalid form in edit_recommendations")
+
+    return HttpResponseRedirect("/home")
 
 
 
