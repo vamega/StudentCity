@@ -12,7 +12,7 @@
      </tr>
      {% for recommendation in recommendations %}
      <tr>
-     <td>{{ recommendation.course.name }}</td>
+     <td>{{ recommendation.course.course.course_name }}</td>
      <td>{{ recommendation.would_recommend_course }}</td>
      <td>{{ recommendation.comments }}</td>
      </tr>
@@ -31,7 +31,7 @@
      </tr>
      {% for rating in ratings %}
      <tr>
-     <td>{{ rating.course.name }}</td>
+     <td>{{ rating.course.course.course_name }}</td>
      <td>{{ rating.easiness }}</td>
      <td>{{ rating.course_material }}</td>
      <td>{{ rating.course_subject_interest }}</td>

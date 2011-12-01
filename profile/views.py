@@ -316,7 +316,7 @@ def course_recommendation(request, student_id):
     student = request.user.student_set.all()[0]
     c["user"] = request.user
     c["student"] = student
-    c["recommendation"] = recommendations
+    c["recommendations"] = recommendations
     c["ratings"] = ratings
     return render_to_response("profile/course_recommendations.html", c, context_instance=RequestContext(request))
 
