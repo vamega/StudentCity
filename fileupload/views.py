@@ -5,6 +5,10 @@ from django.contrib.auth.forms import *
 from django.template import RequestContext
 from profile.models import *
 from profile.forms import *
+from django.db import models
+from datetime import datetime
+from django.contrib.auth.models import User
+from django.forms import ModelForm
 from django import forms
 from fileupload.form import *
 from django.core.files.storage import default_storage
@@ -36,7 +40,7 @@ def upload_file(request):
 # If the form was valid build the dictionary and send to function to handle file upload
       if c['UploadFileForm'].is_valid():
 	c['title'] = request.POST['title']
-	c['course_num'] = request.POST['course_num']
+	c['course'] = request.POST['course']
         handle_uploaded_file(request.FILES['file'], c)
         return HttpResponseRedirect('fileupload/success.html')
         
@@ -50,8 +54,8 @@ def handle_uploaded_file(f, c):
 #    location = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(16))
 
 # Builds location to save uploaded file under the course number then title user inputed
-    location = 'fileupload/userupload/'
-    location += str(c['course_num'])
+    location = 'static/userupload/'
+    location += str(c['course'])
     location += '/'
     location += str(c['title'])
     destination = open(location, 'wb+')

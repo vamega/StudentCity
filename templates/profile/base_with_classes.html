@@ -1,5 +1,7 @@
 {% extends "profile/base.html" %}
 
+
+
 {% block username %}
     {% if user == None %}
         Nobody!
@@ -14,7 +16,7 @@
 
 
 {% block style %}
-   table, td, tr, th
+    table, td, tr, th
     {
         border: 2px solid black; 
         width: 100%; 
@@ -26,11 +28,13 @@
 
 
 {% block script %}
+{{ block.super }}
     $(document).ready(function(){
         $('.course_tile h5').hide();
         $('.hidden').hide();
         $('.ratings_class').hide();
         $('.recommendations_class').hide();
+        $('.resources_class').hide();
 
         $( ".course_details" ).click( function () {
            $( ".course_tile" ).css( "background-image", "url(/static/images/course_tile.png)" );
@@ -43,6 +47,11 @@
            var main_info = $(this).parent().parent().find(".hidden").html();
            $("#right_side").html(main_info);
          });
+
+	 $( ".resources_link").click( function () {
+	   var resources_info = $(this).find(".resources_class").html();
+	   $("#right_side").html(resources_info);
+	 });
 
          $( ".ratings_link").click( function () {
            var ratings_info = $(this).find(".ratings_class").html();
@@ -73,6 +82,8 @@
                     </div>
                     <div class="resources_link">
                          <h5>Resources</h5>
+			 <!-- "resources_class.html" is the template for the resource list that appears when the above link is clicked. -->
+			 {% include "profile/resources_class.html" %}
                     </div>
                     <div class="my_study_group_link">
                          <h5>My Study Groups</h5>
@@ -139,6 +150,7 @@
                     </div>
                 </div>
                 <div class="hidden" id="hide">
+		    {% include 'profile/create_study_group_popup.html' %}
                     <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>
                     <br />
                     <h3 style="font-weight: bold; font-size: 18px;">Description:</h3>

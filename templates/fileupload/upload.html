@@ -14,10 +14,12 @@
 
   <form action="fileupload/form.py" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
+
+    <center>Make Sure the Course Name Matches exactly</center>
     <table>
 
       <tr><td>File Name:</td><td><input type="text" name="title" /></td></tr>
-      <tr><td>Course Number:</td><td><input type="text" name="course_num" /></td></tr>
+      <tr><td>Course Name:</td><td><input type="text" name="course" /></td></tr>
       <tr><td>File:</td><td><input type="file" name="file" /></td></tr>
     </table>
       <input type="submit" value="Submit" class = "float_right button_input" />

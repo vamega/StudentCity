@@ -125,11 +125,13 @@ class PrivacySettings(models.Model):
 
     
 class PrivateMessage(models.Model):
-    author = models.ForeignKey(User, related_name='PM_author')
-    recipients = models.ManyToManyField(User, related_name='PM_recipients')
+    author = models.ForeignKey(Student, related_name='PM_author')
+    recipients = models.ManyToManyField(Student, related_name='PM_recipients')
+    subject = models.CharField(max_length=256)
     contents = models.TextField()
     read = models.BooleanField()
-    timestamp = models.TimeField()
+    previous_message = models.PositiveIntegerField(blank=True)
+    timestamp = models.DateTimeField()
     
 class GroupPost(models.Model):
     author = models.ForeignKey(User)
@@ -151,4 +153,9 @@ class Recommendations(models.Model):
     would_recommend_course = models.CharField(max_length=1, choices=RECOMMEND_COURSE_CHOICES)
     comments = models.TextField(max_length=256, blank=True)
     timestamp = models.DateTimeField(default=datetime.now)
+
+class StudyGroup(models.Model):
+    course = models.ForeignKey(Course)
+    members = models.ManyToManyField(Student)
+    name = models.CharField(max_length=256)
 
