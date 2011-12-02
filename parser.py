@@ -1,48 +1,70 @@
+from django.conf import settings
 from BeautifulSoup import BeautifulStoneSoup
 from profile.models import *
 import urllib2
+import sys
+import os
 
+def parse_semester_data(semester_data):
+    """Parse the semester and year from the semesterDesc attribute of the CourseDB tag in the XML.
 
-def parseSemesterData(semesterData):
-    desc = semesterData.split(' ')
+    semester_data is the contents of the semesterDesc attribute
+
+    This function returns a tuple of the semester and year of the related CourseDB
+    """
+
+    description = semester_data.split(' ')
 
     semester = None
 
-    if desc[0] == 'Spring':
+    if description[0] == 'Spring':
         semester = 'S'
-    elif desc[0] == 'Fall':
+    elif description[0] == 'Fall':
         semester = 'F'
     else:
         semester = 'B'
 
-    year = int(desc[1])
+    year = int(description[1])
 
     return semester,year
 
-def getCourseData(url):
+def get_course_data(url):
+    """Parse a CourseDB from SIS' course data XML file.
+
+    url is a url to a CourseDB XML file.
+
+    This function modified the database to include add courses, courseDetails and professors that are described in the xml file.
+    """
     doc = urllib2.urlopen(url)
+    # print doc.read()
     soup = BeautifulStoneSoup(doc)
 
     root = soup.find('coursedb')
-    semester, year = parseSemesterData(root['semesterdesc'])
+    semester, year = parse_semester_data(root['semesterdesc'])
     courses = soup.findAll('course')
 
-    for currCourse in courses:
-        course = Course()
+    for current_course in courses:
+        course = None
 
-        course.course_name = currCourse['name']
-        course.course_number = currCourse['num']
-        course.course_department = currCourse['dept']
-        course.save()
+        try:
+            course = Course.objects.get(course_department=current_course['dept'], course_number=current_course['num'])
+        except Course.DoesNotExist:
+            course = Course()
+            course.course_name = current_course['name']
+            course.course_number = current_course['num']
+            course.course_department = current_course['dept']
+            course.save()
 
-        sections = currCourse.findAll('section')
+            os.mkdir( os.path.join(settings.USER_UPLOAD_DIR, course.course_name) )
 
-        for currSection in sections:
-            if currSection['seats'] == '0':
+        sections = current_course.findAll('section')
+
+        for current_section in sections:
+            if current_section['seats'] == '0':
                 continue
 
             professor_names = list()
-            for period in currSection.findAll('period'):
+            for period in current_section.findAll('period'):
                 professor_names = period['instructor'].split("/")
 
             details = CourseDetail()
@@ -51,13 +73,13 @@ def getCourseData(url):
             details.semester = semester
 
             try:
-                section = int(currSection['num'])
+                section = int(current_section['num'])
             except ValueError:
                 section = -1
 
             details.section = section
 
-            details.crn = currSection['crn']
+            details.crn = current_section['crn']
             
             try:
                 details.save()
@@ -75,3 +97,16 @@ def getCourseData(url):
                 details.professor.add(professor)
             
             details.save()
+
+
+if __name__ == "__main__":
+    url = None
+    if(len(sys.argv) == 1):
+        print "No URL supplied. Running on test URL."
+        url = 'http://50.115.160.86/static/testCourseData.xml'
+        print "Test URL - %s"%url
+    else:
+        url = argv[1]
+    
+    print url
+    get_course_data(url)

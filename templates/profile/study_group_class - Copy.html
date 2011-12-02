@@ -1,11 +1,7 @@
-<!--
-This template is for displaying study groups as well as creating a study group for a class.
--->
 <div class="study_group_class">
     <h1 style="font-weight: bold; font-size: 24px;">{{ course_detail.course.course_name }}</h1>
     <br />
     <h1 style="font-weight: bold; font-size: 18px;">Study Groups</h1><br /><br />
-    
     {% for sg in course_detail.course.studygroup_set.all %}
     <p style="font-size: 14px;">{{ sg.name }}</p>
     {% endfor %}

@@ -11,12 +11,13 @@
 
 {% block main_content %}
 
-<!-- Creates a form on the webpage to upload files if the file uploaded successful say so -->
-
+<<<<<<< HEAD
+<!-- Creates a form on the webpage to upload files -->
+=======
   {% if success %}
   <center><h5>Success! Upoad another?</h5></center>
   {% endif %}
-
+>>>>>>> 6fffc4ddc6ec662c8ced494f8d8aa1d8f68c48de
   <form action="fileupload/form.py" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
 
