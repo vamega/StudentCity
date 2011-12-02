@@ -320,3 +320,32 @@ def course_recommendation(request, student_id):
     c["ratings"] = ratings
     return render_to_response("profile/course_recommendations.html", c, context_instance=RequestContext(request))
 
+def create_study_group(request):
+    c = {}
+    c.update(csrf(request))
+    
+    post = request.POST
+    name = post['sg_title']
+    max_capacity = post['max_capacity']
+    course_code = post['course_code']
+    (department, s, number) = course_code.partition(' ')
+    
+    course = Course.objects.filter(course_department=department, course_number=number)[0]
+    
+    sg = StudyGroup(course=course, name=name, max_capacity=max_capacity)
+    sg.save()
+    for student in post['course_students']:
+      sg.members.add(Student.objects.filter(id=student)[0])
+    
+    sg.save()
+    
+    return HttpResponseRedirect("/home")
+    
+    
+def view_study_group(request, study_group):
+    c = {}
+    c.update(csrf(request))
+    
+    c["study_group"] = StudyGroup.objects.get(name=study_group)
+    
+    return render_to_response("profile/view_study_group.html", c, context_instance=RequestContext(request))
