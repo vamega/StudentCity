@@ -5,6 +5,12 @@ from django.contrib.auth.views import  logout
 from django.contrib import admin
 admin.autodiscover()
 
+'''
+    This file defines a tuple that Django uses to direct HTTP Requests to the proper view.
+    Note that 'profile.urls' is included for the '^home' regex.
+    This means that any urls of the form "http://www.StudentCityURL.com/home/..." are redirected to the profile module.
+'''
+
 urlpatterns = patterns('',
     # The main login/register page
     url(r'^$', 'authentication.views.index'),

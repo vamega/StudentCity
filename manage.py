@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+
+'''
+  NOTE: This file (manage.py) is not specific to StudentCity. It was not written by us. This file is used by Django to developers and link to several very handy dev tools.
+'''
+
 from django.core.management import execute_manager
 import imp
 try:

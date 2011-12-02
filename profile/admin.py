@@ -1,6 +1,12 @@
 from profile.models import Course, Student
 from django.contrib import admin
 
+
+"""
+    This file is used to format the administrative backed web pages for the Profile app.
+    We did not make much use of the Admin pages, therefore this file is quite sparse and rather pointless.
+"""
+
 class CourseInline(admin.TabularInline):
     model = Course
     extra = 1

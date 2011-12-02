@@ -1,6 +1,12 @@
 import os
 
-# Django settings for StudentCity project.
+'''
+Universal Django settings for StudentCity project.
+
+These are the universal settings used for all installations, plus some defaults intended to be overwritten.
+See the included 'local.py' for a sample set of local configuration options.
+
+'''
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

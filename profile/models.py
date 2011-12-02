@@ -4,6 +4,14 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
+
+"""
+    This file contains all of the Models used for the user profile, the course group,
+    the messaging system, and essentially everything else other than the authentication system and the file upload.
+"""
+
+
+
 SEMESTER_CHOICES = (
     ('F', 'Fall'),
     ('S', 'Spring'),
@@ -25,6 +33,7 @@ RATINGS_CHOICES = (
 
 
 class Course(models.Model):
+    """Store data regarding a course offered by the university."""
     course_department = models.CharField(max_length=16)
     course_number = models.IntegerField()
     course_name = models.CharField(max_length=256)
@@ -34,7 +43,8 @@ class Course(models.Model):
         return self.course_department + " " + str(self.course_number)
 
     def get_num_students(self, past_or_present):
-        date_time = datetime.now()
+	"""Return the number of students who are currently taking or have taken the course, pased on the past_or_present var."""
+	date_time = datetime.now()
         if date_time.month in (1, 2, 3, 4, 5, 6):
             sem = 'S'
         else:
@@ -56,6 +66,7 @@ class Course(models.Model):
 
 
 class CourseDetail(models.Model):
+    """Store data regarding a specific section of a course within a specific semester of a specific year."""
     course = models.ForeignKey(Course)
     year = models.CharField(max_length=4)
     semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
@@ -75,6 +86,7 @@ class CourseDetail(models.Model):
         return num
 
 class Student(models.Model):
+    """Store data regarding a student attending the university."""
     user = models.ForeignKey(User, unique=True)
     rcs_id = models.CharField(max_length=128)
     rin = models.CharField(max_length=9)
@@ -105,6 +117,7 @@ class Student(models.Model):
         return self.rcs_id
 
 class Teacher(models.Model):
+    """Store data regarding a teacher employed by the university."""
     rcs_id = models.CharField(max_length=128)
     first_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
@@ -115,6 +128,7 @@ class Teacher(models.Model):
         return self.rcs_id
 
 class PrivacySettings(models.Model):
+    """Store data regarding a student's privacy settings."""
     student = models.ForeignKey(Student, unique=True)
     allow_others_to_view_profile_picture = models.BooleanField()
     allow_others_to_view_interests = models.BooleanField()
@@ -125,6 +139,7 @@ class PrivacySettings(models.Model):
 
     
 class PrivateMessage(models.Model):
+    """Store data regarding the contents of a private, user-to-user message."""
     author = models.ForeignKey(Student, related_name='PM_author')
     recipients = models.ManyToManyField(Student, related_name='PM_recipients')
     subject = models.CharField(max_length=256)
@@ -134,12 +149,14 @@ class PrivateMessage(models.Model):
     timestamp = models.DateTimeField()
     
 class GroupPost(models.Model):
+    """Store data regarding the contents of a post on a group's message board."""
     author = models.ForeignKey(User)
     group = models.ForeignKey(Course)
     contents = models.TextField()
     timestamp = models.TimeField()
 
 class Ratings(models.Model):
+    """Store data regarding the ratings a student gives a class."""
     course = models.ForeignKey(CourseDetail)
     rater = models.ForeignKey(Student)
     easiness = models.IntegerField(choices=RATINGS_CHOICES)
@@ -148,6 +165,7 @@ class Ratings(models.Model):
     timestamp = models.DateTimeField(default=datetime.now)
 
 class Recommendations(models.Model):
+    """Store data regarding the contents of a private, user-to-user message."""
     course = models.ForeignKey(CourseDetail)
     recommender = models.ForeignKey(Student)
     would_recommend_course = models.CharField(max_length=1, choices=RECOMMEND_COURSE_CHOICES)
@@ -155,6 +173,7 @@ class Recommendations(models.Model):
     timestamp = models.DateTimeField(default=datetime.now)
 
 class StudyGroup(models.Model):
+    """Store data regarding information about and the members of a study group."""
     course = models.ForeignKey(Course)
     members = models.ManyToManyField(Student, related_name='study_groups')
     name = models.CharField(max_length=256)
