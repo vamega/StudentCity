@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django import forms
 
 class UploadFileForm(forms.Form):
-    # Sets form imputs
+    # Sets form inputs
     title = forms.CharField(max_length=50)
     course = forms.CharField(max_length=50)
     file  = forms.FileField()

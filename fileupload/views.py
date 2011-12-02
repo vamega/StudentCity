@@ -22,14 +22,14 @@ logger = logging.getLogger('testing')
 
 
 
-
 def upload_file(request):
+""" Get the course name, document title, and document location, returns a page redirect """
   
     c = {}
     c.update(csrf(request))
-    c['user'] = request.user
     
-    c["user"] = request.user
+# Makes sure the user keeps their identity if they are not logged in redirect them to an error 11
+    c['user'] = request.user
     c["student"] = request.user.student_set.all()[0]
     
     if (not request.user.is_authenticated()) or (request.user == None):
@@ -37,9 +37,9 @@ def upload_file(request):
     
     
      
-    
+# If the form has been submitted, Retrieve the inputes from form.html
     if request.method == 'POST':
-      form = c['UploadFileForm'] = UploadFileForm(request.POST, request.FILES, RequestContext(request))
+      c['UploadFileForm'] = UploadFileForm(request.POST, request.FILES, RequestContext(request))
 
 # If the form was valid build the dictionary and send to function to handle file upload
       if c['UploadFileForm'].is_valid():
@@ -48,17 +48,23 @@ def upload_file(request):
         handle_uploaded_file(request.FILES['file'], c)
         c['success'] = True
         
+# Else, Show the form for the user to enter data
     else:
-        form = c['UploadFileForm'] = UploadFileForm()
+        c['UploadFileForm'] = UploadFileForm()
         c['form'] = UploadFileForm()
     return render_to_response('fileupload/upload.html', c, RequestContext(request))
 
 
 
 def handle_uploaded_file(f, c):
+""" Handles uploaded file, making the destination and uploading the file """  
+  
+  
+# Original way to name uploaded files  
 # location = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(16))
 
-# Builds location to save uploaded file under the course number then title user inputed
+# Builds location to save uploaded file under the course name then the title user inputed
+
     c['user'] = request.user
     location = 'static/userupload/'
     location += str(c['course'])
@@ -66,6 +72,7 @@ def handle_uploaded_file(f, c):
     location += str(c['title'])
     destination = open(location, 'wb+')
 
+# Writes the file to the destination in chunks
     for chunk in f.chunks():
         destination.write(chunk)
     destination.close()
