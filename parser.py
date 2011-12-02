@@ -1,7 +1,9 @@
+from django.conf import settings
 from BeautifulSoup import BeautifulStoneSoup
 from profile.models import *
 import urllib2
 import sys
+import os
 
 def parse_semester_data(semester_data):
     """Parse the semester and year from the semesterDesc attribute of the CourseDB tag in the XML.
@@ -42,12 +44,18 @@ def get_course_data(url):
     courses = soup.findAll('course')
 
     for current_course in courses:
-        course = Course()
+        course = None
 
-        course.course_name = current_course['name']
-        course.course_number = current_course['num']
-        course.course_department = current_course['dept']
-        course.save()
+        try:
+            course = Course.objects.get(course_department=current_course['dept'], course_number=current_course['num'])
+        except Course.DoesNotExist:
+            course = Course()
+            course.course_name = current_course['name']
+            course.course_number = current_course['num']
+            course.course_department = current_course['dept']
+            course.save()
+
+            os.mkdir( os.path.join(settings.USER_UPLOAD_DIR, course.course_name) )
 
         sections = current_course.findAll('section')
 
