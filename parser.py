@@ -106,7 +106,7 @@ if __name__ == "__main__":
         url = 'http://50.115.160.86/static/testCourseData.xml'
         print "Test URL - %s"%url
     else:
-        url = argv[1]
+        url = sys.argv[1]
     
     print url
     get_course_data(url)
