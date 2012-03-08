@@ -4,6 +4,7 @@ from profile.models import *
 import urllib2
 import sys
 import os
+import re
 
 def parse_semester_data(semester_data):
     """Parse the semester and year from the semesterDesc attribute of the CourseDB tag in the XML.
@@ -35,7 +36,7 @@ def get_course_data(url):
 
     This function modified the database to include add courses, courseDetails and professors that are described in the xml file.
     """
-    doc = urllib2.urlopen(url)
+    doc = open(url)
     # print doc.read()
     soup = BeautifulStoneSoup(doc)
 
@@ -50,12 +51,16 @@ def get_course_data(url):
             course = Course.objects.get(course_department=current_course['dept'], course_number=current_course['num'])
         except Course.DoesNotExist:
             course = Course()
-            course.course_name = current_course['name']
+            name = re.sub('[^a-zA-Z0-9 ]', '', current_course['name'])
+            course.course_name = name
             course.course_number = current_course['num']
             course.course_department = current_course['dept']
             course.save()
-
-            os.mkdir( os.path.join(settings.USER_UPLOAD_DIR, course.course_name) )
+            
+            try:
+                os.mkdir( os.path.join(settings.USER_UPLOAD_DIR, name) )
+            except:
+                pass
 
         sections = current_course.findAll('section')
 

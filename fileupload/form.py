@@ -7,8 +7,8 @@ from django import forms
 
 
 class UploadFileForm(forms.Form):
-''' Create form for user to enter data to upload file '''
-# Sets form inputs
+    ''' Create form for user to enter data to upload file '''
+    # Sets form inputs
     title = forms.CharField(max_length=50)
     course = forms.CharField(max_length=50)
     file  = forms.FileField()

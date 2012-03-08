@@ -17,14 +17,12 @@ import string
 import random
 
 import logging
-
 logger = logging.getLogger('testing')
 
 
 
 def upload_file(request):
-""" Get the course name, document title, and document location, returns a page redirect """
-  
+    """ Get the course name, document title, and document location, returns a page redirect """
     c = {}
     c.update(csrf(request))
     
@@ -33,22 +31,22 @@ def upload_file(request):
     c["student"] = request.user.student_set.all()[0]
     
     if (not request.user.is_authenticated()) or (request.user == None):
-      return HttpResponseRedirect("/?error=11")
+        return HttpResponseRedirect("/?error=11")
     
     
      
-# If the form has been submitted, Retrieve the inputes from form.html
+    # If the form has been submitted, Retrieve the inputes from form.html
     if request.method == 'POST':
-      c['UploadFileForm'] = UploadFileForm(request.POST, request.FILES, RequestContext(request))
+        c['UploadFileForm'] = UploadFileForm(request.POST, request.FILES, RequestContext(request))
 
-# If the form was valid build the dictionary and send to function to handle file upload
-      if c['UploadFileForm'].is_valid():
-	c['title'] = request.POST['title']
-	c['course'] = request.POST['course']
-        handle_uploaded_file(request.FILES['file'], c)
-        c['success'] = True
-        
-# Else, Show the form for the user to enter data
+        # If the form was valid build the dictionary and send to function to handle file upload
+        if c['UploadFileForm'].is_valid():
+            c['title'] = request.POST['title']
+            c['course'] = request.POST['course']
+            handle_uploaded_file(request.FILES['file'], c)
+            c['success'] = True
+            
+    # Else, Show the form for the user to enter data
     else:
         c['UploadFileForm'] = UploadFileForm()
         c['form'] = UploadFileForm()
@@ -57,13 +55,11 @@ def upload_file(request):
 
 
 def handle_uploaded_file(f, c):
-""" Handles uploaded file, making the destination and uploading the file """  
-  
-  
-# Original way to name uploaded files  
-# location = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(16))
+    """ Handles uploaded file, making the destination and uploading the file """   
+    # Original way to name uploaded files  
+    # location = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(16))
 
-# Builds location to save uploaded file under the course name then the title user inputed
+    # Builds location to save uploaded file under the course name then the title user inputed
 
     c['user'] = request.user
     location = 'static/userupload/'
@@ -72,8 +68,7 @@ def handle_uploaded_file(f, c):
     location += str(c['title'])
     destination = open(location, 'wb+')
 
-# Writes the file to the destination in chunks
+    # Writes the file to the destination in chunks
     for chunk in f.chunks():
         destination.write(chunk)
     destination.close()
- 

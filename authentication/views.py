@@ -68,7 +68,6 @@ def register(request):
     return HttpResponseRedirect("/"+error_string)
 
 def login(request):
-''' Varify user and log in if exists '''
     c = {}
     c.update(csrf(request))
 

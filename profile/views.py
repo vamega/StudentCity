@@ -10,10 +10,8 @@ import logging
 
 logger = logging.getLogger('testing')
 
-
-
+# Add profile app views here
 def index(request):
-    """Render the personal profile page."""
     # csrf is used to prevent Cross-Site Request Forgeries (i.e. XSS attacks, SQL injections, etc.)
     c = {}
     c.update(csrf(request))
@@ -28,7 +26,6 @@ def index(request):
 
 
 def course_search(request):
-    """Search the database for the given course criteria and return all matching results."""
     c = {}
     c.update(csrf(request))
 
@@ -40,6 +37,8 @@ def course_search(request):
     search_options['course_number'] = request.POST.get('course_number')
     search_options['year'] = request.POST.get('year')
     search_options['section'] = request.POST.get('section')
+
+    #assert(False)
     
     new_options = {}
     for key in search_options:
@@ -53,14 +52,14 @@ def course_search(request):
     
     c['search_results'] = CourseDetail.objects.filter(**new_options)
     c['user'] = request.user
-    c[#c['debug'] = "Search options:\n\n" + str(new_options)'student'] = request.user.student_set.all()[0]
+    c['student'] = request.user.student_set.all()[0]
     
+    #c['debug'] = "Search options:\n\n" + str(new_options)
     return render_to_response("profile/add_course.html", c, context_instance=RequestContext(request))
     
 
 
 def add_course(request):
-    """Register a student for a current course section."""
     c = {}
     c.update(csrf(request))
     if request.POST.get('dept') == u'' or request.POST.get('num') == u'':
@@ -73,8 +72,21 @@ def add_course(request):
 
     
     
+def course_group_main(request):
+    c = {}
+    c.update(csrf(request))
+    course_code = request.POST.get('course_code')
+    (department, s, number) = course_code.partition(' ')
+    course = Course.objects.filter(course_department=department, course_number=number)[0]
+    course_details = CourseDetail.objects.all()
+    
+    c["course"] = course
+    c["course_details"] = course_details
+    return render_to_response("profile/course_group_main.html", c)
+    
+    
+    
 def course_group(request):
-    """Render the main course group HTML template with current students, past students, etc."""
     c = {}
     c.update(csrf(request))
     course_code = request.POST.get('course_code')
@@ -84,9 +96,9 @@ def course_group(request):
     c['course'] = course
     return render_to_response("profile/course_group.html", c)
     
+    # This isn't finished
 
 def settings(request):
-    """Render current settings and process changes to be saved."""
     c = {}
     c.update(csrf(request))
     if request.user.student_set.all().count() == 0:
@@ -102,7 +114,6 @@ def settings(request):
     
     
 def search(request):
-    """Basic course search algorithm."""
     # csrf is used to prevent Cross-Site Request Forgeries (i.e. XSS attacks, SQL injections, etc.)
     c = {}
     c.update(csrf(request))
@@ -110,29 +121,27 @@ def search(request):
     if search.has_looked():
         return HttpResponseRedirect("profile/course_search")
     else:
-	found_classes = {}
-	found_dep = {}
-	found_number = {}
-	found_name = {}
-	
-        #c['search_form'] = SearchForm()
-        
+        found_classes = {}
+        found_dep = {}
+        found_number = {}
+        found_name = {}
+            
         for i in course_search.course_department:
-	    if i == models.Model.course_department:
-		temp = models.Model.course_department + ' ' + models.Model.course_number + ' ' + models.Model.course_name
-		found_dep.append(temp)
-		
-	for i in course_search.course_number:
-	    if i == models.Model.course_department:
-		temp = models.Model.course_department + ' ' + models.Model.course_number + ' ' + models.Model.course_name
-		found_number.append(temp)
+            if i == models.Model.course_department:
+                temp = models.Model.course_department + ' ' + models.Model.course_number + ' ' + models.Model.course_name
+                found_dep.append(temp)
+            
+        for i in course_search.course_number:
+            if i == models.Model.course_department:
+                temp = models.Model.course_department + ' ' + models.Model.course_number + ' ' + models.Model.course_name
+                found_number.append(temp)
 
-	for i in course_search.course_name:
-	    if i == models.Model.course_department:
-		temp = models.Model.course_department + ' ' + models.Model.course_number + ' ' + models.Model.course_name
-		found_name.append(temp)
-	    
-        
+        for i in course_search.course_name:
+            if i == models.Model.course_department:
+                temp = models.Model.course_department + ' ' + models.Model.course_number + ' ' + models.Model.course_name
+                found_name.append(temp)
+            
+            
         if request.GET.get('error') == '1':
             c['error'] = 1
         
@@ -141,7 +150,6 @@ def search(request):
 
 
 def edit_personal_info(request):
-    """Process changes to personal info."""
     c = {}
     c.update(csrf(request))
     if request.method == 'POST':
@@ -156,7 +164,6 @@ def edit_personal_info(request):
     return HttpResponseRedirect("/home/settings/")
     
 def edit_privacy_settings(request):
-    """Process changes to privacy settings."""
     c = {}
     c.update(csrf(request))
     if request.method == 'POST':
@@ -168,7 +175,6 @@ def edit_privacy_settings(request):
     return HttpResponseRedirect("/home/settings/")
     
 def profile_page(request, student_id):
-    """Render a user's public profile page."""
     c = {}
     c.update(csrf(request))
 
@@ -186,7 +192,6 @@ def profile_page(request, student_id):
     return render_to_response("profile/profile_page.html", c)
     
 def ratings(request, course_id):
-    """Show all past ratings for a course."""
     c = {}
     c.update(csrf(request))
     if request.user.student_set.all().count() == 0:
@@ -202,7 +207,6 @@ def ratings(request, course_id):
     
 
 def edit_ratings(request):
-    """Save a new set of ratings for a course."""
     c = {}
     c.update(csrf(request))
     if request.method == 'POST':
@@ -216,7 +220,6 @@ def edit_ratings(request):
     return HttpResponseRedirect("/home")
     
 def recommendations(request, course_id):
-    """Show all past recommendations for a course."""
     c = {}
     c.update(csrf(request))
     if request.user.student_set.all().count() == 0:
@@ -232,7 +235,6 @@ def recommendations(request, course_id):
 
 
 def edit_recommendations(request):
-    """Save a new set of recommendations for a course."""
     c = {}
     c.update(csrf(request))
     if request.method == 'POST':
@@ -247,7 +249,6 @@ def edit_recommendations(request):
     return HttpResponseRedirect("/home")
 
 def message(request, student_id, previous_message_id):
-    """Display message history."""
     c = {}
     c.update(csrf(request))
     if request.user.student_set.all().count() == 0:
@@ -272,7 +273,6 @@ def message(request, student_id, previous_message_id):
     return render_to_response("profile/message.html", c, context_instance=RequestContext(request))
     
 def send_message(request):
-    """Send a new message."""
     c = {}
     c.update(csrf(request))
     if request.method == 'POST':
@@ -291,7 +291,6 @@ def send_message(request):
     return HttpResponseRedirect("/home")
     
 def view_message(request, message_id):
-    """Display contents of a message."""
     c = {}
     c.update(csrf(request))
     student = request.user.student_set.all()[0]
@@ -306,7 +305,6 @@ def view_message(request, message_id):
     return render_to_response("profile/view_message.html", c, context_instance=RequestContext(request))
 
 def course_recommendation(request, student_id):
-    """Process a recommendation for a course."""
     c = {}
     c.update(csrf(request))
     student = Student.objects.get(id=student_id)
@@ -321,7 +319,6 @@ def course_recommendation(request, student_id):
     return render_to_response("profile/course_recommendations.html", c, context_instance=RequestContext(request))
 
 def create_study_group(request):
-    """Create a new study group."""
     c = {}
     c.update(csrf(request))
     
@@ -344,7 +341,6 @@ def create_study_group(request):
     
     
 def view_study_group(request, study_group):
-    """View details about a study group."""
     c = {}
     c.update(csrf(request))
     
